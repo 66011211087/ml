@@ -26,8 +26,6 @@ body{
     color:#45394f;
 }
 
-/* ================= HEADER ================= */
-
 .header{
     position:relative;
     overflow:hidden;
@@ -67,8 +65,6 @@ body{
     font-size:13px;
 }
 
-/* ================= FLOWER DECORATION ================= */
-
 .flower{
     position:absolute;
     font-size:42px;
@@ -93,15 +89,11 @@ body{
     font-size:38px;
 }
 
-/* ================= CONTAINER ================= */
-
 .container{
     max-width:1500px;
     margin:auto;
     padding:0 30px 40px;
 }
-
-/* ================= SUMMARY CARDS ================= */
 
 .cards{
     position:relative;
@@ -153,8 +145,6 @@ body{
     color:#634c6d;
 }
 
-/* ================= GRID ================= */
-
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -183,8 +173,6 @@ body{
     margin-bottom:12px;
 }
 
-/* ================= CONTROLS ================= */
-
 .controls{
     display:flex;
     gap:12px;
@@ -201,20 +189,18 @@ select{
     font-size:14px;
 }
 
-/* ================= CHART ================= */
-
 .chart{
     width:100%;
     height:500px;
 }
 
-/* ================= KEYWORD CHART ================= */
-
 #keywordChart{
     height:590px;
 }
 
-/* ================= FOOTER ================= */
+#authorChart{
+    height:560px;
+}
 
 .footer{
     text-align:center;
@@ -222,6 +208,108 @@ select{
     color:#918492;
     font-size:13px;
 }
+
+
+/* ================= AUTHOR POPUP ================= */
+
+.author-popup{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(69,57,79,.35);
+    backdrop-filter:blur(5px);
+}
+
+.author-popup.show{
+    display:flex;
+}
+
+.author-box{
+    width:min(430px,90%);
+    background:#fff;
+    border-radius:28px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(80,50,90,.25);
+    border:1px solid #f0dfe9;
+    animation:authorPop .25s ease;
+}
+
+@keyframes authorPop{
+
+    from{
+        transform:scale(.85);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+.author-flower{
+    font-size:58px;
+    margin-bottom:8px;
+}
+
+.author-rank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:58px;
+    height:38px;
+    border-radius:15px;
+    background:#fce0eb;
+    color:#6b526e;
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.author-box h3{
+    margin:5px 0 10px;
+    color:#5d4668;
+    font-size:24px;
+}
+
+.author-publications{
+    font-size:16px;
+    color:#8b7c91;
+}
+
+.author-publications strong{
+    display:block;
+    margin-top:7px;
+    font-size:34px;
+    color:#b56b91;
+}
+
+.author-close{
+    margin-top:22px;
+    border:0;
+    padding:11px 25px;
+    border-radius:14px;
+    background:linear-gradient(
+        135deg,
+        #f48fb1,
+        #ba8de3
+    );
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.author-close:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(186,141,227,.25);
+}
+
 
 /* ================= RESPONSIVE ================= */
 
@@ -271,6 +359,10 @@ select{
 
     #keywordChart{
         height:680px;
+    }
+
+    #authorChart{
+        height:620px;
     }
 
 }
@@ -401,6 +493,7 @@ select{
 
     <div class="desc">
         Most productive authors based on publication volume.
+        <b>Click the rank, flower or author name to view details.</b>
     </div>
 
     <div id="authorChart" class="chart"></div>
@@ -486,6 +579,59 @@ select{
 </section>
 
 </main>
+
+
+<!-- ================= AUTHOR POPUP ================= -->
+
+<div
+    id="authorPopup"
+    class="author-popup"
+    onclick="closeAuthorPopup(event)"
+>
+
+    <div
+        class="author-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <div
+            id="popupFlower"
+            class="author-flower"
+        >
+            🌸
+        </div>
+
+        <div
+            id="popupRank"
+            class="author-rank"
+        >
+            #01
+        </div>
+
+        <h3 id="popupAuthor">
+            Author Name
+        </h3>
+
+        <div class="author-publications">
+
+            Publications
+
+            <strong id="popupPublications">
+                0
+            </strong>
+
+        </div>
+
+        <button
+            class="author-close"
+            onclick="closeAuthorPopup()"
+        >
+            ✕ Close
+        </button>
+
+    </div>
+
+</div>
 
 
 <footer class="footer">
@@ -864,8 +1010,7 @@ function updateResearchMap(){
 
 
 /* =====================================================
-   🌼 03 · TOP KEYWORDS
-   FLOWER GARDEN STYLE
+   03 · TOP KEYWORDS
 ===================================================== */
 
 function drawKeywordChart(){
@@ -881,30 +1026,18 @@ function drawKeywordChart(){
 
 
     const flowers = [
-        "🌸",
-        "🌼",
-        "🌷",
-        "🌺",
-        "🌻",
-        "💮",
-        "🏵️",
-        "🌹",
-        "🌸",
-        "🌼",
-        "🌷",
-        "🌺"
+        "🌸","🌼","🌷","🌺",
+        "🌻","💮","🏵️","🌹",
+        "🌸","🌼","🌷","🌺"
     ];
 
-
-    /* ============================
-       FLOWER SIZE
-    ============================ */
 
     const minValue =
         Math.min(...values);
 
     const maxValue =
         Math.max(...values);
+
 
     const flowerSizes =
         values.map(value=>{
@@ -922,10 +1055,6 @@ function drawKeywordChart(){
 
         });
 
-
-    /* ============================
-       DATA
-    ============================ */
 
     const yPositions =
         names.map((name,index)=>index);
@@ -952,10 +1081,6 @@ function drawKeywordChart(){
     });
 
 
-    /* ============================
-       FLOWER STEM
-    ============================ */
-
     const stemX = [];
     const stemY = [];
 
@@ -977,10 +1102,6 @@ function drawKeywordChart(){
     });
 
 
-    /* ============================
-       LEAVES
-    ============================ */
-
     const leafX =
         values.map(
             value=>value-65
@@ -990,28 +1111,10 @@ function drawKeywordChart(){
         yPositions;
 
 
-    /* ============================
-       RANK
-    ============================ */
-
-    const rankX =
-        names.map(
-            ()=>-120
-        );
-
-
-    /* ============================
-       FLOWER
-    ============================ */
-
     const flowerX = values;
 
     const flowerY = yPositions;
 
-
-    /* ============================
-       FREQUENCY
-    ============================ */
 
     const frequencyX =
         values.map(
@@ -1025,17 +1128,12 @@ function drawKeywordChart(){
 
         [
 
-            /* =====================
-               Horizontal Lines
-            ===================== */
-
             {
 
                 x:lineX,
                 y:lineY,
 
                 mode:"lines",
-
                 type:"scatter",
 
                 line:{
@@ -1048,17 +1146,12 @@ function drawKeywordChart(){
             },
 
 
-            /* =====================
-               Flower Stem
-            ===================== */
-
             {
 
                 x:stemX,
                 y:stemY,
 
                 mode:"lines",
-
                 type:"scatter",
 
                 line:{
@@ -1071,17 +1164,12 @@ function drawKeywordChart(){
             },
 
 
-            /* =====================
-               Leaves
-            ===================== */
-
             {
 
                 x:leafX,
                 y:leafY,
 
                 mode:"text",
-
                 type:"scatter",
 
                 text:
@@ -1098,21 +1186,15 @@ function drawKeywordChart(){
             },
 
 
-            /* =====================
-               Flowers
-            ===================== */
-
             {
 
                 x:flowerX,
                 y:flowerY,
 
                 mode:"text",
-
                 type:"scatter",
 
-                text:
-                    flowers,
+                text:flowers,
 
                 textfont:{
                     size:flowerSizes
@@ -1129,17 +1211,12 @@ function drawKeywordChart(){
             },
 
 
-            /* =====================
-               Frequency
-            ===================== */
-
             {
 
                 x:frequencyX,
                 y:yPositions,
 
                 mode:"text",
-
                 type:"scatter",
 
                 text:
@@ -1227,10 +1304,6 @@ function drawKeywordChart(){
             showlegend:false,
 
             hovermode:"closest",
-
-            /* =====================
-               Dashboard Labels
-            ===================== */
 
             annotations:[
 
@@ -1366,10 +1439,6 @@ function drawKeywordChart(){
 
             shapes:[
 
-                /* =====================
-                   Rank Number Boxes
-                ===================== */
-
                 ...yPositions.map(
 
                     (position,index)=>({
@@ -1406,10 +1475,6 @@ function drawKeywordChart(){
 
                 ),
 
-                /* =====================
-                   Separator
-                ===================== */
-
                 {
 
                     type:"line",
@@ -1445,10 +1510,6 @@ function drawKeywordChart(){
 
     );
 
-
-    /* ============================
-       Add Rank Text
-    ============================ */
 
     setTimeout(()=>{
 
@@ -1506,6 +1567,7 @@ function drawKeywordChart(){
 
 /* =====================================================
    04 · TOP AUTHORS
+   CLICKABLE RANK + FLOWER + NAME
 ===================================================== */
 
 function drawAuthorChart(){
@@ -1521,9 +1583,23 @@ function drawAuthorChart(){
 
 
     const flowers = [
-        "🌸","🌼","🌷","🌺","🌻",
-        "💮","🏵️","🌹","🌸","🌼"
+        "🌸",
+        "🌼",
+        "🌷",
+        "🌺",
+        "🌻",
+        "💮",
+        "🏵️",
+        "🌹",
+        "🌸",
+        "🌼"
     ];
+
+
+    const positions =
+        values.map(
+            (value,index)=>index+1
+        );
 
 
     const minValue =
@@ -1538,23 +1614,41 @@ function drawAuthorChart(){
 
             return Math.round(
 
-                28 +
+                30 +
 
                 (
                     (value-minValue) /
                     (maxValue-minValue)
-                ) * 24
+                ) * 23
 
             );
 
         });
 
 
-    const positions =
-        values.map(
-            (value,index)=>index+1
+    /* =========================
+       AUTHOR DATA
+    ========================= */
+
+    const authorData =
+        sortedAuthors.map(
+            (item,index)=>({
+
+                rank:index+1,
+
+                name:item[0],
+
+                publications:item[1],
+
+                flower:flowers[index]
+
+            })
         );
 
+
+    /* =========================
+       BASE FLOWER GARDEN
+    ========================= */
 
     Plotly.newPlot(
 
@@ -1562,13 +1656,21 @@ function drawAuthorChart(){
 
         [
 
+            /* =====================
+               BASE GROUND
+            ===================== */
+
             {
 
-                x:positions,
+                x:[
+                    1,
+                    positions.length
+                ],
 
-                y:values.map(
-                    value=>0
-                ),
+                y:[
+                    0,
+                    0
+                ],
 
                 mode:"lines",
 
@@ -1576,13 +1678,17 @@ function drawAuthorChart(){
 
                 line:{
                     color:"#82A96D",
-                    width:4
+                    width:5
                 },
 
                 hoverinfo:"skip"
 
             },
 
+
+            /* =====================
+               STEMS
+            ===================== */
 
             {
 
@@ -1616,16 +1722,20 @@ function drawAuthorChart(){
             },
 
 
+            /* =====================
+               LEAVES
+            ===================== */
+
             {
 
                 x:
                     positions.map(
-                        position=>position+.08
+                        position=>position-.12
                     ),
 
                 y:
                     values.map(
-                        value=>value*.45
+                        value=>value*.43
                     ),
 
                 text:
@@ -1638,13 +1748,17 @@ function drawAuthorChart(){
                 type:"scatter",
 
                 textfont:{
-                    size:18
+                    size:19
                 },
 
                 hoverinfo:"skip"
 
             },
 
+
+            /* =====================
+               CLICKABLE FLOWERS
+            ===================== */
 
             {
 
@@ -1662,23 +1776,37 @@ function drawAuthorChart(){
                     size:flowerSizes
                 },
 
-                customdata:names,
+                customdata:authorData,
 
                 hovertemplate:
-                    "<b>%{customdata}</b>" +
-                    "<br>Publications: %{y}" +
+
+                    "<b>%{customdata.flower} " +
+                    "%{customdata.name}</b>" +
+
+                    "<br>Rank: #%{customdata.rank}" +
+
+                    "<br>Publications: " +
+                    "%{customdata.publications}" +
+
+                    "<br><br>🖱️ Click to view details" +
+
                     "<extra></extra>"
 
             },
 
 
+            /* =====================
+               CLICKABLE NUMBERS
+            ===================== */
+
             {
 
                 x:positions,
 
-                y:values.map(
-                    value=>value+15
-                ),
+                y:
+                    values.map(
+                        value=>value+17
+                    ),
 
                 text:
                     values.map(
@@ -1690,22 +1818,38 @@ function drawAuthorChart(){
                 type:"scatter",
 
                 textfont:{
-                    size:13,
-                    color:"#6B526E"
+                    size:16,
+                    color:"#5E4968"
                 },
 
-                hoverinfo:"skip"
+                customdata:authorData,
+
+                hovertemplate:
+
+                    "<b>%{customdata.name}</b>" +
+
+                    "<br>Publications: " +
+                    "%{customdata.publications}" +
+
+                    "<br><br>🖱️ Click to view details" +
+
+                    "<extra></extra>"
 
             },
 
+
+            /* =====================
+               CLICKABLE AUTHOR NAME
+            ===================== */
 
             {
 
                 x:positions,
 
-                y:values.map(
-                    ()=>-25
-                ),
+                y:
+                    values.map(
+                        ()=>-24
+                    ),
 
                 text:names,
 
@@ -1716,11 +1860,74 @@ function drawAuthorChart(){
                 textposition:"bottom center",
 
                 textfont:{
-                    size:13,
+                    size:14,
                     color:"#5F5665"
                 },
 
-                hoverinfo:"skip"
+                customdata:authorData,
+
+                hovertemplate:
+
+                    "<b>%{customdata.name}</b>" +
+
+                    "<br>Rank: #" +
+                    "%{customdata.rank}" +
+
+                    "<br>Publications: " +
+                    "%{customdata.publications}" +
+
+                    "<br><br>🖱️ Click to view details" +
+
+                    "<extra></extra>"
+
+            },
+
+
+            /* =====================
+               RANK NUMBERS
+            ===================== */
+
+            {
+
+                x:
+                    positions.map(
+                        position=>position-.27
+                    ),
+
+                y:
+                    values.map(
+                        ()=>-1
+                    ),
+
+                text:
+                    positions.map(
+                        position=>
+                            `<b>${String(position).padStart(2,"0")}</b>`
+                    ),
+
+                mode:"text",
+
+                type:"scatter",
+
+                textfont:{
+                    size:15,
+                    color:"#6B526E"
+                },
+
+                customdata:authorData,
+
+                hovertemplate:
+
+                    "<b>Rank #%{customdata.rank}</b>" +
+
+                    "<br>%{customdata.name}" +
+
+                    "<br>Publications: " +
+                    "%{customdata.publications}" +
+
+                    "<br><br>🖱️ Click to view details" +
+
+                    "<extra></extra>"
 
             }
 
@@ -1730,21 +1937,25 @@ function drawAuthorChart(){
 
             ...commonLayout,
 
+            height:560,
+
             margin:{
-                l:60,
-                r:40,
-                t:60,
-                b:90
+                l:65,
+                r:45,
+                t:70,
+                b:115
             },
 
             xaxis:{
 
                 range:[
-                    .3,
-                    positions.length+.7
+                    .35,
+                    positions.length+.65
                 ],
 
-                visible:false
+                visible:false,
+
+                fixedrange:true
 
             },
 
@@ -1753,7 +1964,7 @@ function drawAuthorChart(){
                 title:"Publications",
 
                 range:[
-                    -40,
+                    -43,
                     Math.max(...values)+55
                 ],
 
@@ -1767,7 +1978,110 @@ function drawAuthorChart(){
 
             showlegend:false,
 
-            hovermode:"closest"
+            hovermode:"closest",
+
+            /* =====================
+               HEADER LABELS
+            ===================== */
+
+            annotations:[
+
+                {
+
+                    x:.02,
+
+                    y:1.09,
+
+                    xref:"paper",
+
+                    yref:"paper",
+
+                    text:
+                        "<b>🌷 TOP AUTHORS</b>",
+
+                    showarrow:false,
+
+                    xanchor:"left",
+
+                    font:{
+                        size:13,
+                        color:"#A18F9F"
+                    }
+
+                },
+
+                {
+
+                    x:.98,
+
+                    y:1.09,
+
+                    xref:"paper",
+
+                    yref:"paper",
+
+                    text:
+                        "<b>CLICK TO VIEW DETAILS</b>",
+
+                    showarrow:false,
+
+                    xanchor:"right",
+
+                    font:{
+                        size:11,
+                        color:"#A18F9F"
+                    }
+
+                }
+
+            ],
+
+            /* =====================
+               RANK BOXES
+            ===================== */
+
+            shapes:
+
+                positions.map(
+
+                    (position,index)=>({
+
+                        type:"rect",
+
+                        xref:"x",
+
+                        yref:"y",
+
+                        x0:
+                            position-.45,
+
+                        x1:
+                            position-.09,
+
+                        y0:-6,
+
+                        y1:5,
+
+                        fillcolor:
+
+                            index===0
+                            ? "#FCE0EB"
+                            : index===1
+                            ? "#EDE3F7"
+                            : index===2
+                            ? "#E0F3EF"
+                            : "#FFF5D8",
+
+                        line:{
+                            color:"#FFFFFF",
+                            width:2
+                        },
+
+                        layer:"below"
+
+                    })
+
+                )
 
         },
 
@@ -1775,13 +2089,149 @@ function drawAuthorChart(){
 
             responsive:true,
 
-            displayModeBar:false
+            displayModeBar:false,
+
+            scrollZoom:false
 
         }
 
     );
 
+
+    /* =================================================
+       CLICK EVENT
+    ================================================= */
+
+    const chart =
+        document.getElementById("authorChart");
+
+
+    chart.on(
+        "plotly_click",
+        function(data){
+
+            if(
+                !data ||
+                !data.points ||
+                !data.points.length
+            ){
+                return;
+            }
+
+
+            const point =
+                data.points[0];
+
+
+            if(
+                !point.customdata
+            ){
+                return;
+            }
+
+
+            const author =
+                point.customdata;
+
+
+            openAuthorPopup(
+
+                author.rank,
+
+                author.name,
+
+                author.publications,
+
+                author.flower
+
+            );
+
+        }
+    );
+
 }
+
+
+/* =====================================================
+   AUTHOR POPUP
+===================================================== */
+
+function openAuthorPopup(
+    rank,
+    name,
+    publications,
+    flower
+){
+
+    document
+    .getElementById("popupFlower")
+    .textContent = flower;
+
+
+    document
+    .getElementById("popupRank")
+    .textContent =
+        "#" +
+        String(rank).padStart(2,"0");
+
+
+    document
+    .getElementById("popupAuthor")
+    .textContent = name;
+
+
+    document
+    .getElementById("popupPublications")
+    .textContent =
+        publications.toLocaleString();
+
+
+    document
+    .getElementById("authorPopup")
+    .classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE AUTHOR POPUP
+===================================================== */
+
+function closeAuthorPopup(event){
+
+    if(
+        event &&
+        event.target &&
+        event.target.id !== "authorPopup"
+    ){
+        return;
+    }
+
+    document
+    .getElementById("authorPopup")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document
+            .getElementById("authorPopup")
+            .classList.remove("show");
+
+        }
+
+    }
+);
 
 
 /* =====================================================
