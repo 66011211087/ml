@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scopus Research Landscape Explorer</title>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:#f4f6fb;
+    color:#172033;
+}
+
+.header{
+    background:linear-gradient(135deg,#111827,#263b80,#4f46a5);
+    color:white;
+    padding:45px 6%;
+}
+
+.header h1{
+    margin:0;
+    font-size:38px;
+    font-weight:800;
+}
+
+.header p{
+    margin:12px 0 0;
+    color:#dbe4ff;
+    font-size:16px;
+}
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:-55px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+.card .label{
+    color:#64748b;
+    font-size:14px;
+}
+
+.card .value{
+    margin-top:8px;
+    font-size:32px;
+    font-weight:800;
+    color:#312e81;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:25px;
+}
+
+.panel{
+    background:white;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 8px 25px rgba(15,23,42,.06);
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.panel h2{
+    margin:0 0 7px;
+    font-size:21px;
+}
+
+.desc{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.chart{
+    width:100%;
+    height:500px;
+}
+
+.controls{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:15px 0;
+}
+
+select,input{
+    padding:10px 13px;
+    border:1px solid #dbe1ea;
+    border-radius:10px;
+    background:white;
+}
+
+.footer{
+    text-align:center;
+    padding:35px;
+    color:#64748b;
+    font-size:13px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.12);
+    padding:7px 12px;
+    border-radius:20px;
+    margin-top:20px;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+}
+
+@media(max-width:600px){
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .container{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+HEADER
+========================================================= -->
+
+<header class="header">
+
+    <h1>Scopus Research Landscape Explorer</h1>
+
+    <p>
+        Interactive Research Dashboard for Exploratory Data Analysis,
+        Visualization and Machine Learning Preparation
+    </p>
+
+    <div class="badge">
+        Scopus Research Analytics · EDA · Feature Vector · Text Embedding
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+SUMMARY CARDS
+========================================================= -->
+
+<section class="cards">
+
+    <div class="card">
+        <div class="label">Total Publications</div>
+        <div class="value" id="totalRecords">5,427</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Research Subjects</div>
+        <div class="value" id="totalSubjects">10</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Feature Dimensions</div>
+        <div class="value">768-D</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Year Coverage</div>
+        <div class="value">2021–2026</div>
+    </div>
+
+</section>
+
+
+<section class="grid">
+
+
+<!-- =========================================================
+1 RESEARCH MAP
+========================================================= -->
+
+<div class="panel full">
+
+<h2>01 · Research Landscape Map</h2>
+
+<div class="desc">
+Interactive 2D projection of research feature vectors.
+Each point represents a research publication.
+</div>
+
+<div class="controls">
+
+<select id="subjectFilter" onchange="updateResearchMap()">
+<option value="all">All Subjects</option>
+<option value="Artificial Intelligence">Artificial Intelligence</option>
+<option value="Machine Learning">Machine Learning</option>
+<option value="Deep Learning">Deep Learning</option>
+<option value="Data Science">Data Science</option>
+<option value="Computer Vision">Computer Vision</option>
+<option value="Natural Language Processing">Natural Language Processing</option>
+<option value="Software Engineering">Software Engineering</option>
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="Internet of Things">Internet of Things</option>
+<option value="Computer Networks">Computer Networks</option>
+</select>
+
+</div>
+
+<div id="researchMap" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+2 SUBJECT DISTRIBUTION
+========================================================= -->
+
+<div class="panel">
+
+<h2>02 · Subject Distribution</h2>
+
+<div class="desc">
+Distribution of publications across the ten research subjects.
+</div>
+
+<div id="subjectChart" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+3 KEYWORD
+========================================================= -->
+
+<div class="panel">
+
+<h2>03 · Top Research Keywords</h2>
+
+<div class="desc">
+Most frequently occurring research keywords.
+</div>
+
+<div id="keywordChart" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+4 TIMELINE
+========================================================= -->
+
+<div class="panel full">
+
+<h2>04 · Research Trend Timeline</h2>
+
+<div class="desc">
+Publication trends across different research subjects and years.
+</div>
+
+<div class="controls">
+
+<select id="timelineMode" onchange="drawTimeline()">
+<option value="line">Line Chart</option>
+<option value="bar">Stacked Bar</option>
+</select>
+
+</div>
+
+<div id="timelineChart" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+5 HEATMAP
+========================================================= -->
+
+<div class="panel full">
+
+<h2>05 · Subject × Keyword Heatmap</h2>
+
+<div class="desc">
+Relationship between research subjects and the most important keywords.
+</div>
+
+<div id="heatmapChart" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+6 NETWORK
+========================================================= -->
+
+<div class="panel full">
+
+<h2>06 · Keyword Co-occurrence Network</h2>
+
+<div class="desc">
+Research keywords that frequently appear together in publications.
+</div>
+
+<div class="controls">
+
+<select id="networkSubject" onchange="drawNetwork()">
+<option value="all">All Subjects</option>
+<option value="Artificial Intelligence">Artificial Intelligence</option>
+<option value="Machine Learning">Machine Learning</option>
+<option value="Deep Learning">Deep Learning</option>
+<option value="Data Science">Data Science</option>
+<option value="Computer Vision">Computer Vision</option>
+<option value="Natural Language Processing">Natural Language Processing</option>
+<option value="Software Engineering">Software Engineering</option>
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="Internet of Things">Internet of Things</option>
+<option value="Computer Networks">Computer Networks</option>
+</select>
+
+</div>
+
+<div id="networkChart" class="chart"></div>
+
+</div>
+
+
+<!-- =========================================================
+7 SANKEY
+========================================================= -->
+
+<div class="panel full">
+
+<h2>07 · Research Flow</h2>
+
+<div class="desc">
+Flow of research topics from Subject → Keyword → Year.
+</div>
+
+<div id="sankeyChart" class="chart"></div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+Scopus Research Landscape Explorer<br>
+Interactive Visualization · Exploratory Data Analysis · Machine Learning Preparation
+
+</footer>
+
+
+
+<script>
+
+/* ============================================================
+   DATA
+   ============================================================
+
+   Dashboard เป็นไฟล์เดียว
+   ข้อมูลด้านล่างสามารถเปลี่ยนเป็นข้อมูลจริงจาก Colab ได้
+============================================================ */
+
+
+/* SUBJECT DATA */
+
+const subjects = [
+
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "Data Science",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Software Engineering",
+    "Cybersecurity",
+    "Internet of Things",
+    "Computer Networks"
+
+];
+
+
+const subjectCounts = {
+
+    "Artificial Intelligence": 680,
+    "Machine Learning": 640,
+    "Deep Learning": 590,
+    "Data Science": 570,
+    "Computer Vision": 540,
+    "Natural Language Processing": 520,
+    "Software Engineering": 500,
+    "Cybersecurity": 470,
+    "Internet of Things": 470,
+    "Computer Networks": 437
+
+};
+
+
+/* KEYWORD DATA */
+
+const keywords = [
+
+    ["artificial intelligence",920],
+    ["machine learning",850],
+    ["deep learning",780],
+    ["data science",690],
+    ["neural network",620],
+    ["natural language processing",580],
+    ["computer vision",540],
+    ["big data",510],
+    ["feature extraction",480],
+    ["classification",450],
+    ["prediction",430],
+    ["internet of things",410],
+    ["cybersecurity",390],
+    ["cloud computing",360],
+    ["data mining",340]
+
+];
+
+
+/* YEAR DATA */
+
+const years = [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+];
+
+
+const trends = {
+
+"Artificial Intelligence":[70,85,105,120,140,160],
+
+"Machine Learning":[65,78,95,110,135,157],
+
+"Deep Learning":[50,68,90,108,130,144],
+
+"Data Science":[55,70,82,100,125,138],
+
+"Computer Vision":[42,55,72,90,110,125],
+
+"Natural Language Processing":[40,52,67,85,105,120],
+
+"Software Engineering":[45,60,70,80,100,110],
+
+"Cybersecurity":[38,50,62,75,90,105],
+
+"Internet of Things":[35,48,58,70,85,98],
+
+"Computer Networks":[32,45,55,65,78,90]
+
+};
+
+
+/* ============================================================
+   1 SUBJECT CHART
+============================================================ */
+
+function drawSubjectChart(){
+
+    Plotly.newPlot(
+
+        "subjectChart",
+
+        [{
+
+            x:Object.values(subjectCounts),
+
+            y:Object.keys(subjectCounts),
+
+            type:"bar",
+
+            orientation:"h",
+
+            text:Object.values(subjectCounts),
+
+            textposition:"outside",
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "Publications: %{x}<extra></extra>"
+
+        }],
+
+        {
+
+            margin:{
+                l:180,
+                r:40,
+                t:20,
+                b:50
+            },
+
+            xaxis:{
+                title:"Number of Publications"
+            },
+
+            yaxis:{
+                autorange:"reversed"
+            },
+
+            plot_bgcolor:"white",
+
+            paper_bgcolor:"white"
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   2 KEYWORD CHART
+============================================================ */
+
+function drawKeywordChart(){
+
+    Plotly.newPlot(
+
+        "keywordChart",
+
+        [{
+
+            x:keywords.map(x=>x[1]),
+
+            y:keywords.map(x=>x[0]),
+
+            type:"bar",
+
+            orientation:"h",
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "Frequency: %{x}<extra></extra>"
+
+        }],
+
+        {
+
+            margin:{
+                l:180,
+                r:30,
+                t:20,
+                b:50
+            },
+
+            yaxis:{
+                autorange:"reversed"
+            },
+
+            xaxis:{
+                title:"Frequency"
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   3 TIMELINE
+============================================================ */
+
+function drawTimeline(){
+
+    const mode =
+        document.getElementById("timelineMode").value;
+
+    const traces = [];
+
+    subjects.forEach(subject=>{
+
+        traces.push({
+
+            x:years,
+
+            y:trends[subject],
+
+            name:subject,
+
+            type:mode==="line"
+                ?"scatter"
+                :"bar",
+
+            mode:mode==="line"
+                ?"lines+markers"
+                :undefined
+
+        });
+
+    });
+
+
+    const layout = {
+
+        barmode:
+            mode==="bar"
+            ?"stack"
+            :undefined,
+
+        hovermode:
+            "x unified",
+
+        xaxis:{
+            title:"Publication Year"
+        },
+
+        yaxis:{
+            title:"Number of Publications"
+        },
+
+        legend:{
+            orientation:"h"
+        }
+
+    };
+
+
+    Plotly.newPlot(
+
+        "timelineChart",
+
+        traces,
+
+        layout,
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   4 HEATMAP
+============================================================ */
+
+function drawHeatmap(){
+
+    const topKeywords =
+        keywords.slice(0,10)
+        .map(x=>x[0]);
+
+
+    const z = [];
+
+
+    subjects.forEach((subject,i)=>{
+
+        const row = [];
+
+        topKeywords.forEach((keyword,j)=>{
+
+            let value =
+                Math.round(
+                    20 +
+                    ((i*17+j*23)%90)
+                );
+
+            row.push(value);
+
+        });
+
+        z.push(row);
+
+    });
+
+
+    Plotly.newPlot(
+
+        "heatmapChart",
+
+        [{
+
+            z:z,
+
+            x:topKeywords,
+
+            y:subjects,
+
+            type:"heatmap",
+
+            hovertemplate:
+                "<b>%{y}</b>" +
+                "<br>%{x}" +
+                "<br>Frequency: %{z}" +
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            margin:{
+                l:180,
+                b:120
+            },
+
+            xaxis:{
+                tickangle:-40
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   5 RESEARCH LANDSCAPE MAP
+============================================================ */
+
+function updateResearchMap(){
+
+    const selected =
+        document.getElementById("subjectFilter").value;
+
+    const traces = [];
+
+
+    subjects.forEach((subject,index)=>{
+
+        if(
+            selected!=="all" &&
+            selected!==subject
+        ){
+            return;
+        }
+
+
+        const x=[];
+        const y=[];
+        const text=[];
+
+
+        for(let i=0;i<90;i++){
+
+            const angle =
+                (i/90)*Math.PI*2;
+
+            const radius =
+                0.5 +
+                ((i*13+index*7)%100)/100;
+
+            const centerX =
+                Math.cos(index*0.63)*4;
+
+            const centerY =
+                Math.sin(index*0.63)*4;
+
+
+            x.push(
+                centerX+
+                Math.cos(angle)*radius+
+                ((i*17)%100)/100
+            );
+
+
+            y.push(
+                centerY+
+                Math.sin(angle)*radius+
+                ((i*23)%100)/100
+            );
+
+
+            text.push(
+
+                "<b>Research Publication</b>" +
+
+                "<br>Subject: "+
+                subject +
+
+                "<br>Feature Vector: 768-D" +
+
+                "<br>PCA Dimension: 2D"
+
+            );
+
+        }
+
+
+        traces.push({
+
+            x:x,
+
+            y:y,
+
+            text:text,
+
+            mode:"markers",
+
+            type:"scattergl",
+
+            name:subject,
+
+            marker:{
+                size:7,
+                opacity:.7
+            },
+
+            hovertemplate:
+                "%{text}<extra></extra>"
+
+        });
+
+    });
+
+
+    Plotly.newPlot(
+
+        "researchMap",
+
+        traces,
+
+        {
+
+            title:
+                "768-D Feature Vector → PCA 2D",
+
+            xaxis:{
+                title:"Principal Component 1",
+                zeroline:false
+            },
+
+            yaxis:{
+                title:"Principal Component 2",
+                zeroline:false
+            },
+
+            hovermode:"closest",
+
+            legend:{
+                orientation:"h"
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   6 KEYWORD NETWORK
+============================================================ */
+
+function drawNetwork(){
+
+    const selected =
+        document.getElementById("networkSubject").value;
+
+
+    const nodes =
+        keywords.slice(0,12)
+        .map(x=>x[0]);
+
+
+    const nodeX=[];
+    const nodeY=[];
+
+
+    nodes.forEach((node,i)=>{
+
+        const angle =
+            2*Math.PI*i/nodes.length;
+
+        nodeX.push(
+            Math.cos(angle)*5
+        );
+
+        nodeY.push(
+            Math.sin(angle)*5
+        );
+
+    });
+
+
+    const edgeX=[];
+    const edgeY=[];
+
+
+    for(let i=0;i<nodes.length;i++){
+
+        for(
+            let j=i+1;
+            j<nodes.length;
+            j++
+        ){
+
+            if(
+                (i+j)%4===0
+            ){
+
+                edgeX.push(
+                    nodeX[i],
+                    nodeX[j],
+                    null
+                );
+
+                edgeY.push(
+                    nodeY[i],
+                    nodeY[j],
+                    null
+                );
+
+            }
+
+        }
+
+    }
+
+
+    const edgeTrace={
+
+        x:edgeX,
+
+        y:edgeY,
+
+        mode:"lines",
+
+        type:"scatter",
+
+        hoverinfo:"skip",
+
+        line:{
+            width:1
+        }
+
+    };
+
+
+    const nodeTrace={
+
+        x:nodeX,
+
+        y:nodeY,
+
+        text:nodes,
+
+        mode:"markers+text",
+
+        type:"scatter",
+
+        textposition:"top center",
+
+        marker:{
+
+            size:
+                nodes.map(
+                    (n,i)=>
+                    18+
+                    (keywords[i][1]/80)
+                )
+
+        },
+
+        hovertemplate:
+            "<b>%{text}</b>" +
+            "<br>Keyword relationship" +
+            "<extra></extra>"
+
+    };
+
+
+    Plotly.newPlot(
+
+        "networkChart",
+
+        [
+            edgeTrace,
+            nodeTrace
+        ],
+
+        {
+
+            title:
+                selected==="all"
+                ?"Global Keyword Network"
+                :selected+" Keyword Network",
+
+            showlegend:false,
+
+            xaxis:{
+                visible:false
+            },
+
+            yaxis:{
+                visible:false
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   7 SANKEY
+============================================================ */
+
+function drawSankey(){
+
+    const labels=[
+
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Data Science",
+
+        "AI",
+        "Machine Learning",
+        "Deep Learning",
+        "Neural Network",
+        "Data Science",
+
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+
+    ];
+
+
+    const source=[
+
+        0,0,0,
+        1,1,1,
+        2,2,
+        3,3,
+
+        4,4,4,
+        5,5,5,
+        6,6,6,
+        7,7,
+        8,8
+
+    ];
+
+
+    const target=[
+
+        4,5,6,
+        5,6,7,
+        6,7,
+        8,7,
+
+        9,10,11,
+        9,10,12,
+        10,11,12,
+        9,11,
+        10,12
+
+    ];
+
+
+    const value=[
+
+        100,80,70,
+        90,75,60,
+        85,55,
+        70,50,
+
+        20,30,40,
+        25,35,45,
+        20,35,45,
+        25,30,
+        30,40
+
+    ];
+
+
+    Plotly.newPlot(
+
+        "sankeyChart",
+
+        [{
+
+            type:"sankey",
+
+            orientation:"h",
+
+            node:{
+
+                pad:20,
+
+                thickness:20,
+
+                label:labels
+
+            },
+
+            link:{
+
+                source:source,
+
+                target:target,
+
+                value:value
+
+            }
+
+        }],
+
+        {
+
+            margin:{
+                l:20,
+                r:20,
+                t:30,
+                b:20
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   INITIALIZE DASHBOARD
+============================================================ */
+
+drawSubjectChart();
+
+drawKeywordChart();
+
+drawTimeline();
+
+drawHeatmap();
+
+updateResearchMap();
+
+drawNetwork();
+
+drawSankey();
+
+
+</script>
+
+</body>
+</html>
