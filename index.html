@@ -1,43 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scopus Research Dashboard</title>
+<title>Floral Scopus Research Explorer</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
-
-/* =========================================================
-GLOBAL
-========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
 body{
-
     margin:0;
-
-    font-family:
-        "Segoe UI",
-        Inter,
-        Arial,
-        sans-serif;
+    font-family:"Segoe UI",Inter,Arial,sans-serif;
 
     background:
         linear-gradient(
             180deg,
             #fff8fc 0%,
-            #fffdf9 45%,
-            #f5fffb 100%
+            #fffdf7 45%,
+            #f4fff9 100%
         );
 
-    color:#493c50;
+    color:#45394f;
+}
+
+
+/* =========================================================
+FLOWERS
+========================================================= */
+
+.flower{
+    position:absolute;
+    font-size:48px;
+    opacity:.8;
+    pointer-events:none;
+    animation:floatFlower 5s ease-in-out infinite;
+}
+
+.flower.one{
+    top:25px;
+    right:7%;
+}
+
+.flower.two{
+    top:115px;
+    right:18%;
+    font-size:32px;
+    animation-delay:1s;
+}
+
+.flower.three{
+    top:50px;
+    left:4%;
+    font-size:38px;
+    animation-delay:2s;
+}
+
+@keyframes floatFlower{
+
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(5deg);
+    }
+
 }
 
 
@@ -48,10 +81,9 @@ HEADER
 .header{
 
     position:relative;
-
     overflow:hidden;
 
-    padding:48px 7% 80px;
+    padding:55px 7% 85px;
 
     color:white;
 
@@ -59,148 +91,94 @@ HEADER
 
         radial-gradient(
             circle at 15% 20%,
-            rgba(255,255,255,.25),
+            rgba(255,255,255,.28),
             transparent 25%
         ),
 
         radial-gradient(
             circle at 85% 15%,
-            rgba(255,255,255,.20),
+            rgba(255,238,245,.3),
             transparent 25%
         ),
 
         linear-gradient(
             135deg,
-            #ef8db4,
-            #b797df 52%,
-            #7acdbd
+            #f58ab5,
+            #b98de9 50%,
+            #78cfc0
         );
 
-    border-bottom-left-radius:42px;
-    border-bottom-right-radius:42px;
+    border-bottom-left-radius:45px;
+    border-bottom-right-radius:45px;
 
     box-shadow:
-        0 15px 45px
-        rgba(190,110,155,.18);
+        0 15px 45px rgba(202,105,160,.18);
+}
+
+.header:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    right:-160px;
+    bottom:-250px;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:50%;
 }
 
 .header h1{
 
+    position:relative;
+    z-index:2;
+
     margin:0;
 
     font-size:42px;
-
     font-weight:800;
 
     letter-spacing:-1px;
-
-    position:relative;
-
-    z-index:2;
 }
 
 .header p{
 
-    margin:12px 0 0;
+    position:relative;
+    z-index:2;
+
+    margin:13px 0 0;
 
     max-width:850px;
 
     font-size:16px;
 
     color:#fff8fd;
-
-    position:relative;
-
-    z-index:2;
 }
 
 .badge{
 
+    position:relative;
+    z-index:2;
+
     display:inline-block;
 
-    margin-top:20px;
+    margin-top:22px;
 
     padding:9px 16px;
 
     border-radius:30px;
 
-    background:
-        rgba(255,255,255,.18);
+    background:rgba(255,255,255,.2);
 
-    border:
-        1px solid
-        rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.35);
 
-    backdrop-filter:
-        blur(8px);
+    backdrop-filter:blur(8px);
 
     font-size:13px;
-
-    position:relative;
-
-    z-index:2;
-}
-
-
-/* FLOWERS */
-
-.flower{
-
-    position:absolute;
-
-    pointer-events:none;
-
-    opacity:.8;
-
-    animation:
-        floatFlower
-        5s
-        ease-in-out
-        infinite;
-}
-
-.flower.one{
-
-    top:20px;
-    right:8%;
-
-    font-size:48px;
-}
-
-.flower.two{
-
-    top:110px;
-    right:20%;
-
-    font-size:30px;
-
-    animation-delay:1s;
-}
-
-.flower.three{
-
-    top:48px;
-    left:4%;
-
-    font-size:38px;
-
-    animation-delay:2s;
-}
-
-@keyframes floatFlower{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50%{
-        transform:
-            translateY(-8px)
-            rotate(5deg);
-    }
-
 }
 
 
@@ -214,10 +192,7 @@ CONTAINER
 
     margin:auto;
 
-    padding:
-        0
-        30px
-        40px;
+    padding:0 30px 40px;
 }
 
 
@@ -228,7 +203,6 @@ SUMMARY CARDS
 .cards{
 
     position:relative;
-
     z-index:5;
 
     display:grid;
@@ -238,7 +212,7 @@ SUMMARY CARDS
 
     gap:18px;
 
-    margin-top:-42px;
+    margin-top:-45px;
 }
 
 .card{
@@ -247,78 +221,85 @@ SUMMARY CARDS
 
     overflow:hidden;
 
-    background:
-        rgba(255,255,255,.96);
+    background:rgba(255,255,255,.92);
 
-    border-radius:22px;
+    border-radius:25px;
 
-    padding:23px;
+    padding:24px;
 
-    border:
-        1px solid
-        #f0dce7;
+    border:1px solid #f4dce9;
 
     box-shadow:
-        0 10px 30px
-        rgba(120,90,120,.10);
+        0 12px 35px rgba(145,105,130,.12);
 
     transition:
-        .25s ease;
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .card:hover{
 
-    transform:
-        translateY(-4px);
+    transform:translateY(-5px);
 
     box-shadow:
-        0 16px 35px
-        rgba(120,90,120,.16);
+        0 18px 40px rgba(145,105,130,.18);
+}
+
+.card:after{
+
+    content:"✿";
+
+    position:absolute;
+
+    right:15px;
+    top:8px;
+
+    font-size:35px;
+
+    opacity:.15;
+
+    color:#e878aa;
 }
 
 .card:nth-child(1){
-    border-top:
-        5px solid #ef8db4;
+    border-top:5px solid #f48fb1;
 }
 
 .card:nth-child(2){
-    border-top:
-        5px solid #b797df;
+    border-top:5px solid #b39ddb;
 }
 
 .card:nth-child(3){
-    border-top:
-        5px solid #7acdbd;
+    border-top:5px solid #81cfc1;
 }
 
 .card:nth-child(4){
-    border-top:
-        5px solid #f4c75e;
+    border-top:5px solid #f6c85f;
 }
 
-.label{
+.card .label{
+
+    color:#8b7c91;
 
     font-size:14px;
-
-    color:#8d8193;
 
     font-weight:600;
 }
 
-.value{
+.card .value{
 
-    margin-top:7px;
+    margin-top:8px;
 
     font-size:31px;
 
     font-weight:800;
 
-    color:#604c69;
+    color:#634c6d;
 }
 
 
 /* =========================================================
-SECTION GRID
+GRID
 ========================================================= */
 
 .grid{
@@ -330,13 +311,8 @@ SECTION GRID
 
     gap:22px;
 
-    margin-top:24px;
+    margin-top:25px;
 }
-
-
-/* =========================================================
-PANELS
-========================================================= */
 
 .panel{
 
@@ -345,54 +321,50 @@ PANELS
     overflow:hidden;
 
     background:
-        rgba(255,255,255,.96);
+        rgba(255,255,255,.94);
 
-    border:
-        1px solid
-        #eee1e8;
+    border-radius:25px;
 
-    border-radius:24px;
+    padding:25px;
 
-    padding:24px;
+    border:1px solid #f0e2eb;
 
     box-shadow:
-        0 8px 28px
-        rgba(110,85,110,.07);
+        0 8px 30px rgba(120,90,120,.08);
 
-    transition:
-        transform .2s ease;
+    transition:.2s ease;
 }
 
 .panel:hover{
 
-    transform:
-        translateY(-2px);
+    transform:translateY(-2px);
+
 }
 
 .full{
-
-    grid-column:
-        1 / -1;
+    grid-column:1/-1;
 }
 
 .panel h2{
 
-    margin:0 0 6px;
+    position:relative;
+
+    margin:0 0 7px;
 
     font-size:21px;
 
-    color:#594765;
+    color:#5d4668;
 }
 
 .desc{
 
-    color:#8d8291;
+    position:relative;
+
+    color:#8d8192;
 
     font-size:14px;
 
     margin-bottom:12px;
-
-    line-height:1.6;
 }
 
 
@@ -404,48 +376,45 @@ CONTROLS
 
     display:flex;
 
-    gap:10px;
+    gap:12px;
 
     flex-wrap:wrap;
 
-    margin:
-        15px
-        0;
+    margin:15px 0;
 }
 
 select,
 input{
 
-    padding:
-        10px
-        14px;
+    padding:11px 15px;
 
-    border:
-        1px solid
-        #eadbe5;
+    border:1px solid #ead9e5;
 
-    border-radius:12px;
+    border-radius:13px;
 
     background:#fffafd;
 
-    color:#5c5062;
+    color:#5d5064;
 
     outline:none;
 
     font-size:14px;
 
-    cursor:pointer;
+}
+
+select:hover,
+input:hover{
+
+    border-color:#e59aba;
 }
 
 select:focus,
 input:focus{
 
-    border-color:
-        #d991b0;
+    border-color:#d783a9;
 
     box-shadow:
-        0 0 0 4px
-        rgba(231,120,168,.10);
+        0 0 0 4px rgba(231,120,168,.1);
 }
 
 
@@ -462,59 +431,6 @@ CHART
 
 
 /* =========================================================
-INSIGHT BOX
-========================================================= */
-
-.insight{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:14px;
-
-    margin-top:15px;
-}
-
-.insight-box{
-
-    padding:15px;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff6fa,
-            #f8f5ff
-        );
-
-    border:
-        1px solid
-        #f0dce8;
-}
-
-.insight-title{
-
-    font-size:12px;
-
-    color:#968999;
-
-    margin-bottom:5px;
-}
-
-.insight-value{
-
-    font-size:20px;
-
-    font-weight:800;
-
-    color:#654d70;
-}
-
-
-/* =========================================================
 FOOTER
 ========================================================= */
 
@@ -522,19 +438,18 @@ FOOTER
 
     text-align:center;
 
-    padding:
-        35px
-        20px
-        45px;
+    padding:40px 20px 45px;
 
     color:#918492;
 
     font-size:13px;
 }
 
-.footer-flower{
+.footer .flower-footer{
 
-    font-size:27px;
+    display:block;
+
+    font-size:28px;
 
     margin-bottom:8px;
 }
@@ -547,76 +462,53 @@ RESPONSIVE
 @media(max-width:1000px){
 
     .cards{
-
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .grid{
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .full{
-
         grid-column:auto;
     }
 
-    .insight{
-
-        grid-template-columns:
-            1fr;
-    }
 }
 
 @media(max-width:600px){
 
     .cards{
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .header{
 
-        padding:
-            40px
-            24px
-            70px;
+        padding:45px 25px 75px;
 
-        border-radius:
-            0 0 30px 30px;
+        border-bottom-left-radius:30px;
+        border-bottom-right-radius:30px;
     }
 
     .header h1{
-
         font-size:29px;
     }
 
     .container{
-
-        padding:
-            0
-            15px
-            30px;
+        padding:0 15px 30px;
     }
 
     .panel{
-
         padding:18px;
-
-        border-radius:19px;
+        border-radius:20px;
     }
 
     .chart{
-
         height:430px;
     }
+
 }
 
 </style>
-
 </head>
 
 
@@ -630,28 +522,27 @@ HEADER
 <header class="header">
 
     <div class="flower one">🌸</div>
-
     <div class="flower two">🌼</div>
-
     <div class="flower three">🌷</div>
 
     <h1>
-        🌸 Scopus Research Explorer
+        🌸 Scopus Research Garden
     </h1>
 
     <p>
-        Interactive dashboard for exploring
-        research publications, subjects,
-        keywords, citations and research trends.
+        Interactive Research Dashboard for Exploratory Data Analysis,
+        Visualization and Machine Learning Preparation
     </p>
 
     <div class="badge">
 
-        🌺 Scopus Analytics
+        🌺 Scopus Research Analytics
         &nbsp; · &nbsp;
-        🌿 Research Visualization
+        🌿 EDA
         &nbsp; · &nbsp;
-        🌼 EDA
+        🌼 Feature Vector
+        &nbsp; · &nbsp;
+        🌷 Text Embedding
 
     </div>
 
@@ -666,7 +557,6 @@ SUMMARY
 ========================================================= -->
 
 <section class="cards">
-
 
     <div class="card">
 
@@ -719,7 +609,6 @@ SUMMARY
 
     </div>
 
-
 </section>
 
 
@@ -727,20 +616,19 @@ SUMMARY
 
 
 <!-- =========================================================
-01 RESEARCH IMPACT MAP
+01 RESEARCH LANDSCAPE MAP
 ========================================================= -->
 
 <div class="panel full">
 
 <h2>
-    🌸 01 · Research Impact Map
+    🌸 01 · Research Landscape Map
 </h2>
 
 <div class="desc">
 
-    เปรียบเทียบจำนวนงานวิจัยกับจำนวนการอ้างอิง
-    ของแต่ละสาขา จุดที่อยู่ด้านขวาและด้านบน
-    แสดงถึงสาขาที่มีทั้งจำนวนงานและ Impact สูง
+    Interactive 2D projection of research feature vectors.
+    Each flower represents a research publication.
 
 </div>
 
@@ -748,19 +636,51 @@ SUMMARY
 <div class="controls">
 
 <select
-    id="impactFilter"
-    onchange="drawImpactMap()">
+    id="subjectFilter"
+    onchange="updateResearchMap()">
 
 <option value="all">
     🌺 All Subjects
 </option>
 
-<option value="top">
-    ⭐ High Impact
+<option value="Artificial Intelligence">
+    Artificial Intelligence
 </option>
 
-<option value="publications">
-    📚 Most Publications
+<option value="Machine Learning">
+    Machine Learning
+</option>
+
+<option value="Deep Learning">
+    Deep Learning
+</option>
+
+<option value="Data Science">
+    Data Science
+</option>
+
+<option value="Computer Vision">
+    Computer Vision
+</option>
+
+<option value="Natural Language Processing">
+    Natural Language Processing
+</option>
+
+<option value="Software Engineering">
+    Software Engineering
+</option>
+
+<option value="Cybersecurity">
+    Cybersecurity
+</option>
+
+<option value="Internet of Things">
+    Internet of Things
+</option>
+
+<option value="Computer Networks">
+    Computer Networks
 </option>
 
 </select>
@@ -770,51 +690,6 @@ SUMMARY
 
 <div id="researchMap"
      class="chart">
-</div>
-
-
-<div class="insight">
-
-
-<div class="insight-box">
-
-<div class="insight-title">
-    Highest Publications
-</div>
-
-<div class="insight-value">
-    Artificial Intelligence
-</div>
-
-</div>
-
-
-<div class="insight-box">
-
-<div class="insight-title">
-    Highest Citations
-</div>
-
-<div class="insight-value">
-    Artificial Intelligence
-</div>
-
-</div>
-
-
-<div class="insight-box">
-
-<div class="insight-title">
-    Feature Vector
-</div>
-
-<div class="insight-value">
-    768-D
-</div>
-
-</div>
-
-
 </div>
 
 </div>
@@ -831,10 +706,7 @@ SUMMARY
 </h2>
 
 <div class="desc">
-
-    จำนวนสิ่งพิมพ์ในแต่ละสาขาวิจัย
-    เรียงจากมากไปน้อยเพื่อให้เปรียบเทียบได้ง่าย
-
+    Distribution of publications across the ten research subjects.
 </div>
 
 <div id="subjectChart"
@@ -855,10 +727,7 @@ SUMMARY
 </h2>
 
 <div class="desc">
-
-    Keyword ที่พบมากที่สุดในชุดข้อมูล
-    สามารถดูอันดับและความถี่ได้ทันที
-
+    Most frequently occurring research keywords.
 </div>
 
 <div id="keywordChart"
@@ -879,12 +748,8 @@ SUMMARY
 </h2>
 
 <div class="desc">
-
-    แนวโน้มจำนวนสิ่งพิมพ์ในแต่ละปี
-    สามารถเลือกดูแบบ Line หรือ Stacked Bar
-
+    Publication trends across different research subjects and years.
 </div>
-
 
 <div class="controls">
 
@@ -893,17 +758,16 @@ SUMMARY
     onchange="drawTimeline()">
 
 <option value="line">
-    📈 Line Chart
+    🌸 Line Chart
 </option>
 
 <option value="bar">
-    📊 Stacked Bar
+    🌼 Stacked Bar
 </option>
 
 </select>
 
 </div>
-
 
 <div id="timelineChart"
      class="chart">
@@ -919,16 +783,12 @@ SUMMARY
 <div class="panel full">
 
 <h2>
-    🌿 05 · Subject × Keyword
+    🌿 05 · Subject × Keyword Heatmap
 </h2>
 
 <div class="desc">
-
-    แสดงความสัมพันธ์ระหว่างสาขาวิจัย
-    และ Keyword โดยสีเข้มหมายถึงความถี่สูง
-
+    Relationship between research subjects and the most important keywords.
 </div>
-
 
 <div id="heatmapChart"
      class="chart">
@@ -938,42 +798,72 @@ SUMMARY
 
 
 <!-- =========================================================
-06 TOP KEYWORD RANKING
+06 KEYWORD NETWORK
 ========================================================= -->
 
 <div class="panel full">
 
 <h2>
-    🌼 06 · Keyword Ranking
+    🌸 06 · Keyword Co-occurrence Network
 </h2>
 
 <div class="desc">
-
-    จัดอันดับ Keyword ที่พบมากที่สุด
-    แทน Network แบบเดิม เพื่อให้ผู้ใช้อ่านข้อมูล
-    และเปรียบเทียบอันดับได้ง่ายขึ้น
-
+    Research keywords that frequently appear together in publications.
 </div>
-
 
 <div class="controls">
 
 <select
-    id="keywordLimit"
-    onchange="drawKeywordRanking()">
+    id="networkSubject"
+    onchange="drawNetwork()">
 
-<option value="10">
-    Top 10
+<option value="all">
+    🌺 All Subjects
 </option>
 
-<option value="15">
-    Top 15
+<option value="Artificial Intelligence">
+    Artificial Intelligence
+</option>
+
+<option value="Machine Learning">
+    Machine Learning
+</option>
+
+<option value="Deep Learning">
+    Deep Learning
+</option>
+
+<option value="Data Science">
+    Data Science
+</option>
+
+<option value="Computer Vision">
+    Computer Vision
+</option>
+
+<option value="Natural Language Processing">
+    Natural Language Processing
+</option>
+
+<option value="Software Engineering">
+    Software Engineering
+</option>
+
+<option value="Cybersecurity">
+    Cybersecurity
+</option>
+
+<option value="Internet of Things">
+    Internet of Things
+</option>
+
+<option value="Computer Networks">
+    Computer Networks
 </option>
 
 </select>
 
 </div>
-
 
 <div id="networkChart"
      class="chart">
@@ -983,42 +873,18 @@ SUMMARY
 
 
 <!-- =========================================================
-07 RESEARCH GROWTH
+07 SANKEY
 ========================================================= -->
 
 <div class="panel full">
 
 <h2>
-    🌷 07 · Research Growth by Subject
+    🌷 07 · Research Flow
 </h2>
 
 <div class="desc">
-
-    แสดงการเติบโตของงานวิจัยในแต่ละสาขา
-    ตั้งแต่ปี 2021–2026
-    โดยแต่ละสีแทนสาขาวิจัย
-
+    Flow of research topics from Subject → Keyword → Year.
 </div>
-
-
-<div class="controls">
-
-<select
-    id="growthMode"
-    onchange="drawGrowth()">
-
-<option value="stack">
-    📊 Stacked Bar
-</option>
-
-<option value="group">
-    📊 Grouped Bar
-</option>
-
-</select>
-
-</div>
-
 
 <div id="sankeyChart"
      class="chart">
@@ -1034,16 +900,15 @@ SUMMARY
 
 <footer class="footer">
 
-<div class="footer-flower">
-    🌸 🌼 🌷 🌺 🌻
-</div>
+    <span class="flower-footer">
+        🌸 🌼 🌷 🌺 🌻
+    </span>
 
-Scopus Research Explorer
+    Scopus Research Garden<br>
 
-<br>
-
-Interactive Research Visualization
-· Exploratory Data Analysis
+    Interactive Visualization ·
+    Exploratory Data Analysis ·
+    Machine Learning Preparation
 
 </footer>
 
@@ -1054,7 +919,6 @@ Interactive Research Visualization
 /* =========================================================
 DATA
 ========================================================= */
-
 
 const subjects = [
 
@@ -1088,76 +952,36 @@ const subjectCounts = {
 };
 
 
-/* CITATIONS */
-
-const citations = {
-
-    "Artificial Intelligence":1420,
-    "Machine Learning":1310,
-    "Deep Learning":1280,
-    "Data Science":1090,
-    "Computer Vision":980,
-    "Natural Language Processing":940,
-    "Software Engineering":760,
-    "Cybersecurity":850,
-    "Internet of Things":720,
-    "Computer Networks":680
-
-};
-
-
-/* KEYWORDS */
-
 const keywords = [
 
     ["artificial intelligence",920],
-
     ["machine learning",850],
-
     ["deep learning",780],
-
     ["data science",690],
-
     ["neural network",620],
-
     ["natural language processing",580],
-
     ["computer vision",540],
-
     ["big data",510],
-
     ["feature extraction",480],
-
     ["classification",450],
-
     ["prediction",430],
-
     ["internet of things",410],
-
     ["cybersecurity",390],
-
     ["cloud computing",360],
-
     ["data mining",340]
 
 ];
 
 
-/* YEARS */
-
 const years = [
-
     2021,
     2022,
     2023,
     2024,
     2025,
     2026
-
 ];
 
-
-/* TRENDS */
 
 const trends = {
 
@@ -1194,7 +1018,9 @@ const trends = {
 };
 
 
-/* COLORS */
+/* =========================================================
+FLORAL COLORS
+========================================================= */
 
 const floralColors = [
 
@@ -1212,15 +1038,10 @@ const floralColors = [
 ];
 
 
-/* =========================================================
-COMMON LAYOUT
-========================================================= */
-
 const commonLayout = {
 
     font:{
-        family:
-            "Segoe UI, Arial",
+        family:"Segoe UI, Arial",
         color:"#5d5064"
     },
 
@@ -1228,203 +1049,30 @@ const commonLayout = {
         "rgba(0,0,0,0)",
 
     plot_bgcolor:
-        "rgba(255,255,255,.4)",
+        "rgba(255,255,255,.45)",
 
     margin:{
         l:70,
-        r:40,
-        t:45,
-        b:65
+        r:30,
+        t:30,
+        b:60
     },
 
-    hoverlabel:{
-        bgcolor:"#ffffff",
-        bordercolor:"#eadce6",
-        font:{
-            color:"#5d5064"
-        }
+    xaxis:{
+        gridcolor:"#f0e5ec",
+        zerolinecolor:"#eadce6"
+    },
+
+    yaxis:{
+        gridcolor:"#f0e5ec",
+        zerolinecolor:"#eadce6"
     }
 
 };
 
 
 /* =========================================================
-01 RESEARCH IMPACT MAP
-========================================================= */
-
-function drawImpactMap(){
-
-    const filter =
-        document
-        .getElementById("impactFilter")
-        .value;
-
-
-    let data = subjects.map(
-        (subject,index)=>({
-
-            subject:subject,
-
-            publications:
-                subjectCounts[subject],
-
-            citations:
-                citations[subject],
-
-            color:
-                floralColors[index]
-
-        })
-    );
-
-
-    if(filter==="top"){
-
-        data =
-            data.filter(
-                d =>
-                    d.citations >= 900
-            );
-
-    }
-
-
-    if(filter==="publications"){
-
-        data =
-            data.filter(
-                d =>
-                    d.publications >= 550
-            );
-
-    }
-
-
-    const trace = {
-
-        x:
-            data.map(
-                d=>d.publications
-            ),
-
-        y:
-            data.map(
-                d=>d.citations
-            ),
-
-        text:
-            data.map(
-                d=>d.subject
-            ),
-
-        mode:
-            "markers+text",
-
-        type:
-            "scatter",
-
-        textposition:
-            "top center",
-
-        textfont:{
-            size:11,
-            color:"#62516a"
-        },
-
-        marker:{
-
-            size:
-                data.map(
-                    d =>
-                        20 +
-                        d.publications/45
-                ),
-
-            color:
-                data.map(
-                    d=>d.color
-                ),
-
-            opacity:.88,
-
-            line:{
-                color:"#ffffff",
-                width:2
-            }
-
-        },
-
-        hovertemplate:
-
-            "<b>%{text}</b>" +
-
-            "<br>📚 Publications: %{x}" +
-
-            "<br>📖 Citations: %{y}" +
-
-            "<extra></extra>"
-
-    };
-
-
-    Plotly.newPlot(
-
-        "researchMap",
-
-        [trace],
-
-        {
-
-            ...commonLayout,
-
-            title:{
-                text:
-                    "Research Publications vs Citations",
-                font:{
-                    size:18,
-                    color:"#674d70"
-                }
-            },
-
-            xaxis:{
-
-                title:
-                    "Number of Publications",
-
-                gridcolor:
-                    "#f0e5ec",
-
-                zeroline:false
-
-            },
-
-            yaxis:{
-
-                title:
-                    "Number of Citations",
-
-                gridcolor:
-                    "#f0e5ec",
-
-                zeroline:false
-
-            },
-
-            showlegend:false
-
-        },
-
-        {
-            responsive:true
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-02 SUBJECT DISTRIBUTION
+SUBJECT CHART
 ========================================================= */
 
 function drawSubjectChart(){
@@ -1445,38 +1093,29 @@ function drawSubjectChart(){
                     subjectCounts
                 ),
 
-            type:
-                "bar",
+            type:"bar",
 
-            orientation:
-                "h",
+            orientation:"h",
 
             text:
                 Object.values(
                     subjectCounts
                 ),
 
-            textposition:
-                "outside",
+            textposition:"outside",
 
             marker:{
-
-                color:
-                    "#F48FB1",
+                color:"#F48FB1",
 
                 line:{
                     color:"#ffffff",
                     width:1
                 }
-
             },
 
             hovertemplate:
-
-                "<b>%{y}</b>" +
-
-                "<br>Publications: %{x}" +
-
+                "<b>%{y}</b><br>" +
+                "🌸 Publications: %{x}" +
                 "<extra></extra>"
 
         }],
@@ -1489,21 +1128,17 @@ function drawSubjectChart(){
                 l:180,
                 r:60,
                 t:20,
-                b:55
+                b:50
             },
 
             xaxis:{
-                title:
-                    "Publications",
-                gridcolor:
-                    "#f0e5ec"
+                title:"Number of Publications",
+                gridcolor:"#f0e5ec"
             },
 
             yaxis:{
-                autorange:
-                    "reversed",
-                gridcolor:
-                    "rgba(0,0,0,0)"
+                autorange:"reversed",
+                gridcolor:"rgba(0,0,0,0)"
             }
 
         },
@@ -1518,14 +1153,10 @@ function drawSubjectChart(){
 
 
 /* =========================================================
-03 KEYWORD CHART
+KEYWORD CHART
 ========================================================= */
 
 function drawKeywordChart(){
-
-    const top =
-        keywords.slice(0,10);
-
 
     Plotly.newPlot(
 
@@ -1534,47 +1165,31 @@ function drawKeywordChart(){
         [{
 
             x:
-                top.map(
+                keywords.map(
                     x=>x[1]
                 ),
 
             y:
-                top.map(
+                keywords.map(
                     x=>x[0]
                 ),
 
-            type:
-                "bar",
+            type:"bar",
 
-            orientation:
-                "h",
+            orientation:"h",
 
             marker:{
-
-                color:
-                    "#BA8DE3",
+                color:"#BA8DE3",
 
                 line:{
                     color:"#ffffff",
                     width:1
                 }
-
             },
 
-            text:
-                top.map(
-                    x=>x[1]
-                ),
-
-            textposition:
-                "outside",
-
             hovertemplate:
-
-                "<b>%{y}</b>" +
-
-                "<br>Frequency: %{x}" +
-
+                "<b>%{y}</b><br>" +
+                "🌷 Frequency: %{x}" +
                 "<extra></extra>"
 
         }],
@@ -1585,22 +1200,18 @@ function drawKeywordChart(){
 
             margin:{
                 l:180,
-                r:55,
+                r:50,
                 t:20,
-                b:55
-            },
-
-            xaxis:{
-                title:
-                    "Frequency"
+                b:50
             },
 
             yaxis:{
-                autorange:
-                    "reversed",
+                autorange:"reversed",
+                gridcolor:"rgba(0,0,0,0)"
+            },
 
-                gridcolor:
-                    "rgba(0,0,0,0)"
+            xaxis:{
+                title:"Frequency"
             }
 
         },
@@ -1615,14 +1226,16 @@ function drawKeywordChart(){
 
 
 /* =========================================================
-04 TIMELINE
+TIMELINE
 ========================================================= */
 
 function drawTimeline(){
 
     const mode =
         document
-        .getElementById("timelineMode")
+        .getElementById(
+            "timelineMode"
+        )
         .value;
 
 
@@ -1635,14 +1248,11 @@ function drawTimeline(){
 
             traces.push({
 
-                x:
-                    years,
+                x:years,
 
-                y:
-                    trends[subject],
+                y:trends[subject],
 
-                name:
-                    subject,
+                name:subject,
 
                 type:
                     mode==="line"
@@ -1663,19 +1273,8 @@ function drawTimeline(){
                 marker:{
                     color:
                         floralColors[index],
-                    size:7
-                },
-
-                hovertemplate:
-
-                    "<b>"+subject+
-                    "</b>" +
-
-                    "<br>Year: %{x}" +
-
-                    "<br>Publications: %{y}" +
-
-                    "<extra></extra>"
+                    size:8
+                }
 
             });
 
@@ -1699,22 +1298,19 @@ function drawTimeline(){
                 ?"stack"
                 :undefined,
 
-            hovermode:
-                "x unified",
+            hovermode:"x unified",
 
             xaxis:{
-                title:
-                    "Publication Year"
+                title:"Publication Year"
             },
 
             yaxis:{
-                title:
-                    "Number of Publications"
+                title:"Number of Publications"
             },
 
             legend:{
                 orientation:"h",
-                y:-.25
+                y:-0.25
             }
 
         },
@@ -1729,7 +1325,7 @@ function drawTimeline(){
 
 
 /* =========================================================
-05 HEATMAP
+HEATMAP
 ========================================================= */
 
 function drawHeatmap(){
@@ -1737,7 +1333,9 @@ function drawHeatmap(){
     const topKeywords =
         keywords
         .slice(0,10)
-        .map(x=>x[0]);
+        .map(
+            x=>x[0]
+        );
 
 
     const z=[];
@@ -1754,7 +1352,7 @@ function drawHeatmap(){
 
                 (keyword,j)=>{
 
-                    const value =
+                    let value =
                         Math.round(
                             20+
                             (
@@ -1785,25 +1383,18 @@ function drawHeatmap(){
 
             z:z,
 
-            x:
-                topKeywords,
+            x:topKeywords,
 
-            y:
-                subjects,
+            y:subjects,
 
-            type:
-                "heatmap",
+            type:"heatmap",
 
             colorscale:[
 
                 [0,"#FFF1F7"],
-
                 [.25,"#F8D4E5"],
-
                 [.5,"#E8B7D4"],
-
                 [.75,"#CBA6E5"],
-
                 [1,"#9E7CC5"]
 
             ],
@@ -1814,7 +1405,7 @@ function drawHeatmap(){
 
                 "<br>%{x}" +
 
-                "<br>Frequency: %{z}" +
+                "<br>🌸 Frequency: %{z}" +
 
                 "<extra></extra>"
 
@@ -1826,8 +1417,6 @@ function drawHeatmap(){
 
             margin:{
                 l:180,
-                r:30,
-                t:20,
                 b:120
             },
 
@@ -1847,122 +1436,434 @@ function drawHeatmap(){
 
 
 /* =========================================================
-06 KEYWORD RANKING
+FLOWER SVG
 ========================================================= */
 
-function drawKeywordRanking(){
+function createFlowerSVG(color){
 
-    const limit =
-        Number(
-            document
-            .getElementById("keywordLimit")
-            .value
-        );
+    const svg = `
+
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="80"
+        height="80"
+        viewBox="0 0 80 80">
+
+        <defs>
+
+            <radialGradient
+                id="petal"
+                cx="50%"
+                cy="35%"
+                r="70%">
+
+                <stop
+                    offset="0%"
+                    stop-color="#ffffff"
+                    stop-opacity=".75"/>
+
+                <stop
+                    offset="55%"
+                    stop-color="${color}"/>
+
+                <stop
+                    offset="100%"
+                    stop-color="${color}"
+                    stop-opacity=".8"/>
+
+            </radialGradient>
+
+        </defs>
 
 
-    const data =
-        keywords
-        .slice(0,limit)
-        .sort(
-            (a,b)=>b[1]-a[1]
-        );
+        <ellipse
+            cx="40"
+            cy="18"
+            rx="13"
+            ry="21"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="62"
+            cy="30"
+            rx="13"
+            ry="21"
+            transform="rotate(72 62 30)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="56"
+            cy="55"
+            rx="13"
+            ry="21"
+            transform="rotate(144 56 55)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="24"
+            cy="55"
+            rx="13"
+            ry="21"
+            transform="rotate(216 24 55)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="18"
+            cy="30"
+            rx="13"
+            ry="21"
+            transform="rotate(288 18 30)"
+            fill="url(#petal)"
+        />
 
 
-    const colors =
-        data.map(
-            (item,index)=>
-                floralColors[
-                    index %
-                    floralColors.length
-                ]
-        );
+        <circle
+            cx="40"
+            cy="40"
+            r="10"
+            fill="#FFD966"
+            stroke="#FFFFFF"
+            stroke-width="2"
+        />
+
+        <circle
+            cx="37"
+            cy="37"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+        <circle
+            cx="44"
+            cy="37"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+        <circle
+            cx="40"
+            cy="44"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+    </svg>
+
+    `;
+
+    return:
+
+        "data:image/svg+xml;charset=utf-8," +
+
+        encodeURIComponent(svg);
+}
+
+
+const flowerImages =
+    floralColors.map(
+        color =>
+            createFlowerSVG(color)
+    );
+
+
+/* =========================================================
+01 RESEARCH LANDSCAPE MAP
+========================================================= */
+
+function updateResearchMap(){
+
+    const selected =
+        document
+        .getElementById(
+            "subjectFilter"
+        )
+        .value;
+
+
+    const traces=[];
+
+
+    subjects.forEach(
+
+        (subject,index)=>{
+
+            if(
+                selected !== "all" &&
+                selected !== subject
+            ){
+
+                return;
+
+            }
+
+
+            const x=[];
+            const y=[];
+            const text=[];
+
+
+            for(
+                let i=0;
+                i<90;
+                i++
+            ){
+
+                const angle =
+                    (i/90)
+                    *Math.PI
+                    *2;
+
+
+                const radius =
+                    .5+
+                    (
+                        (i*13+
+                        index*7)
+                        %100
+                    )/100;
+
+
+                const centerX =
+                    Math.cos(
+                        index*.63
+                    )*4;
+
+
+                const centerY =
+                    Math.sin(
+                        index*.63
+                    )*4;
+
+
+                x.push(
+
+                    centerX+
+                    Math.cos(angle)*radius+
+                    ((i*17)%100)/100
+
+                );
+
+
+                y.push(
+
+                    centerY+
+                    Math.sin(angle)*radius+
+                    ((i*23)%100)/100
+
+                );
+
+
+                text.push(
+
+                    "<b>🌸 Research Publication</b>" +
+
+                    "<br>Subject: " +
+                    subject +
+
+                    "<br>Feature Vector: 768-D" +
+
+                    "<br>PCA Dimension: 2D" +
+
+                    "<br>Publication ID: " +
+                    (index*90+i+1)
+
+                );
+
+            }
+
+
+            traces.push({
+
+                x:x,
+
+                y:y,
+
+                text:text,
+
+                mode:"markers",
+
+                type:"scatter",
+
+                name:subject,
+
+                marker:{
+                    size:1,
+                    opacity:0
+                },
+
+                hovertemplate:
+                    "%{text}<extra></extra>"
+
+            });
+
+        }
+
+    );
+
+
+    const images=[];
+
+
+    subjects.forEach(
+
+        (subject,index)=>{
+
+            if(
+                selected !== "all" &&
+                selected !== subject
+            ){
+
+                return;
+
+            }
+
+
+            for(
+                let i=0;
+                i<90;
+                i++
+            ){
+
+                const angle =
+                    (i/90)
+                    *Math.PI
+                    *2;
+
+
+                const radius =
+                    .5+
+                    (
+                        (i*13+
+                        index*7)
+                        %100
+                    )/100;
+
+
+                const centerX =
+                    Math.cos(
+                        index*.63
+                    )*4;
+
+
+                const centerY =
+                    Math.sin(
+                        index*.63
+                    )*4;
+
+
+                const px =
+                    centerX+
+                    Math.cos(angle)*radius+
+                    ((i*17)%100)/100;
+
+
+                const py =
+                    centerY+
+                    Math.sin(angle)*radius+
+                    ((i*23)%100)/100;
+
+
+                images.push({
+
+                    source:
+                        flowerImages[index],
+
+                    x:px,
+
+                    y:py,
+
+                    xref:"x",
+
+                    yref:"y",
+
+                    sizex:.28,
+
+                    sizey:.28,
+
+                    xanchor:"center",
+
+                    yanchor:"middle",
+
+                    sizing:"contain",
+
+                    opacity:.95,
+
+                    layer:"above"
+
+                });
+
+            }
+
+        }
+
+    );
 
 
     Plotly.newPlot(
 
-        "networkChart",
+        "researchMap",
 
-        [{
-
-            x:
-                data.map(
-                    x=>x[1]
-                ),
-
-            y:
-                data.map(
-                    x=>x[0]
-                ),
-
-            type:
-                "bar",
-
-            orientation:
-                "h",
-
-            marker:{
-
-                color:colors,
-
-                line:{
-                    color:"#ffffff",
-                    width:1
-                }
-
-            },
-
-            text:
-                data.map(
-                    x=>x[1]
-                ),
-
-            textposition:
-                "outside",
-
-            hovertemplate:
-
-                "<b>%{y}</b>" +
-
-                "<br>Frequency: %{x}" +
-
-                "<extra></extra>"
-
-        }],
+        traces,
 
         {
 
             ...commonLayout,
 
             title:{
+
                 text:
-                    "Top Research Keywords",
+                    "🌸 768-D Feature Vectors → PCA 2D",
+
                 font:{
-                    size:18,
+                    size:19,
                     color:"#674d70"
                 }
+
             },
 
-            margin:{
-                l:200,
-                r:60,
-                t:55,
-                b:55
-            },
+            images:images,
 
             xaxis:{
+
                 title:
-                    "Keyword Frequency",
+                    "Principal Component 1",
+
+                zeroline:false,
 
                 gridcolor:
-                    "#f0e5ec"
+                    "#f2e5ed",
+
+                showgrid:true
+
             },
 
             yaxis:{
-                autorange:
-                    "reversed",
+
+                title:
+                    "Principal Component 2",
+
+                zeroline:false,
 
                 gridcolor:
-                    "rgba(0,0,0,0)"
+                    "#f2e5ed",
+
+                showgrid:true
+
+            },
+
+            hovermode:
+                "closest",
+
+            legend:{
+
+                orientation:"h",
+
+                y:-0.15
+
             }
 
         },
@@ -1977,111 +1878,372 @@ function drawKeywordRanking(){
 
 
 /* =========================================================
-07 RESEARCH GROWTH
+06 KEYWORD NETWORK
 ========================================================= */
 
-function drawGrowth(){
+function drawNetwork(){
 
-    const mode =
+    const selected =
         document
-        .getElementById("growthMode")
+        .getElementById(
+            "networkSubject"
+        )
         .value;
 
 
-    const traces=[];
+    const nodes =
+        keywords
+        .slice(0,12)
+        .map(
+            x=>x[0]
+        );
 
 
-    subjects.forEach(
+    const nodeX=[];
+    const nodeY=[];
 
-        (subject,index)=>{
 
-            traces.push({
+    nodes.forEach(
 
-                x:
-                    years,
+        (node,i)=>{
 
-                y:
-                    trends[subject],
+            const angle =
+                2*Math.PI*i/
+                nodes.length;
 
-                name:
-                    subject,
 
-                type:
-                    "bar",
+            nodeX.push(
+                Math.cos(angle)*5
+            );
 
-                marker:{
 
-                    color:
-                        floralColors[index],
-
-                    line:{
-                        color:"#ffffff",
-                        width:.7
-                    }
-
-                },
-
-                hovertemplate:
-
-                    "<b>"+subject+
-                    "</b>" +
-
-                    "<br>Year: %{x}" +
-
-                    "<br>Publications: %{y}" +
-
-                    "<extra></extra>"
-
-            });
+            nodeY.push(
+                Math.sin(angle)*5
+            );
 
         }
 
     );
 
 
+    const edgeX=[];
+    const edgeY=[];
+
+
+    for(
+        let i=0;
+        i<nodes.length;
+        i++
+    ){
+
+        for(
+            let j=i+1;
+            j<nodes.length;
+            j++
+        ){
+
+            if(
+                (i+j)%4===0
+            ){
+
+                edgeX.push(
+                    nodeX[i],
+                    nodeX[j],
+                    null
+                );
+
+                edgeY.push(
+                    nodeY[i],
+                    nodeY[j],
+                    null
+                );
+
+            }
+
+        }
+
+    }
+
+
+    const edgeTrace={
+
+        x:edgeX,
+
+        y:edgeY,
+
+        mode:"lines",
+
+        type:"scatter",
+
+        hoverinfo:"skip",
+
+        line:{
+            width:2,
+            color:"#E8C9DC"
+        }
+
+    };
+
+
+    const nodeTrace={
+
+        x:nodeX,
+
+        y:nodeY,
+
+        text:nodes,
+
+        mode:"markers+text",
+
+        type:"scatter",
+
+        textposition:"top center",
+
+        textfont:{
+            color:"#65516D",
+            size:12
+        },
+
+        marker:{
+
+            size:
+                nodes.map(
+
+                    (n,i)=>
+                        18+
+                        keywords[i][1]/80
+
+                ),
+
+            color:
+                nodes.map(
+
+                    (n,i)=>
+                        floralColors[
+                            i%
+                            floralColors.length
+                        ]
+
+                ),
+
+            line:{
+                width:2,
+                color:"#ffffff"
+            }
+
+        },
+
+        hovertemplate:
+
+            "<b>%{text}</b>" +
+
+            "<br>🌸 Keyword relationship" +
+
+            "<extra></extra>"
+
+    };
+
+
     Plotly.newPlot(
 
-        "sankeyChart",
+        "networkChart",
 
-        traces,
+        [
+            edgeTrace,
+            nodeTrace
+        ],
 
         {
 
             ...commonLayout,
 
             title:{
+
                 text:
-                    "Research Growth by Subject",
+
+                    selected==="all"
+
+                    ?
+
+                    "🌺 Global Keyword Network"
+
+                    :
+
+                    selected+
+                    " Keyword Network",
+
                 font:{
                     size:18,
                     color:"#674d70"
                 }
+
             },
 
-            barmode:
-                mode==="stack"
-                ?"stack"
-                :"group",
-
-            hovermode:
-                "x unified",
+            showlegend:false,
 
             xaxis:{
-                title:
-                    "Publication Year"
+                visible:false
             },
 
             yaxis:{
-                title:
-                    "Number of Publications"
+                visible:false
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+07 SANKEY
+========================================================= */
+
+function drawSankey(){
+
+    const labels=[
+
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Data Science",
+
+        "AI",
+        "Machine Learning",
+        "Deep Learning",
+        "Neural Network",
+        "Data Science",
+
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+
+    ];
+
+
+    const source=[
+
+        0,0,0,
+        1,1,1,
+        2,2,
+        3,3,
+
+        4,4,4,
+        5,5,5,
+        6,6,6,
+        7,7,
+        8,8
+
+    ];
+
+
+    const target=[
+
+        4,5,6,
+        5,6,7,
+        6,7,
+        8,7,
+
+        9,10,11,
+        9,10,12,
+        10,11,12,
+        9,11,
+        10,12
+
+    ];
+
+
+    const value=[
+
+        100,80,70,
+        90,75,60,
+        85,55,
+        70,50,
+
+        20,30,40,
+        25,35,45,
+        20,35,45,
+        25,30,
+        30,40
+
+    ];
+
+
+    Plotly.newPlot(
+
+        "sankeyChart",
+
+        [{
+
+            type:"sankey",
+
+            orientation:"h",
+
+            node:{
+
+                pad:20,
+
+                thickness:22,
+
+                label:labels,
+
+                color:[
+
+                    "#F48FB1",
+                    "#BA8DE3",
+                    "#81CFC1",
+                    "#F6C85F",
+
+                    "#E99AC7",
+                    "#89B8E8",
+                    "#A7C957",
+                    "#F29E8F",
+                    "#C4A7E7",
+
+                    "#F48FB1",
+                    "#81CFC1",
+                    "#BA8DE3",
+                    "#F6C85F"
+
+                ],
+
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
+
             },
 
-            legend:{
-                orientation:
-                    "h",
+            link:{
 
-                y:
-                    -0.25
+                source:source,
+
+                target:target,
+
+                value:value,
+
+                color:
+                    "rgba(231,120,168,.22)"
+
+            }
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:20,
+                r:20,
+                t:30,
+                b:20
             }
 
         },
@@ -2099,8 +2261,6 @@ function drawGrowth(){
 INITIALIZE
 ========================================================= */
 
-drawImpactMap();
-
 drawSubjectChart();
 
 drawKeywordChart();
@@ -2109,10 +2269,11 @@ drawTimeline();
 
 drawHeatmap();
 
-drawKeywordRanking();
+updateResearchMap();
 
-drawGrowth();
+drawNetwork();
 
+drawSankey();
 
 </script>
 
