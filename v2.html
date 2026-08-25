@@ -1,6 +1,3 @@
-# index.html
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +26,7 @@ body{
     color:#45394f;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 .header{
     position:relative;
@@ -70,7 +67,7 @@ body{
     font-size:13px;
 }
 
-/* FLOWER DECORATION */
+/* ================= FLOWER ================= */
 
 .flower{
     position:absolute;
@@ -96,7 +93,7 @@ body{
     font-size:38px;
 }
 
-/* CONTAINER */
+/* ================= CONTAINER ================= */
 
 .container{
     max-width:1500px;
@@ -104,7 +101,7 @@ body{
     padding:0 30px 40px;
 }
 
-/* SUMMARY CARDS */
+/* ================= SUMMARY CARDS ================= */
 
 .cards{
     position:relative;
@@ -156,7 +153,7 @@ body{
     color:#634c6d;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 
 .grid{
     display:grid;
@@ -186,7 +183,7 @@ body{
     margin-bottom:12px;
 }
 
-/* CONTROLS */
+/* ================= CONTROLS ================= */
 
 .controls{
     display:flex;
@@ -204,14 +201,14 @@ select{
     font-size:14px;
 }
 
-/* CHART */
+/* ================= CHART ================= */
 
 .chart{
     width:100%;
     height:500px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 .footer{
     text-align:center;
@@ -220,7 +217,7 @@ select{
     font-size:13px;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:1000px){
 
@@ -273,6 +270,8 @@ select{
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header class="header">
 
     <div class="flower one">🌸</div>
@@ -287,13 +286,18 @@ select{
     </p>
 
     <div class="badge">
-        🌺 Scopus Research Analytics · 🌿 EDA · 🌼 Feature Vector · 🌷 Text Embedding
+        🌺 Scopus Research Analytics ·
+        🌿 EDA ·
+        🌼 Feature Vector ·
+        🌷 Text Embedding
     </div>
 
 </header>
 
 
 <main class="container">
+
+<!-- ================= SUMMARY ================= -->
 
 <section class="cards">
 
@@ -323,7 +327,7 @@ select{
 <section class="grid">
 
 
-<!-- RESEARCH LANDSCAPE -->
+<!-- ================= 01 RESEARCH LANDSCAPE ================= -->
 
 <div class="panel full">
 
@@ -336,7 +340,11 @@ select{
     <div class="controls">
 
         <select id="subjectFilter" onchange="updateResearchMap()">
-            <option value="all">🌺 All Subjects</option>
+
+            <option value="all">
+                🌺 All Subjects
+            </option>
+
         </select>
 
     </div>
@@ -346,7 +354,7 @@ select{
 </div>
 
 
-<!-- RESEARCH AREAS -->
+<!-- ================= 02 RESEARCH AREAS ================= -->
 
 <div class="panel">
 
@@ -361,7 +369,7 @@ select{
 </div>
 
 
-<!-- TOP KEYWORDS -->
+<!-- ================= 03 TOP KEYWORDS ================= -->
 
 <div class="panel">
 
@@ -376,7 +384,7 @@ select{
 </div>
 
 
-<!-- TOP AUTHORS -->
+<!-- ================= 04 TOP AUTHORS ================= -->
 
 <div class="panel full">
 
@@ -391,7 +399,7 @@ select{
 </div>
 
 
-<!-- TIMELINE -->
+<!-- ================= 05 TIMELINE ================= -->
 
 <div class="panel full">
 
@@ -405,9 +413,13 @@ select{
 
         <select id="timelineMode" onchange="drawTimeline()">
 
-            <option value="line">🌸 Line Chart</option>
+            <option value="line">
+                🌸 Line Chart
+            </option>
 
-            <option value="bar">🌼 Stacked Bar</option>
+            <option value="bar">
+                🌼 Stacked Bar
+            </option>
 
         </select>
 
@@ -418,7 +430,7 @@ select{
 </div>
 
 
-<!-- HEATMAP -->
+<!-- ================= 06 HEATMAP ================= -->
 
 <div class="panel full">
 
@@ -433,7 +445,7 @@ select{
 </div>
 
 
-<!-- NETWORK -->
+<!-- ================= 07 NETWORK ================= -->
 
 <div class="panel full">
 
@@ -448,7 +460,7 @@ select{
 </div>
 
 
-<!-- RESEARCH FLOW -->
+<!-- ================= 08 RESEARCH FLOW ================= -->
 
 <div class="panel full">
 
@@ -480,9 +492,11 @@ select{
 
 <script>
 
-/* ================= DATA ================= */
+/* =====================================================
+   DATA
+===================================================== */
 
-const subjects=[
+const subjects = [
 
     "Artificial Intelligence",
     "Machine Learning",
@@ -497,7 +511,8 @@ const subjects=[
 
 ];
 
-const subjectCounts={
+
+const subjectCounts = {
 
     "Artificial Intelligence":680,
     "Machine Learning":640,
@@ -512,7 +527,8 @@ const subjectCounts={
 
 };
 
-const keywords=[
+
+const keywords = [
 
     ["artificial intelligence",920],
     ["machine learning",850],
@@ -529,7 +545,8 @@ const keywords=[
 
 ];
 
-const authors=[
+
+const authors = [
 
     ["John Smith",245],
     ["Maria Garcia",220],
@@ -544,27 +561,37 @@ const authors=[
 
 ];
 
-const years=[2021,2022,2023,2024,2025,2026];
 
-const trends={};
+const years = [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+];
+
+
+const trends = {};
 
 subjects.forEach((subject,index)=>{
 
-    trends[subject]=years.map(
+    trends[subject] = years.map(
 
         (year,yearIndex)=>
 
-            Math.round(
-                35 +
-                index*2 +
-                yearIndex*(12+index*1.4)
-            )
+        Math.round(
+            35 +
+            index * 2 +
+            yearIndex * (12 + index * 1.4)
+        )
 
     );
 
 });
 
-const floralColors=[
+
+const floralColors = [
 
     "#F48FB1",
     "#BA8DE3",
@@ -580,7 +607,9 @@ const floralColors=[
 ];
 
 
-/* ADD SUBJECT OPTIONS */
+/* =====================================================
+   ADD SUBJECT OPTIONS
+===================================================== */
 
 subjects.forEach(subject=>{
 
@@ -599,9 +628,11 @@ subjects.forEach(subject=>{
 });
 
 
-/* COMMON LAYOUT */
+/* =====================================================
+   COMMON LAYOUT
+===================================================== */
 
-const commonLayout={
+const commonLayout = {
 
     font:{
         family:"Segoe UI,Arial",
@@ -630,13 +661,15 @@ const commonLayout={
 };
 
 
-/* ================= RESEARCH AREAS ================= */
+/* =====================================================
+   01 RESEARCH AREAS
+===================================================== */
 
 function drawResearchAreas(){
 
-    const labels=Object.keys(subjectCounts);
+    const labels = Object.keys(subjectCounts);
 
-    const values=Object.values(subjectCounts);
+    const values = Object.values(subjectCounts);
 
     Plotly.newPlot(
 
@@ -705,45 +738,56 @@ function drawResearchAreas(){
 }
 
 
-/* ================= RESEARCH LANDSCAPE ================= */
+/* =====================================================
+   02 RESEARCH LANDSCAPE
+===================================================== */
 
 function updateResearchMap(){
 
-    const selected=
+    const selected =
         document.getElementById("subjectFilter").value;
 
-    const traces=[];
+    const traces = [];
 
     subjects.forEach((subject,index)=>{
 
         if(
-            selected!=="all" &&
-            selected!==subject
+            selected !== "all" &&
+            selected !== subject
         ){
             return;
         }
 
-        const x=[];
-        const y=[];
+        const x = [];
+        const y = [];
 
         for(let i=0;i<70;i++){
 
-            const angle=i/70*Math.PI*2;
+            const angle =
+                i / 70 * Math.PI * 2;
 
-            const centerX=Math.cos(index*.63)*4;
+            const centerX =
+                Math.cos(index * .63) * 4;
 
-            const centerY=Math.sin(index*.63)*4;
+            const centerY =
+                Math.sin(index * .63) * 4;
 
             x.push(
-                centerX+
-                Math.cos(angle)*(.4+(i%9)/12)+
-                ((i*7)%13)/20
+
+                centerX +
+                Math.cos(angle) *
+                (.4 + (i % 9) / 12) +
+                ((i * 7) % 13) / 20
+
             );
 
             y.push(
-                centerY+
-                Math.sin(angle)*(.4+(i%7)/12)+
-                ((i*11)%13)/20
+
+                centerY +
+                Math.sin(angle) *
+                (.4 + (i % 7) / 12) +
+                ((i * 11) % 13) / 20
+
             );
 
         }
@@ -760,18 +804,24 @@ function updateResearchMap(){
             type:"scatter",
 
             marker:{
+
                 size:9,
+
                 color:floralColors[index],
+
                 opacity:.72,
+
                 line:{
                     color:"#fff",
                     width:1
                 }
+
             }
 
         });
 
     });
+
 
     Plotly.newPlot(
 
@@ -807,18 +857,68 @@ function updateResearchMap(){
 }
 
 
-/* ================= TOP KEYWORDS ================= */
+/* =====================================================
+   03 TOP KEYWORDS - FLOWER CHART
+===================================================== */
 
 function drawKeywordChart(){
 
-    const topKeywords=
+    const topKeywords =
         [...keywords].sort((a,b)=>b[1]-a[1]);
 
-    const names=
+    const names =
         topKeywords.map(item=>item[0]);
 
-    const values=
+    const values =
         topKeywords.map(item=>item[1]);
+
+
+    /* ดอกไม้แต่ละอันดับ */
+
+    const flowers = [
+
+        "🌸",
+        "🌼",
+        "🌷",
+        "🌺",
+        "🌻",
+        "💮",
+        "🏵️",
+        "🌹",
+        "🌸",
+        "🌼",
+        "🌷",
+        "🌺"
+
+    ];
+
+
+    /* เส้นกราฟ */
+
+    const lineX = [];
+    const lineY = [];
+
+
+    values.forEach((value,index)=>{
+
+        lineX.push(
+
+            0,
+            value,
+            null
+
+        );
+
+        lineY.push(
+
+            names[index],
+            names[index],
+            null
+
+        );
+
+    });
+
 
     Plotly.newPlot(
 
@@ -826,30 +926,83 @@ function drawKeywordChart(){
 
         [
 
+            /* เส้น */
+
             {
 
-                x:values,
-                y:names,
+                x:lineX,
+
+                y:lineY,
 
                 mode:"lines",
 
                 type:"scatter",
 
                 line:{
-                    color:"#E7D5E3",
-                    width:3
+
+                    color:"#E8D5E2",
+
+                    width:4
+
                 },
 
                 hoverinfo:"skip"
 
             },
 
+
+            /* ดอกไม้ */
+
             {
 
                 x:values,
+
                 y:names,
 
-                mode:"markers+text",
+                mode:"text",
+
+                type:"scatter",
+
+                text:
+
+                    values.map(
+                        (value,index)=>flowers[index]
+                    ),
+
+                textposition:"middle center",
+
+                textfont:{
+
+                    size:
+
+                        values.map(
+                            value=>22 + value / 30
+                        )
+
+                },
+
+                hovertemplate:
+
+                    "<b>%{y}</b>" +
+                    "<br>Frequency: %{x}" +
+                    "<extra></extra>"
+
+            },
+
+
+            /* ตัวเลข */
+
+            {
+
+                x:
+
+                    values.map(
+                        value=>value + 45
+                    ),
+
+                y:names,
+
+                mode:"text",
 
                 type:"scatter",
 
@@ -857,21 +1010,15 @@ function drawKeywordChart(){
 
                 textposition:"middle right",
 
-                marker:{
+                textfont:{
 
-                    size:
-                        values.map(
-                            value=>12+value/45
-                        ),
+                    size:14,
 
-                    color:"#BA8DE3",
+                    color:"#6B526E"
 
-                    line:{
-                        color:"#fff",
-                        width:2
-                    }
+                },
 
-                }
+                hoverinfo:"skip"
 
             }
 
@@ -882,19 +1029,38 @@ function drawKeywordChart(){
             ...commonLayout,
 
             margin:{
-                l:180,
-                r:70,
+
+                l:190,
+                r:100,
                 t:20,
-                b:40
+                b:50
+
             },
 
             xaxis:{
+
                 title:"Keyword Frequency",
-                gridcolor:"#f0e5ec"
+
+                range:[
+
+                    0,
+
+                    Math.max(...values) * 1.2
+
+                ],
+
+                gridcolor:"#F3E6ED",
+
+                zeroline:false
+
             },
 
             yaxis:{
-                autorange:"reversed"
+
+                autorange:"reversed",
+
+                gridcolor:"rgba(0,0,0,0)"
+
             },
 
             showlegend:false
@@ -908,12 +1074,15 @@ function drawKeywordChart(){
 }
 
 
-/* ================= TOP AUTHORS ================= */
+/* =====================================================
+   04 TOP AUTHORS
+===================================================== */
 
 function drawAuthorChart(){
 
-    const sortedAuthors=
+    const sortedAuthors =
         [...authors].sort((a,b)=>b[1]-a[1]);
+
 
     Plotly.newPlot(
 
@@ -922,16 +1091,19 @@ function drawAuthorChart(){
         [{
 
             x:
+
                 sortedAuthors.map(
                     (item,index)=>index+1
                 ),
 
             y:
+
                 sortedAuthors.map(
                     item=>item[1]
                 ),
 
             text:
+
                 sortedAuthors.map(
                     item=>item[0]
                 ),
@@ -945,6 +1117,7 @@ function drawAuthorChart(){
             marker:{
 
                 size:
+
                     sortedAuthors.map(
                         item=>item[1]/2.2
                     ),
@@ -961,6 +1134,7 @@ function drawAuthorChart(){
             },
 
             hovertemplate:
+
                 "<b>%{text}</b>" +
                 "<br>Publications: %{y}" +
                 "<extra></extra>"
@@ -976,8 +1150,11 @@ function drawAuthorChart(){
             },
 
             yaxis:{
+
                 title:"Publications",
+
                 gridcolor:"#f0e5ec"
+
             },
 
             showlegend:false
@@ -991,14 +1168,17 @@ function drawAuthorChart(){
 }
 
 
-/* ================= TIMELINE ================= */
+/* =====================================================
+   05 TIMELINE
+===================================================== */
 
 function drawTimeline(){
 
-    const mode=
+    const mode =
         document.getElementById("timelineMode").value;
 
-    const traces=
+
+    const traces =
 
         subjects.map(
 
@@ -1011,27 +1191,35 @@ function drawTimeline(){
                 name:subject,
 
                 type:
-                    mode==="line"
-                    ?"scatter"
-                    :"bar",
+
+                    mode === "line"
+                    ? "scatter"
+                    : "bar",
 
                 mode:
-                    mode==="line"
-                    ?"lines+markers"
-                    :undefined,
+
+                    mode === "line"
+                    ? "lines+markers"
+                    : undefined,
 
                 line:{
+
                     color:floralColors[index],
+
                     width:3
+
                 },
 
                 marker:{
+
                     color:floralColors[index]
+
                 }
 
             })
 
         );
+
 
     Plotly.newPlot(
 
@@ -1044,9 +1232,10 @@ function drawTimeline(){
             ...commonLayout,
 
             barmode:
-                mode==="bar"
-                ?"stack"
-                :undefined,
+
+                mode === "bar"
+                ? "stack"
+                : undefined,
 
             hovermode:"x unified",
 
@@ -1072,17 +1261,20 @@ function drawTimeline(){
 }
 
 
-/* ================= HEATMAP ================= */
+/* =====================================================
+   06 HEATMAP
+===================================================== */
 
 function drawHeatmap(){
 
-    const topKeywords=
+    const topKeywords =
 
         keywords
         .slice(0,10)
         .map(item=>item[0]);
 
-    const z=
+
+    const z =
 
         subjects.map(
 
@@ -1092,12 +1284,13 @@ function drawHeatmap(){
 
                     (keyword,j)=>
 
-                        20+
+                        20 +
                         ((i*17+j*23)%90)
 
                 )
 
         );
+
 
     Plotly.newPlot(
 
@@ -1145,33 +1338,45 @@ function drawHeatmap(){
 }
 
 
-/* ================= NETWORK ================= */
+/* =====================================================
+   07 KEYWORD NETWORK
+===================================================== */
 
 function drawNetwork(){
 
-    const nodes=
+    const nodes =
+
         keywords
         .slice(0,10)
         .map(item=>item[0]);
 
-    const x=[];
-    const y=[];
 
-    const edgeX=[];
-    const edgeY=[];
+    const x = [];
+    const y = [];
+
+    const edgeX = [];
+    const edgeY = [];
+
 
     nodes.forEach((node,index)=>{
 
-        const angle=
-            2*Math.PI*
-            index/
+        const angle =
+
+            2 * Math.PI *
+            index /
             nodes.length;
 
-        x.push(Math.cos(angle)*5);
 
-        y.push(Math.sin(angle)*5);
+        x.push(
+            Math.cos(angle) * 5
+        );
+
+        y.push(
+            Math.sin(angle) * 5
+        );
 
     });
+
 
     for(let i=0;i<nodes.length;i++){
 
@@ -1180,15 +1385,19 @@ function drawNetwork(){
             if((i+j)%3===0){
 
                 edgeX.push(
+
                     x[i],
                     x[j],
                     null
+
                 );
 
                 edgeY.push(
+
                     y[i],
                     y[j],
                     null
+
                 );
 
             }
@@ -1196,6 +1405,7 @@ function drawNetwork(){
         }
 
     }
+
 
     Plotly.newPlot(
 
@@ -1206,6 +1416,7 @@ function drawNetwork(){
             {
 
                 x:edgeX,
+
                 y:edgeY,
 
                 mode:"lines",
@@ -1215,15 +1426,20 @@ function drawNetwork(){
                 hoverinfo:"skip",
 
                 line:{
+
                     width:2,
+
                     color:"#E8C9DC"
+
                 }
 
             },
 
+
             {
 
                 x:x,
+
                 y:y,
 
                 text:nodes,
@@ -1237,21 +1453,31 @@ function drawNetwork(){
                 marker:{
 
                     size:
+
                         nodes.map(
+
                             (node,index)=>
-                                18+
-                                keywords[index][1]/90
+
+                                18 +
+                                keywords[index][1] / 90
+
                         ),
 
                     color:
+
                         nodes.map(
+
                             (node,index)=>
                                 floralColors[index]
+
                         ),
 
                     line:{
+
                         width:2,
+
                         color:"#fff"
+
                     }
 
                 }
@@ -1283,11 +1509,13 @@ function drawNetwork(){
 }
 
 
-/* ================= SANKEY ================= */
+/* =====================================================
+   08 RESEARCH FLOW
+===================================================== */
 
 function drawSankey(){
 
-    const labels=[
+    const labels = [
 
         "Artificial Intelligence",
         "Machine Learning",
@@ -1305,7 +1533,8 @@ function drawSankey(){
 
     ];
 
-    const source=[
+
+    const source = [
 
         0,0,
         1,1,
@@ -1317,7 +1546,8 @@ function drawSankey(){
 
     ];
 
-    const target=[
+
+    const target = [
 
         4,5,
         4,6,
@@ -1329,7 +1559,8 @@ function drawSankey(){
 
     ];
 
-    const value=[
+
+    const value = [
 
         100,80,
         90,60,
@@ -1340,6 +1571,7 @@ function drawSankey(){
         50,65
 
     ];
+
 
     Plotly.newPlot(
 
@@ -1395,10 +1627,12 @@ function drawSankey(){
             ...commonLayout,
 
             margin:{
+
                 l:20,
                 r:20,
                 t:30,
                 b:20
+
             }
 
         },
@@ -1410,7 +1644,9 @@ function drawSankey(){
 }
 
 
-/* ================= INITIALIZE ================= */
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 drawResearchAreas();
 
@@ -1432,4 +1668,3 @@ drawSankey();
 
 </body>
 </html>
-```
