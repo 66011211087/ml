@@ -1,117 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Floral Scopus Research Explorer</title>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        "Segoe UI",
+        Inter,
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8fc 0%,
+            #fffdf7 45%,
+            #f4fff9 100%
+        );
+
+    color:#45394f;
+}
+
+
+/* =========================================================
+   DECORATIVE FLOWERS
+========================================================= */
+
+.flower{
+    position:absolute;
+    font-size:48px;
+    opacity:.8;
+    pointer-events:none;
+    animation:floatFlower 5s ease-in-out infinite;
+}
+
+.flower.one{
+    top:25px;
+    right:7%;
+}
+
+.flower.two{
+    top:115px;
+    right:18%;
+    font-size:32px;
+    animation-delay:1s;
+}
+
+.flower.three{
+    top:50px;
+    left:4%;
+    font-size:38px;
+    animation-delay:2s;
+}
+
+@keyframes floatFlower{
+
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(5deg);
+    }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    position:relative;
+    overflow:hidden;
+
+    padding:55px 7% 85px;
+
+    color:white;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.28),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,238,245,.3),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #f58ab5,
+            #b98de9 50%,
+            #78cfc0
+        );
+
+    border-bottom-left-radius:45px;
+    border-bottom-right-radius:45px;
+
+    box-shadow:
+        0 15px 45px rgba(202,105,160,.18);
+}
+
+
+.header:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    right:-160px;
+    bottom:-250px;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:50%;
+}
+
+
+.header h1{
+
+    position:relative;
+    z-index:2;
+
+    margin:0;
+
+    font-size:42px;
+    font-weight:800;
+
+    letter-spacing:-1px;
+}
+
+
+.header p{
+
+    position:relative;
+    z-index:2;
+
+    margin:13px 0 0;
+
+    max-width:850px;
+
+    font-size:16px;
+
+    color:#fff8fd;
+}
+
+
+.badge{
+
+    position:relative;
+    z-index:2;
+
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:9px 16px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.2);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    backdrop-filter:blur(8px);
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:0 30px 40px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.cards{
+
+    position:relative;
+    z-index:5;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+
+    margin-top:-45px;
+}
+
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.92);
+
+    border-radius:25px;
+
+    padding:24px;
+
+    border:1px solid #f4dce9;
+
+    box-shadow:
+        0 12px 35px rgba(145,105,130,.12);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(145,105,130,.18);
+}
+
+
+.card:after{
+
+    content:"✿";
+
+    position:absolute;
+
+    right:15px;
+    top:8px;
+
+    font-size:35px;
+
+    opacity:.15;
+
+    color:#e878aa;
+}
+
+
+.card:nth-child(1){
+    border-top:5px solid #f48fb1;
+}
+
+.card:nth-child(2){
+    border-top:5px solid #b39ddb;
+}
+
+.card:nth-child(3){
+    border-top:5px solid #81cfc1;
+}
+
+.card:nth-child(4){
+    border-top:5px solid #f6c85f;
+}
+
+
+.card .label{
+
+    color:#8b7c91;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+
+.card .value{
+
+    margin-top:8px;
+
+    font-size:31px;
+
+    font-weight:800;
+
+    color:#634c6d;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:22px;
+
+    margin-top:25px;
+}
+
+
+.panel{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    border:1px solid #f0e2eb;
+
+    box-shadow:
+        0 8px 30px rgba(120,90,120,.08);
+
+    transition:
+        transform .2s ease;
+}
+
+
+.panel:hover{
+
+    transform:translateY(-2px);
+}
+
+
+.panel:before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-30px;
+    right:-25px;
+
+    width:100px;
+    height:100px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(245,143,181,.13),
+            transparent 70%
+        );
+
+    border-radius:50%;
+}
+
+
+.full{
+    grid-column:1/-1;
+}
+
+
+.panel h2{
+
+    position:relative;
+
+    margin:0 0 7px;
+
+    font-size:21px;
+
+    color:#5d4668;
+}
+
+
+.panel h2:first-letter{
+    color:#e778a8;
+}
+
+
+.desc{
+
+    position:relative;
+
+    color:#8d8192;
+
+    font-size:14px;
+
+    margin-bottom:12px;
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin:15px 0;
+}
+
+
+select,
+input{
+
+    padding:11px 15px;
+
+    border:
+        1px solid #ead9e5;
+
+    border-radius:13px;
+
+    background:#fffafd;
+
+    color:#5d5064;
+
+    outline:none;
+
+    font-size:14px;
+
+    transition:
+        border .2s,
+        box-shadow .2s;
+}
+
+
+select:hover,
+input:hover{
+
+    border-color:#e59aba;
+}
+
+
+select:focus,
+input:focus{
+
+    border-color:#d783a9;
+
+    box-shadow:
+        0 0 0 4px rgba(231,120,168,.1);
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart{
+
+    width:100%;
+
+    height:500px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    position:relative;
+
+    text-align:center;
+
+    padding:40px 20px 45px;
+
+    color:#918492;
+
+    font-size:13px;
+}
+
+
+.footer .flower-footer{
+
+    display:block;
+
+    font-size:28px;
+
+    margin-bottom:8px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .cards{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .full{
+
+        grid-column:auto;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+    .header{
+
+        padding:
+            45px 25px 75px;
+
+        border-bottom-left-radius:30px;
+        border-bottom-right-radius:30px;
+    }
+
+    .header h1{
+
+        font-size:29px;
+    }
+
+    .container{
+
+        padding:
+            0 15px 30px;
+    }
+
+    .panel{
+
+        padding:18px;
+
+        border-radius:20px;
+    }
+
+    .chart{
+
+        height:430px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+   HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="flower one">🌸</div>
+    <div class="flower two">🌼</div>
+    <div class="flower three">🌷</div>
+
+    <h1>
+        🌸 Scopus Research Garden
+    </h1>
+
+    <p>
+        Interactive Research Dashboard for Exploratory Data Analysis,
+        Visualization and Machine Learning Preparation
+    </p>
+
+    <div class="badge">
+
+        🌺 Scopus Research Analytics
+        &nbsp; · &nbsp;
+        🌿 EDA
+        &nbsp; · &nbsp;
+        🌼 Feature Vector
+        &nbsp; · &nbsp;
+        🌷 Text Embedding
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+   SUMMARY CARDS
+========================================================= -->
+
+<section class="cards">
+
+    <div class="card">
+
+        <div class="label">
+            🌸 Total Publications
+        </div>
+
+        <div class="value"
+             id="totalRecords">
+
+            5,427
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            🌷 Research Subjects
+        </div>
+
+        <div class="value"
+             id="totalSubjects">
+
+            10
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            🌼 Feature Dimensions
+        </div>
+
+        <div class="value">
+
+            768-D
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            🌺 Year Coverage
+        </div>
+
+        <div class="value">
+
+            2021–2026
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="grid">
+
+
+<!-- =========================================================
+   01 RESEARCH MAP
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌸 01 · Research Landscape Map
+</h2>
+
+<div class="desc">
+
+    Interactive 2D projection of research feature vectors.
+    Each point represents a research publication.
+
+</div>
+
+<div class="controls">
+
+<select id="subjectFilter"
+        onchange="updateResearchMap()">
+
+<option value="all">
+    🌺 All Subjects
+</option>
+
+<option value="Artificial Intelligence">
+    Artificial Intelligence
+</option>
+
+<option value="Machine Learning">
+    Machine Learning
+</option>
+
+<option value="Deep Learning">
+    Deep Learning
+</option>
+
+<option value="Data Science">
+    Data Science
+</option>
+
+<option value="Computer Vision">
+    Computer Vision
+</option>
+
+<option value="Natural Language Processing">
+    Natural Language Processing
+</option>
+
+<option value="Software Engineering">
+    Software Engineering
+</option>
+
+<option value="Cybersecurity">
+    Cybersecurity
+</option>
+
+<option value="Internet of Things">
+    Internet of Things
+</option>
+
+<option value="Computer Networks">
+    Computer Networks
+</option>
+
+</select>
+
+</div>
+
+<div id="researchMap"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   02 SUBJECT
+========================================================= -->
+
+<div class="panel">
+
+<h2>
+    🌷 02 · Subject Distribution
+</h2>
+
+<div class="desc">
+
+    Distribution of publications across
+    the ten research subjects.
+
+</div>
+
+<div id="subjectChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   03 KEYWORDS
+========================================================= -->
+
+<div class="panel">
+
+<h2>
+    🌼 03 · Top Research Keywords
+</h2>
+
+<div class="desc">
+
+    Most frequently occurring research keywords.
+
+</div>
+
+<div id="keywordChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   04 TIMELINE
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌺 04 · Research Trend Timeline
+</h2>
+
+<div class="desc">
+
+    Publication trends across different
+    research subjects and years.
+
+</div>
+
+<div class="controls">
+
+<select id="timelineMode"
+        onchange="drawTimeline()">
+
+<option value="line">
+    🌸 Line Chart
+</option>
+
+<option value="bar">
+    🌼 Stacked Bar
+</option>
+
+</select>
+
+</div>
+
+<div id="timelineChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   05 HEATMAP
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌿 05 · Subject × Keyword Heatmap
+</h2>
+
+<div class="desc">
+
+    Relationship between research subjects
+    and the most important keywords.
+
+</div>
+
+<div id="heatmapChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   06 NETWORK
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌸 06 · Keyword Co-occurrence Network
+</h2>
+
+<div class="desc">
+
+    Research keywords that frequently appear
+    together in publications.
+
+</div>
+
+<div class="controls">
+
+<select id="networkSubject"
+        onchange="drawNetwork()">
+
+<option value="all">
+    🌺 All Subjects
+</option>
+
+<option value="Artificial Intelligence">
+    Artificial Intelligence
+</option>
+
+<option value="Machine Learning">
+    Machine Learning
+</option>
+
+<option value="Deep Learning">
+    Deep Learning
+</option>
+
+<option value="Data Science">
+    Data Science
+</option>
+
+<option value="Computer Vision">
+    Computer Vision
+</option>
+
+<option value="Natural Language Processing">
+    Natural Language Processing
+</option>
+
+<option value="Software Engineering">
+    Software Engineering
+</option>
+
+<option value="Cybersecurity">
+    Cybersecurity
+</option>
+
+<option value="Internet of Things">
+    Internet of Things
+</option>
+
+<option value="Computer Networks">
+    Computer Networks
+</option>
+
+</select>
+
+</div>
+
+<div id="networkChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+   07 SANKEY
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌷 07 · Research Flow
+</h2>
+
+<div class="desc">
+
+    Flow of research topics from
+    Subject → Keyword → Year.
+
+</div>
+
+<div id="sankeyChart"
+     class="chart">
+</div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+    <span class="flower-footer">
+        🌸 🌼 🌷 🌺 🌻
+    </span>
+
+    Scopus Research Garden<br>
+
+    Interactive Visualization ·
+    Exploratory Data Analysis ·
+    Machine Learning Preparation
+
+</footer>
+
+
 <script>
+
+/* =========================================================
+   DATA
+========================================================= */
+
+const subjects = [
+
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "Data Science",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Software Engineering",
+    "Cybersecurity",
+    "Internet of Things",
+    "Computer Networks"
+
+];
+
+
+const subjectCounts = {
+
+    "Artificial Intelligence":680,
+    "Machine Learning":640,
+    "Deep Learning":590,
+    "Data Science":570,
+    "Computer Vision":540,
+    "Natural Language Processing":520,
+    "Software Engineering":500,
+    "Cybersecurity":470,
+    "Internet of Things":470,
+    "Computer Networks":437
+
+};
+
+
+const keywords = [
+
+    ["artificial intelligence",920],
+    ["machine learning",850],
+    ["deep learning",780],
+    ["data science",690],
+    ["neural network",620],
+    ["natural language processing",580],
+    ["computer vision",540],
+    ["big data",510],
+    ["feature extraction",480],
+    ["classification",450],
+    ["prediction",430],
+    ["internet of things",410],
+    ["cybersecurity",390],
+    ["cloud computing",360],
+    ["data mining",340]
+
+];
+
+
+const years = [
+
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+
+];
+
+
+const trends = {
+
+"Artificial Intelligence":
+[70,85,105,120,140,160],
+
+"Machine Learning":
+[65,78,95,110,135,157],
+
+"Deep Learning":
+[50,68,90,108,130,144],
+
+"Data Science":
+[55,70,82,100,125,138],
+
+"Computer Vision":
+[42,55,72,90,110,125],
+
+"Natural Language Processing":
+[40,52,67,85,105,120],
+
+"Software Engineering":
+[45,60,70,80,100,110],
+
+"Cybersecurity":
+[38,50,62,75,90,105],
+
+"Internet of Things":
+[35,48,58,70,85,98],
+
+"Computer Networks":
+[32,45,55,65,78,90]
+
+};
+
+
+/* =========================================================
+   FLORAL COLOR PALETTE
+========================================================= */
+
+const floralColors = [
+
+    "#F48FB1",
+    "#BA8DE3",
+    "#81CFC1",
+    "#F6C85F",
+    "#89B8E8",
+    "#E99AC7",
+    "#A7C957",
+    "#F29E8F",
+    "#8DD3C7",
+    "#C4A7E7"
+
+];
+
+
+const commonLayout = {
+
+    font:{
+        family:"Segoe UI, Arial",
+        color:"#5d5064"
+    },
+
+    paper_bgcolor:"rgba(0,0,0,0)",
+
+    plot_bgcolor:"rgba(255,255,255,.45)",
+
+    margin:{
+        l:70,
+        r:30,
+        t:30,
+        b:60
+    },
+
+    xaxis:{
+        gridcolor:"#f0e5ec",
+        zerolinecolor:"#eadce6"
+    },
+
+    yaxis:{
+        gridcolor:"#f0e5ec",
+        zerolinecolor:"#eadce6"
+    }
+
+};
+
+
+/* =========================================================
+   01 SUBJECT CHART
+========================================================= */
+
+function drawSubjectChart(){
+
+    Plotly.newPlot(
+
+        "subjectChart",
+
+        [{
+
+            x:Object.values(subjectCounts),
+
+            y:Object.keys(subjectCounts),
+
+            type:"bar",
+
+            orientation:"h",
+
+            text:Object.values(subjectCounts),
+
+            textposition:"outside",
+
+            marker:{
+                color:"#F48FB1",
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
+            },
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "🌸 Publications: %{x}" +
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:180,
+                r:60,
+                t:20,
+                b:50
+            },
+
+            xaxis:{
+                title:"Number of Publications",
+                gridcolor:"#f0e5ec"
+            },
+
+            yaxis:{
+                autorange:"reversed",
+                gridcolor:"rgba(0,0,0,0)"
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   02 KEYWORD CHART
+========================================================= */
+
+function drawKeywordChart(){
+
+    Plotly.newPlot(
+
+        "keywordChart",
+
+        [{
+
+            x:keywords.map(x=>x[1]),
+
+            y:keywords.map(x=>x[0]),
+
+            type:"bar",
+
+            orientation:"h",
+
+            marker:{
+                color:"#BA8DE3",
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
+            },
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "🌷 Frequency: %{x}" +
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:180,
+                r:50,
+                t:20,
+                b:50
+            },
+
+            yaxis:{
+                autorange:"reversed",
+                gridcolor:"rgba(0,0,0,0)"
+            },
+
+            xaxis:{
+                title:"Frequency"
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   03 TIMELINE
+========================================================= */
+
+function drawTimeline(){
+
+    const mode =
+        document.getElementById(
+            "timelineMode"
+        ).value;
+
+
+    const traces=[];
+
+
+    subjects.forEach(
+        (subject,index)=>{
+
+            traces.push({
+
+                x:years,
+
+                y:trends[subject],
+
+                name:subject,
+
+                type:
+                    mode==="line"
+                    ?"scatter"
+                    :"bar",
+
+                mode:
+                    mode==="line"
+                    ?"lines+markers"
+                    :undefined,
+
+                line:{
+                    color:
+                        floralColors[index],
+
+                    width:3
+                },
+
+                marker:{
+                    color:
+                        floralColors[index],
+
+                    size:8
+                }
+
+            });
+
+        }
+    );
+
+
+    Plotly.newPlot(
+
+        "timelineChart",
+
+        traces,
+
+        {
+
+            ...commonLayout,
+
+            barmode:
+                mode==="bar"
+                ?"stack"
+                :undefined,
+
+            hovermode:"x unified",
+
+            xaxis:{
+                title:"Publication Year"
+            },
+
+            yaxis:{
+                title:"Number of Publications"
+            },
+
+            legend:{
+                orientation:"h",
+                y:-0.25
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   04 HEATMAP
+========================================================= */
+
+function drawHeatmap(){
+
+    const topKeywords =
+        keywords
+        .slice(0,10)
+        .map(x=>x[0]);
+
+
+    const z=[];
+
+
+    subjects.forEach(
+        (subject,i)=>{
+
+            const row=[];
+
+
+            topKeywords.forEach(
+                (keyword,j)=>{
+
+                    let value =
+                        Math.round(
+                            20+
+                            ((i*17+j*23)%90)
+                        );
+
+
+                    row.push(value);
+
+                }
+            );
+
+
+            z.push(row);
+
+        }
+    );
+
+
+    Plotly.newPlot(
+
+        "heatmapChart",
+
+        [{
+
+            z:z,
+
+            x:topKeywords,
+
+            y:subjects,
+
+            type:"heatmap",
+
+            colorscale:[
+
+                [0,"#FFF1F7"],
+
+                [.25,"#F8D4E5"],
+
+                [.5,"#E8B7D4"],
+
+                [.75,"#CBA6E5"],
+
+                [1,"#9E7CC5"]
+
+            ],
+
+            hovertemplate:
+
+                "<b>%{y}</b>" +
+
+                "<br>%{x}" +
+
+                "<br>🌸 Frequency: %{z}" +
+
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:180,
+                b:120
+            },
+
+            xaxis:{
+                tickangle:-40
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   05 RESEARCH LANDSCAPE
+========================================================= */
 
 function updateResearchMap(){
 
     const selected =
-        document.getElementById("subjectFilter").value;
+        document.getElementById(
+            "subjectFilter"
+        ).value;
 
-    const traces = [];
 
-    subjects.forEach((subject,index)=>{
+    const traces=[];
 
-        if(
-            selected !== "all" &&
-            selected !== subject
-        ){
-            return;
+
+    subjects.forEach(
+        (subject,index)=>{
+
+            if(
+                selected!=="all" &&
+                selected!==subject
+            ){
+                return;
+            }
+
+
+            const x=[];
+            const y=[];
+            const text=[];
+
+
+            for(
+                let i=0;
+                i<90;
+                i++
+            ){
+
+                const angle =
+                    (i/90)*Math.PI*2;
+
+
+                const radius =
+                    0.5+
+                    ((i*13+
+                      index*7)%100)/100;
+
+
+                const centerX =
+                    Math.cos(
+                        index*.63
+                    )*4;
+
+
+                const centerY =
+                    Math.sin(
+                        index*.63
+                    )*4;
+
+
+                x.push(
+
+                    centerX+
+                    Math.cos(angle)*radius+
+                    ((i*17)%100)/100
+
+                );
+
+
+                y.push(
+
+                    centerY+
+                    Math.sin(angle)*radius+
+                    ((i*23)%100)/100
+
+                );
+
+
+                text.push(
+
+                    "<b>🌸 Research Publication</b>" +
+
+                    "<br>Subject: "+
+                    subject +
+
+                    "<br>Feature Vector: 768-D" +
+
+                    "<br>PCA Dimension: 2D"
+
+                );
+
+            }
+
+
+            traces.push({
+
+                x:x,
+
+                y:y,
+
+                text:text,
+
+                mode:"markers",
+
+                type:"scattergl",
+
+                name:subject,
+
+                marker:{
+
+                    size:8,
+
+                    opacity:.72,
+
+                    color:
+                        floralColors[index],
+
+                    line:{
+                        width:1,
+                        color:"#ffffff"
+                    }
+
+                },
+
+                hovertemplate:
+                    "%{text}<extra></extra>"
+
+            });
+
         }
-
-        const x = [];
-        const y = [];
-        const text = [];
-
-        for(let i=0;i<90;i++){
-
-            const angle =
-                (i/90)*Math.PI*2;
-
-            const radius =
-                0.5 +
-                ((i*13 + index*7)%100)/100;
-
-            const centerX =
-                Math.cos(index*0.63)*4;
-
-            const centerY =
-                Math.sin(index*0.63)*4;
-
-            x.push(
-                centerX +
-                Math.cos(angle)*radius +
-                ((i*17)%100)/100
-            );
-
-            y.push(
-                centerY +
-                Math.sin(angle)*radius +
-                ((i*23)%100)/100
-            );
-
-            text.push(
-
-                "<b>🌸 Research Publication</b>" +
-
-                "<br>Subject: " +
-                subject +
-
-                "<br>Feature Vector: 768-D" +
-
-                "<br>PCA Dimension: 2D"
-
-            );
-
-        }
-
-
-        /* =====================================================
-           FLOWER SHAPE
-           ใช้ Scatter Marker รูปดาว 5 กลีบแทนวงกลม
-        ===================================================== */
-
-        traces.push({
-
-            x:x,
-
-            y:y,
-
-            text:text,
-
-            mode:"markers",
-
-            type:"scatter",
-
-            name:subject,
-
-            marker:{
-
-                symbol:"star",
-
-                size:14,
-
-                color:
-                    floralColors[index],
-
-                opacity:.85,
-
-                line:{
-
-                    color:"#ffffff",
-
-                    width:1.5
-
-                }
-
-            },
-
-            hovertemplate:
-
-                "%{text}" +
-
-                "<extra></extra>"
-
-        });
-
-    });
+    );
 
 
     Plotly.newPlot(
@@ -125,60 +1649,422 @@ function updateResearchMap(){
             ...commonLayout,
 
             title:{
-
                 text:
-                    "🌸 768-D Feature Vectors → PCA 2D",
-
+                    "🌺 768-D Feature Vector → PCA 2D",
                 font:{
-
-                    size:19,
-
+                    size:18,
                     color:"#674d70"
-
                 }
-
             },
 
             xaxis:{
-
                 title:"Principal Component 1",
-
-                zeroline:false,
-
-                gridcolor:"#f2e5ed"
-
+                zeroline:false
             },
 
             yaxis:{
-
                 title:"Principal Component 2",
-
-                zeroline:false,
-
-                gridcolor:"#f2e5ed"
-
+                zeroline:false
             },
 
             hovermode:"closest",
 
             legend:{
-
                 orientation:"h",
-
-                y:-0.15
-
+                y:-.15
             }
 
         },
 
         {
-
             responsive:true
-
         }
 
     );
 
 }
 
+
+/* =========================================================
+   06 KEYWORD NETWORK
+========================================================= */
+
+function drawNetwork(){
+
+    const selected =
+        document.getElementById(
+            "networkSubject"
+        ).value;
+
+
+    const nodes =
+        keywords
+        .slice(0,12)
+        .map(x=>x[0]);
+
+
+    const nodeX=[];
+    const nodeY=[];
+
+
+    nodes.forEach(
+        (node,i)=>{
+
+            const angle =
+                2*Math.PI*i/
+                nodes.length;
+
+
+            nodeX.push(
+                Math.cos(angle)*5
+            );
+
+
+            nodeY.push(
+                Math.sin(angle)*5
+            );
+
+        }
+    );
+
+
+    const edgeX=[];
+    const edgeY=[];
+
+
+    for(
+        let i=0;
+        i<nodes.length;
+        i++
+    ){
+
+        for(
+            let j=i+1;
+            j<nodes.length;
+            j++
+        ){
+
+            if(
+                (i+j)%4===0
+            ){
+
+                edgeX.push(
+                    nodeX[i],
+                    nodeX[j],
+                    null
+                );
+
+
+                edgeY.push(
+                    nodeY[i],
+                    nodeY[j],
+                    null
+                );
+
+            }
+
+        }
+
+    }
+
+
+    const edgeTrace={
+
+        x:edgeX,
+
+        y:edgeY,
+
+        mode:"lines",
+
+        type:"scatter",
+
+        hoverinfo:"skip",
+
+        line:{
+            width:2,
+            color:"#E8C9DC"
+        }
+
+    };
+
+
+    const nodeTrace={
+
+        x:nodeX,
+
+        y:nodeY,
+
+        text:nodes,
+
+        mode:"markers+text",
+
+        type:"scatter",
+
+        textposition:"top center",
+
+        textfont:{
+            color:"#65516D",
+            size:12
+        },
+
+        marker:{
+
+            size:
+                nodes.map(
+                    (n,i)=>
+                        18+
+                        keywords[i][1]/80
+                ),
+
+            color:
+                nodes.map(
+                    (n,i)=>
+                        floralColors[
+                            i%floralColors.length
+                        ]
+                ),
+
+            line:{
+                width:2,
+                color:"#ffffff"
+            }
+
+        },
+
+        hovertemplate:
+
+            "<b>%{text}</b>" +
+
+            "<br>🌸 Keyword relationship" +
+
+            "<extra></extra>"
+
+    };
+
+
+    Plotly.newPlot(
+
+        "networkChart",
+
+        [
+            edgeTrace,
+            nodeTrace
+        ],
+
+        {
+
+            ...commonLayout,
+
+            title:{
+                text:
+                    selected==="all"
+                    ?"🌺 Global Keyword Network"
+                    :selected+
+                      " Keyword Network",
+
+                font:{
+                    size:18,
+                    color:"#674d70"
+                }
+            },
+
+            showlegend:false,
+
+            xaxis:{
+                visible:false
+            },
+
+            yaxis:{
+                visible:false
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   07 SANKEY
+========================================================= */
+
+function drawSankey(){
+
+    const labels=[
+
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Data Science",
+
+        "AI",
+        "Machine Learning",
+        "Deep Learning",
+        "Neural Network",
+        "Data Science",
+
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+
+    ];
+
+
+    const source=[
+
+        0,0,0,
+        1,1,1,
+        2,2,
+        3,3,
+
+        4,4,4,
+        5,5,5,
+        6,6,6,
+        7,7,
+        8,8
+
+    ];
+
+
+    const target=[
+
+        4,5,6,
+        5,6,7,
+        6,7,
+        8,7,
+
+        9,10,11,
+        9,10,12,
+        10,11,12,
+        9,11,
+        10,12
+
+    ];
+
+
+    const value=[
+
+        100,80,70,
+        90,75,60,
+        85,55,
+        70,50,
+
+        20,30,40,
+        25,35,45,
+        20,35,45,
+        25,30,
+        30,40
+
+    ];
+
+
+    Plotly.newPlot(
+
+        "sankeyChart",
+
+        [{
+
+            type:"sankey",
+
+            orientation:"h",
+
+            node:{
+
+                pad:20,
+
+                thickness:22,
+
+                label:labels,
+
+                color:[
+
+                    "#F48FB1",
+                    "#BA8DE3",
+                    "#81CFC1",
+                    "#F6C85F",
+
+                    "#E99AC7",
+                    "#89B8E8",
+                    "#A7C957",
+                    "#F29E8F",
+                    "#C4A7E7",
+
+                    "#F48FB1",
+                    "#81CFC1",
+                    "#BA8DE3",
+                    "#F6C85F"
+
+                ],
+
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
+
+            },
+
+            link:{
+
+                source:source,
+
+                target:target,
+
+                value:value,
+
+                color:
+                    "rgba(231,120,168,.22)"
+
+            }
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:20,
+                r:20,
+                t:30,
+                b:20
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+drawSubjectChart();
+
+drawKeywordChart();
+
+drawTimeline();
+
+drawHeatmap();
+
+updateResearchMap();
+
+drawNetwork();
+
+drawSankey();
+
 </script>
+
+</body>
+</html>
