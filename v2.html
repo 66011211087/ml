@@ -1,3 +1,6 @@
+# index.html
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +28,6 @@ body{
     );
     color:#45394f;
 }
-
 
 /* HEADER */
 
@@ -68,7 +70,6 @@ body{
     font-size:13px;
 }
 
-
 /* FLOWER DECORATION */
 
 .flower{
@@ -95,7 +96,6 @@ body{
     font-size:38px;
 }
 
-
 /* CONTAINER */
 
 .container{
@@ -103,7 +103,6 @@ body{
     margin:auto;
     padding:0 30px 40px;
 }
-
 
 /* SUMMARY CARDS */
 
@@ -157,7 +156,6 @@ body{
     color:#634c6d;
 }
 
-
 /* GRID */
 
 .grid{
@@ -188,7 +186,6 @@ body{
     margin-bottom:12px;
 }
 
-
 /* CONTROLS */
 
 .controls{
@@ -207,14 +204,12 @@ select{
     font-size:14px;
 }
 
-
 /* CHART */
 
 .chart{
     width:100%;
     height:500px;
 }
-
 
 /* FOOTER */
 
@@ -224,7 +219,6 @@ select{
     color:#918492;
     font-size:13px;
 }
-
 
 /* RESPONSIVE */
 
@@ -277,9 +271,7 @@ select{
 </style>
 </head>
 
-
 <body>
-
 
 <header class="header">
 
@@ -295,13 +287,7 @@ select{
     </p>
 
     <div class="badge">
-        🌺 Scopus Research Analytics
-        ·
-        🌿 EDA
-        ·
-        🌼 Feature Vector
-        ·
-        🌷 Text Embedding
+        🌺 Scopus Research Analytics · 🌿 EDA · 🌼 Feature Vector · 🌷 Text Embedding
     </div>
 
 </header>
@@ -309,52 +295,26 @@ select{
 
 <main class="container">
 
-
-<!-- SUMMARY CARDS -->
-
 <section class="cards">
 
     <div class="card">
-        <div class="label">
-            🌸 Total Publications
-        </div>
-
-        <div class="value">
-            5,427
-        </div>
+        <div class="label">🌸 Total Publications</div>
+        <div class="value">5,427</div>
     </div>
 
-
     <div class="card">
-        <div class="label">
-            🌷 Research Subjects
-        </div>
-
-        <div class="value">
-            10
-        </div>
+        <div class="label">🌷 Research Subjects</div>
+        <div class="value">10</div>
     </div>
 
-
     <div class="card">
-        <div class="label">
-            🌼 Feature Dimensions
-        </div>
-
-        <div class="value">
-            768-D
-        </div>
+        <div class="label">🌼 Feature Dimensions</div>
+        <div class="value">768-D</div>
     </div>
 
-
     <div class="card">
-        <div class="label">
-            🌺 Year Coverage
-        </div>
-
-        <div class="value">
-            2021–2026
-        </div>
+        <div class="label">🌺 Year Coverage</div>
+        <div class="value">2021–2026</div>
     </div>
 
 </section>
@@ -363,232 +323,148 @@ select{
 <section class="grid">
 
 
-<!-- 01 RESEARCH LANDSCAPE -->
+<!-- RESEARCH LANDSCAPE -->
 
 <div class="panel full">
 
-    <h2>
-        🌸 01 · Research Landscape Map
-    </h2>
+    <h2>🌸 01 · Research Landscape Map</h2>
 
     <div class="desc">
         Interactive 2D projection of research feature vectors.
     </div>
 
-
     <div class="controls">
 
-        <select
-            id="subjectFilter"
-            onchange="updateResearchMap()"
-        >
-
-            <option value="all">
-                🌺 All Subjects
-            </option>
-
+        <select id="subjectFilter" onchange="updateResearchMap()">
+            <option value="all">🌺 All Subjects</option>
         </select>
 
     </div>
 
-
-    <div
-        id="researchMap"
-        class="chart"
-    ></div>
+    <div id="researchMap" class="chart"></div>
 
 </div>
 
 
-
-<!-- 02 RESEARCH AREAS -->
+<!-- RESEARCH AREAS -->
 
 <div class="panel">
 
-    <h2>
-        🌿 02 · Research Areas
-    </h2>
+    <h2>🌿 02 · Research Areas</h2>
 
     <div class="desc">
         Distribution of publications across major research areas.
     </div>
 
-    <div
-        id="researchAreasChart"
-        class="chart"
-    ></div>
+    <div id="researchAreasChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 03 TOP KEYWORDS -->
+<!-- TOP KEYWORDS -->
 
 <div class="panel">
 
-    <h2>
-        🌼 03 · Top Keywords
-    </h2>
+    <h2>🌼 03 · Top Keywords</h2>
 
     <div class="desc">
         Most frequently occurring research keywords.
     </div>
 
-    <div
-        id="keywordChart"
-        class="chart"
-    ></div>
+    <div id="keywordChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 04 TOP AUTHORS -->
+<!-- TOP AUTHORS -->
 
 <div class="panel full">
 
-    <h2>
-        🌷 04 · Top Authors
-    </h2>
+    <h2>🌷 04 · Top Authors</h2>
 
     <div class="desc">
         Most productive authors based on publication volume.
     </div>
 
-    <div
-        id="authorChart"
-        class="chart"
-    ></div>
+    <div id="authorChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 05 TIMELINE -->
+<!-- TIMELINE -->
 
 <div class="panel full">
 
-    <h2>
-        🌺 05 · Research Trend Timeline
-    </h2>
+    <h2>🌺 05 · Research Trend Timeline</h2>
 
     <div class="desc">
         Publication trends across research subjects and years.
     </div>
 
-
     <div class="controls">
 
-        <select
-            id="timelineMode"
-            onchange="drawTimeline()"
-        >
+        <select id="timelineMode" onchange="drawTimeline()">
 
-            <option value="line">
-                🌸 Line Chart
-            </option>
+            <option value="line">🌸 Line Chart</option>
 
-            <option value="bar">
-                🌼 Stacked Bar
-            </option>
+            <option value="bar">🌼 Stacked Bar</option>
 
         </select>
 
     </div>
 
-
-    <div
-        id="timelineChart"
-        class="chart"
-    ></div>
+    <div id="timelineChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 06 HEATMAP -->
+<!-- HEATMAP -->
 
 <div class="panel full">
 
-    <h2>
-        🌿 06 · Subject × Keyword Heatmap
-    </h2>
+    <h2>🌿 06 · Subject × Keyword Heatmap</h2>
 
     <div class="desc">
         Relationship between research subjects and important keywords.
     </div>
 
-    <div
-        id="heatmapChart"
-        class="chart"
-    ></div>
+    <div id="heatmapChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 07 NETWORK -->
+<!-- NETWORK -->
 
 <div class="panel full">
 
-    <h2>
-        🌸 07 · Keyword Co-occurrence Network
-    </h2>
+    <h2>🌸 07 · Keyword Co-occurrence Network</h2>
 
     <div class="desc">
         Research keywords that frequently appear together.
     </div>
 
-
-    <div class="controls">
-
-        <select
-            id="networkSubject"
-            onchange="drawNetwork()"
-        >
-
-            <option value="all">
-                🌺 All Subjects
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div
-        id="networkChart"
-        class="chart"
-    ></div>
+    <div id="networkChart" class="chart"></div>
 
 </div>
 
 
-
-<!-- 08 RESEARCH FLOW -->
+<!-- RESEARCH FLOW -->
 
 <div class="panel full">
 
-    <h2>
-        🌷 08 · Research Flow
-    </h2>
+    <h2>🌷 08 · Research Flow</h2>
 
     <div class="desc">
         Flow of research topics from Subject → Keyword → Year.
     </div>
 
-    <div
-        id="sankeyChart"
-        class="chart"
-    ></div>
+    <div id="sankeyChart" class="chart"></div>
 
 </div>
-
 
 </section>
 
 </main>
-
 
 
 <footer class="footer">
@@ -597,23 +473,14 @@ select{
 
     <br>
 
-    Scopus Research Garden
-    ·
-    Interactive Visualization
-    ·
-    Exploratory Data Analysis
+    Scopus Research Garden · Interactive Visualization · Exploratory Data Analysis
 
 </footer>
 
 
-
 <script>
 
-
-/* =========================================================
-   DATA
-========================================================= */
-
+/* ================= DATA ================= */
 
 const subjects=[
 
@@ -630,7 +497,6 @@ const subjects=[
 
 ];
 
-
 const subjectCounts={
 
     "Artificial Intelligence":680,
@@ -645,7 +511,6 @@ const subjectCounts={
     "Computer Networks":437
 
 };
-
 
 const keywords=[
 
@@ -664,7 +529,6 @@ const keywords=[
 
 ];
 
-
 const authors=[
 
     ["John Smith",245],
@@ -680,47 +544,25 @@ const authors=[
 
 ];
 
-
-const years=[
-
-    2021,
-    2022,
-    2023,
-    2024,
-    2025,
-    2026
-
-];
-
+const years=[2021,2022,2023,2024,2025,2026];
 
 const trends={};
 
+subjects.forEach((subject,index)=>{
 
-subjects.forEach(
+    trends[subject]=years.map(
 
-    (subject,index)=>{
+        (year,yearIndex)=>
 
-        trends[subject]=
+            Math.round(
+                35 +
+                index*2 +
+                yearIndex*(12+index*1.4)
+            )
 
-            years.map(
+    );
 
-                (year,yearIndex)=>
-
-                    Math.round(
-
-                        35
-                        +index*2
-                        +yearIndex*(12+index*1.4)
-
-                    )
-
-            );
-
-    }
-
-);
-
-
+});
 
 const floralColors=[
 
@@ -738,52 +580,26 @@ const floralColors=[
 ];
 
 
+/* ADD SUBJECT OPTIONS */
 
-/* =========================================================
-   ADD SUBJECT OPTIONS
-========================================================= */
+subjects.forEach(subject=>{
 
+    document
+    .getElementById("subjectFilter")
+    .insertAdjacentHTML(
 
-subjects.forEach(
+        "beforeend",
 
-    subject=>{
+        `<option value="${subject}">
+            ${subject}
+        </option>`
 
+    );
 
-        document
-        .getElementById("subjectFilter")
-        .insertAdjacentHTML(
-
-            "beforeend",
-
-            `<option value="${subject}">
-                ${subject}
-            </option>`
-
-        );
+});
 
 
-        document
-        .getElementById("networkSubject")
-        .insertAdjacentHTML(
-
-            "beforeend",
-
-            `<option value="${subject}">
-                ${subject}
-            </option>`
-
-        );
-
-    }
-
-);
-
-
-
-/* =========================================================
-   COMMON PLOTLY LAYOUT
-========================================================= */
-
+/* COMMON LAYOUT */
 
 const commonLayout={
 
@@ -814,24 +630,13 @@ const commonLayout={
 };
 
 
-
-/* =========================================================
-   RESEARCH AREAS
-========================================================= */
-
+/* ================= RESEARCH AREAS ================= */
 
 function drawResearchAreas(){
 
+    const labels=Object.keys(subjectCounts);
 
-    const labels=
-
-        Object.keys(subjectCounts);
-
-
-    const values=
-
-        Object.values(subjectCounts);
-
+    const values=Object.values(subjectCounts);
 
     Plotly.newPlot(
 
@@ -856,7 +661,6 @@ function drawResearchAreas(){
             },
 
             hovertemplate:
-
                 "<b>%{label}</b>" +
                 "<br>Publications: %{value}" +
                 "<br>Share: %{percent}" +
@@ -880,16 +684,8 @@ function drawResearchAreas(){
             annotations:[{
 
                 text:
-
-                    "<b>5,427</b>" +
-
-                    "<br>" +
-
-                    "<span style='font-size:12px'>" +
-
-                    "Publications" +
-
-                    "</span>",
+                    "<b>5,427</b><br>" +
+                    "<span style='font-size:12px'>Publications</span>",
 
                 showarrow:false,
 
@@ -902,172 +698,80 @@ function drawResearchAreas(){
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   RESEARCH LANDSCAPE
-========================================================= */
-
+/* ================= RESEARCH LANDSCAPE ================= */
 
 function updateResearchMap(){
 
-
     const selected=
-
-        document
-        .getElementById("subjectFilter")
-        .value;
-
+        document.getElementById("subjectFilter").value;
 
     const traces=[];
 
+    subjects.forEach((subject,index)=>{
 
-    subjects.forEach(
+        if(
+            selected!=="all" &&
+            selected!==subject
+        ){
+            return;
+        }
 
-        (subject,index)=>{
+        const x=[];
+        const y=[];
 
+        for(let i=0;i<70;i++){
 
-            if(
+            const angle=i/70*Math.PI*2;
 
-                selected!=="all"
+            const centerX=Math.cos(index*.63)*4;
 
-                &&
+            const centerY=Math.sin(index*.63)*4;
 
-                selected!==subject
+            x.push(
+                centerX+
+                Math.cos(angle)*(.4+(i%9)/12)+
+                ((i*7)%13)/20
+            );
 
-            ){
-
-                return;
-
-            }
-
-
-            const x=[];
-
-            const y=[];
-
-
-            for(
-
-                let i=0;
-
-                i<70;
-
-                i++
-
-            ){
-
-
-                const angle=
-
-                    i/70
-
-                    *Math.PI*2;
-
-
-                const centerX=
-
-                    Math.cos(index*.63)*4;
-
-
-                const centerY=
-
-                    Math.sin(index*.63)*4;
-
-
-                x.push(
-
-                    centerX
-
-                    +
-
-                    Math.cos(angle)
-
-                    *
-
-                    (.4+(i%9)/12)
-
-                    +
-
-                    ((i*7)%13)/20
-
-                );
-
-
-                y.push(
-
-                    centerY
-
-                    +
-
-                    Math.sin(angle)
-
-                    *
-
-                    (.4+(i%7)/12)
-
-                    +
-
-                    ((i*11)%13)/20
-
-                );
-
-            }
-
-
-            traces.push({
-
-                x:x,
-
-                y:y,
-
-                name:subject,
-
-                mode:"markers",
-
-                type:"scatter",
-
-                marker:{
-
-                    size:9,
-
-                    color:
-                        floralColors[index],
-
-                    opacity:.72,
-
-                    line:{
-
-                        color:"#fff",
-
-                        width:1
-
-                    }
-
-                },
-
-                hovertemplate:
-
-                    `<b>${subject}</b>
-                    <br>Research publication
-                    <extra></extra>`
-
-            });
+            y.push(
+                centerY+
+                Math.sin(angle)*(.4+(i%7)/12)+
+                ((i*11)%13)/20
+            );
 
         }
 
-    );
+        traces.push({
 
+            x:x,
+            y:y,
+
+            name:subject,
+
+            mode:"markers",
+
+            type:"scatter",
+
+            marker:{
+                size:9,
+                color:floralColors[index],
+                opacity:.72,
+                line:{
+                    color:"#fff",
+                    width:1
+                }
+            }
+
+        });
+
+    });
 
     Plotly.newPlot(
 
@@ -1079,99 +783,42 @@ function updateResearchMap(){
 
             ...commonLayout,
 
-            title:{
-
-                text:
-                    "🌸 Research Feature Landscape",
-
-                font:{
-
-                    size:19,
-
-                    color:"#674d70"
-
-                }
-
-            },
-
             xaxis:{
-
-                title:
-                    "Principal Component 1",
-
-                gridcolor:
-                    "#f2e5ed"
-
+                title:"Principal Component 1",
+                gridcolor:"#f2e5ed"
             },
 
             yaxis:{
-
-                title:
-                    "Principal Component 2",
-
-                gridcolor:
-                    "#f2e5ed"
-
+                title:"Principal Component 2",
+                gridcolor:"#f2e5ed"
             },
 
             legend:{
-
                 orientation:"h",
-
                 y:-.2
-
             }
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   TOP KEYWORDS - LOLLIPOP CHART
-========================================================= */
-
+/* ================= TOP KEYWORDS ================= */
 
 function drawKeywordChart(){
 
-
     const topKeywords=
-
-        [...keywords]
-
-        .sort(
-
-            (a,b)=>b[1]-a[1]
-
-        );
-
+        [...keywords].sort((a,b)=>b[1]-a[1]);
 
     const names=
-
-        topKeywords.map(
-
-            item=>item[0]
-
-        );
-
+        topKeywords.map(item=>item[0]);
 
     const values=
-
-        topKeywords.map(
-
-            item=>item[1]
-
-        );
-
+        topKeywords.map(item=>item[1]);
 
     Plotly.newPlot(
 
@@ -1182,7 +829,6 @@ function drawKeywordChart(){
             {
 
                 x:values,
-
                 y:names,
 
                 mode:"lines",
@@ -1190,22 +836,17 @@ function drawKeywordChart(){
                 type:"scatter",
 
                 line:{
-
                     color:"#E7D5E3",
-
                     width:3
-
                 },
 
                 hoverinfo:"skip"
 
             },
 
-
             {
 
                 x:values,
-
                 y:names,
 
                 mode:"markers+text",
@@ -1219,38 +860,18 @@ function drawKeywordChart(){
                 marker:{
 
                     size:
-
                         values.map(
-
-                            value=>
-
-                                12
-
-                                +
-
-                                value/45
-
+                            value=>12+value/45
                         ),
 
                     color:"#BA8DE3",
 
                     line:{
-
-                        color:"#ffffff",
-
+                        color:"#fff",
                         width:2
-
                     }
 
-                },
-
-                hovertemplate:
-
-                    "<b>%{y}</b>" +
-
-                    "<br>Frequency: %{x}" +
-
-                    "<extra></extra>"
+                }
 
             }
 
@@ -1261,68 +882,38 @@ function drawKeywordChart(){
             ...commonLayout,
 
             margin:{
-
                 l:180,
-
                 r:70,
-
                 t:20,
-
                 b:40
-
             },
 
             xaxis:{
-
-                title:
-                    "Keyword Frequency",
-
-                gridcolor:
-                    "#f0e5ec"
-
+                title:"Keyword Frequency",
+                gridcolor:"#f0e5ec"
             },
 
             yaxis:{
-
-                autorange:
-                    "reversed"
-
+                autorange:"reversed"
             },
 
             showlegend:false
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   TOP AUTHORS - BUBBLE RANKING
-========================================================= */
-
+/* ================= TOP AUTHORS ================= */
 
 function drawAuthorChart(){
 
-
     const sortedAuthors=
-
-        [...authors]
-
-        .sort(
-
-            (a,b)=>b[1]-a[1]
-
-        );
-
+        [...authors].sort((a,b)=>b[1]-a[1]);
 
     Plotly.newPlot(
 
@@ -1331,41 +922,18 @@ function drawAuthorChart(){
         [{
 
             x:
-
                 sortedAuthors.map(
-
                     (item,index)=>index+1
-
                 ),
 
             y:
-
                 sortedAuthors.map(
-
                     item=>item[1]
-
                 ),
 
             text:
-
                 sortedAuthors.map(
-
-                    item=>
-
-                        "<b>"+item[0]+"</b>"
-
-                        +
-
-                        "<br>"
-
-                        +
-
-                        item[1]
-
-                        +
-
-                        " Publications"
-
+                    item=>item[0]
                 ),
 
             mode:"markers+text",
@@ -1377,34 +945,24 @@ function drawAuthorChart(){
             marker:{
 
                 size:
-
                     sortedAuthors.map(
-
                         item=>item[1]/2.2
-
                     ),
 
-                color:
-                    floralColors,
+                color:floralColors,
 
                 opacity:.85,
 
                 line:{
-
-                    color:"#ffffff",
-
+                    color:"#fff",
                     width:3
-
                 }
 
             },
 
             hovertemplate:
-
-                "%{text}"
-
-                +
-
+                "<b>%{text}</b>" +
+                "<br>Publications: %{y}" +
                 "<extra></extra>"
 
         }],
@@ -1414,63 +972,31 @@ function drawAuthorChart(){
             ...commonLayout,
 
             xaxis:{
-
                 visible:false
-
             },
 
             yaxis:{
-
-                title:
-                    "Publications",
-
-                gridcolor:
-                    "#f0e5ec"
-
-            },
-
-            margin:{
-
-                l:60,
-
-                r:30,
-
-                t:70,
-
-                b:30
-
+                title:"Publications",
+                gridcolor:"#f0e5ec"
             },
 
             showlegend:false
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   TIMELINE
-========================================================= */
-
+/* ================= TIMELINE ================= */
 
 function drawTimeline(){
 
-
     const mode=
-
-        document
-        .getElementById("timelineMode")
-        .value;
-
+        document.getElementById("timelineMode").value;
 
     const traces=
 
@@ -1480,47 +1006,32 @@ function drawTimeline(){
 
                 x:years,
 
-                y:
-                    trends[subject],
+                y:trends[subject],
 
                 name:subject,
 
                 type:
-
                     mode==="line"
-
                     ?"scatter"
-
                     :"bar",
 
                 mode:
-
                     mode==="line"
-
                     ?"lines+markers"
-
                     :undefined,
 
                 line:{
-
-                    color:
-                        floralColors[index],
-
+                    color:floralColors[index],
                     width:3
-
                 },
 
                 marker:{
-
-                    color:
-                        floralColors[index]
-
+                    color:floralColors[index]
                 }
 
             })
 
         );
-
 
     Plotly.newPlot(
 
@@ -1533,72 +1044,43 @@ function drawTimeline(){
             ...commonLayout,
 
             barmode:
-
                 mode==="bar"
-
                 ?"stack"
-
                 :undefined,
 
-            hovermode:
-                "x unified",
+            hovermode:"x unified",
 
             xaxis:{
-
-                title:
-                    "Publication Year"
-
+                title:"Publication Year"
             },
 
             yaxis:{
-
-                title:
-                    "Number of Publications"
-
+                title:"Number of Publications"
             },
 
             legend:{
-
                 orientation:"h",
-
                 y:-.3
-
             }
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   HEATMAP
-========================================================= */
-
+/* ================= HEATMAP ================= */
 
 function drawHeatmap(){
-
 
     const topKeywords=
 
         keywords
-
         .slice(0,10)
-
-        .map(
-
-            item=>item[0]
-
-        );
-
+        .map(item=>item[0]);
 
     const z=
 
@@ -1610,22 +1092,12 @@ function drawHeatmap(){
 
                     (keyword,j)=>
 
-                        20
-
-                        +
-
-                        (
-
-                            (i*17+j*23)
-
-                            %90
-
-                        )
+                        20+
+                        ((i*17+j*23)%90)
 
                 )
 
         );
-
 
     Plotly.newPlot(
 
@@ -1644,9 +1116,7 @@ function drawHeatmap(){
             colorscale:[
 
                 [0,"#FFF1F7"],
-
                 [.5,"#E8B7D4"],
-
                 [1,"#9E7CC5"]
 
             ]
@@ -1658,140 +1128,67 @@ function drawHeatmap(){
             ...commonLayout,
 
             margin:{
-
                 l:180,
-
                 b:120
-
             },
 
             xaxis:{
-
                 tickangle:-40
-
             }
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   KEYWORD NETWORK
-========================================================= */
-
+/* ================= NETWORK ================= */
 
 function drawNetwork(){
 
-
     const nodes=
-
         keywords
-
         .slice(0,10)
-
-        .map(
-
-            item=>item[0]
-
-        );
-
+        .map(item=>item[0]);
 
     const x=[];
-
     const y=[];
 
     const edgeX=[];
-
     const edgeY=[];
 
+    nodes.forEach((node,index)=>{
 
-    nodes.forEach(
+        const angle=
+            2*Math.PI*
+            index/
+            nodes.length;
 
-        (node,index)=>{
+        x.push(Math.cos(angle)*5);
 
+        y.push(Math.sin(angle)*5);
 
-            const angle=
+    });
 
-                2*Math.PI
+    for(let i=0;i<nodes.length;i++){
 
-                *index
+        for(let j=i+1;j<nodes.length;j++){
 
-                /nodes.length;
-
-
-            x.push(
-
-                Math.cos(angle)*5
-
-            );
-
-
-            y.push(
-
-                Math.sin(angle)*5
-
-            );
-
-        }
-
-    );
-
-
-    for(
-
-        let i=0;
-
-        i<nodes.length;
-
-        i++
-
-    ){
-
-        for(
-
-            let j=i+1;
-
-            j<nodes.length;
-
-            j++
-
-        ){
-
-            if(
-
-                (i+j)%3===0
-
-            ){
+            if((i+j)%3===0){
 
                 edgeX.push(
-
                     x[i],
-
                     x[j],
-
                     null
-
                 );
 
-
                 edgeY.push(
-
                     y[i],
-
                     y[j],
-
                     null
-
                 );
 
             }
@@ -1799,7 +1196,6 @@ function drawNetwork(){
         }
 
     }
-
 
     Plotly.newPlot(
 
@@ -1810,7 +1206,6 @@ function drawNetwork(){
             {
 
                 x:edgeX,
-
                 y:edgeY,
 
                 mode:"lines",
@@ -1820,20 +1215,15 @@ function drawNetwork(){
                 hoverinfo:"skip",
 
                 line:{
-
                     width:2,
-
                     color:"#E8C9DC"
-
                 }
 
             },
 
-
             {
 
                 x:x,
-
                 y:y,
 
                 text:nodes,
@@ -1847,37 +1237,21 @@ function drawNetwork(){
                 marker:{
 
                     size:
-
                         nodes.map(
-
                             (node,index)=>
-
-                                18
-
-                                +
-
-                                keywords[index][1]
-
-                                /90
-
+                                18+
+                                keywords[index][1]/90
                         ),
 
                     color:
-
                         nodes.map(
-
                             (node,index)=>
-
                                 floralColors[index]
-
                         ),
 
                     line:{
-
                         width:2,
-
                         color:"#fff"
-
                     }
 
                 }
@@ -1893,132 +1267,79 @@ function drawNetwork(){
             showlegend:false,
 
             xaxis:{
-
                 visible:false
-
             },
 
             yaxis:{
-
                 visible:false
-
             }
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   RESEARCH FLOW
-========================================================= */
-
+/* ================= SANKEY ================= */
 
 function drawSankey(){
-
 
     const labels=[
 
         "Artificial Intelligence",
-
         "Machine Learning",
-
         "Deep Learning",
-
         "Data Science",
 
         "AI",
-
         "Neural Network",
-
         "Prediction",
 
         "2023",
-
         "2024",
-
         "2025",
-
         "2026"
 
     ];
 
-
     const source=[
 
         0,0,
-
         1,1,
-
         2,2,
-
         3,
-
         4,4,
-
         5,
-
         6,6
 
     ];
 
-
     const target=[
 
         4,5,
-
         4,6,
-
         5,6,
-
         5,
-
         7,9,
-
         8,
-
         9,10
 
     ];
 
-
     const value=[
 
-        100,
-
-        80,
-
-        90,
-
-        60,
-
-        85,
-
-        55,
-
+        100,80,
+        90,60,
+        85,55,
         70,
-
-        45,
-
-        55,
-
+        45,55,
         40,
-
-        50,
-
-        65
+        50,65
 
     ];
-
 
     Plotly.newPlot(
 
@@ -2039,25 +1360,15 @@ function drawSankey(){
                 color:[
 
                     "#F48FB1",
-
                     "#BA8DE3",
-
                     "#81CFC1",
-
                     "#F6C85F",
-
                     "#E99AC7",
-
                     "#89B8E8",
-
                     "#A7C957",
-
                     "#F29E8F",
-
                     "#8DD3C7",
-
                     "#C4A7E7",
-
                     "#F6C85F"
 
                 ]
@@ -2084,35 +1395,22 @@ function drawSankey(){
             ...commonLayout,
 
             margin:{
-
                 l:20,
-
                 r:20,
-
                 t:30,
-
                 b:20
-
             }
 
         },
 
-        {
-
-            responsive:true
-
-        }
+        {responsive:true}
 
     );
 
 }
 
 
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
+/* ================= INITIALIZE ================= */
 
 drawResearchAreas();
 
@@ -2130,8 +1428,8 @@ drawNetwork();
 
 drawSankey();
 
-
 </script>
 
 </body>
 </html>
+```
