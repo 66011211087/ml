@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scopus Research Explorer</title>
+<title>Scopus Research Dashboard</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
 
 /* =========================================================
-   GLOBAL
+GLOBAL
 ========================================================= */
 
 *{
@@ -19,521 +20,449 @@
 }
 
 body{
+
     margin:0;
+
     font-family:
         "Segoe UI",
         Inter,
         Arial,
         sans-serif;
 
-    background:#f7f8fc;
-    color:#30343b;
-}
+    background:
+        linear-gradient(
+            180deg,
+            #fff8fc 0%,
+            #fffdf9 45%,
+            #f5fffb 100%
+        );
 
-button,
-input,
-select{
-    font-family:inherit;
+    color:#493c50;
 }
 
 
 /* =========================================================
-   HEADER
+HEADER
 ========================================================= */
 
 .header{
 
-    background:
-        linear-gradient(
-            135deg,
-            #f59abb 0%,
-            #b99ae8 50%,
-            #8bd1c3 100%
-        );
+    position:relative;
+
+    overflow:hidden;
+
+    padding:48px 7% 80px;
 
     color:white;
 
-    padding:42px 6% 80px;
+    background:
 
-    position:relative;
-    overflow:hidden;
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.25),
+            transparent 25%
+        ),
 
-    border-bottom-left-radius:35px;
-    border-bottom-right-radius:35px;
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,255,255,.20),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ef8db4,
+            #b797df 52%,
+            #7acdbd
+        );
+
+    border-bottom-left-radius:42px;
+    border-bottom-right-radius:42px;
 
     box-shadow:
-        0 12px 35px rgba(100,80,120,.15);
-}
-
-.header::before{
-    content:"";
-    position:absolute;
-
-    width:280px;
-    height:280px;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.12);
-
-    right:-80px;
-    top:-120px;
-}
-
-.header::after{
-    content:"";
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.08);
-
-    left:-60px;
-    bottom:-100px;
-}
-
-.header-content{
-    max-width:1450px;
-    margin:auto;
-
-    position:relative;
-    z-index:2;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.brand-icon{
-    width:52px;
-    height:52px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(255,255,255,.2);
-
-    border:1px solid rgba(255,255,255,.3);
-
-    border-radius:16px;
-
-    font-size:26px;
-
-    backdrop-filter:blur(10px);
+        0 15px 45px
+        rgba(190,110,155,.18);
 }
 
 .header h1{
+
     margin:0;
 
-    font-size:34px;
+    font-size:42px;
+
     font-weight:800;
 
-    letter-spacing:-.7px;
+    letter-spacing:-1px;
+
+    position:relative;
+
+    z-index:2;
 }
 
 .header p{
-    margin:13px 0 0;
 
-    font-size:15px;
+    margin:12px 0 0;
 
-    color:rgba(255,255,255,.92);
+    max-width:850px;
 
-    max-width:800px;
+    font-size:16px;
+
+    color:#fff8fd;
+
+    position:relative;
+
+    z-index:2;
 }
 
-.header-badge{
+.badge{
 
-    display:inline-flex;
+    display:inline-block;
 
     margin-top:20px;
 
-    padding:8px 14px;
+    padding:9px 16px;
 
-    border-radius:20px;
+    border-radius:30px;
 
-    background:rgba(255,255,255,.17);
+    background:
+        rgba(255,255,255,.18);
 
-    border:1px solid rgba(255,255,255,.25);
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    backdrop-filter:
+        blur(8px);
 
     font-size:13px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+/* FLOWERS */
+
+.flower{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    opacity:.8;
+
+    animation:
+        floatFlower
+        5s
+        ease-in-out
+        infinite;
+}
+
+.flower.one{
+
+    top:20px;
+    right:8%;
+
+    font-size:48px;
+}
+
+.flower.two{
+
+    top:110px;
+    right:20%;
+
+    font-size:30px;
+
+    animation-delay:1s;
+}
+
+.flower.three{
+
+    top:48px;
+    left:4%;
+
+    font-size:38px;
+
+    animation-delay:2s;
+}
+
+@keyframes floatFlower{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(-8px)
+            rotate(5deg);
+    }
+
 }
 
 
 /* =========================================================
-   MAIN
+CONTAINER
 ========================================================= */
 
 .container{
 
-    max-width:1450px;
+    max-width:1500px;
 
-    margin:-42px auto 0;
+    margin:auto;
 
     padding:
-        0 25px
-        50px;
+        0
+        30px
+        40px;
+}
+
+
+/* =========================================================
+SUMMARY CARDS
+========================================================= */
+
+.cards{
 
     position:relative;
+
     z-index:5;
-}
-
-
-/* =========================================================
-   FILTER BAR
-========================================================= */
-
-.filter-panel{
-
-    background:white;
-
-    border:1px solid #eceef3;
-
-    border-radius:20px;
-
-    padding:20px;
-
-    box-shadow:
-        0 10px 30px rgba(50,50,80,.08);
-
-    margin-bottom:22px;
-}
-
-.filter-title{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:15px;
-}
-
-.filter-title h2{
-
-    margin:0;
-
-    font-size:17px;
-
-    color:#41464f;
-}
-
-.filter-title span{
-
-    font-size:12px;
-
-    color:#9297a0;
-}
-
-.filters{
-
-    display:grid;
-
-    grid-template-columns:
-        2fr 1fr 1fr auto;
-
-    gap:12px;
-}
-
-.field{
-    position:relative;
-}
-
-.field label{
-
-    display:block;
-
-    font-size:11px;
-
-    font-weight:700;
-
-    color:#858a94;
-
-    margin-bottom:6px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.4px;
-}
-
-input,
-select{
-
-    width:100%;
-
-    padding:
-        11px 13px;
-
-    border-radius:11px;
-
-    border:1px solid #e2e5eb;
-
-    background:#fafbfc;
-
-    color:#41464f;
-
-    outline:none;
-
-    font-size:14px;
-}
-
-input:focus,
-select:focus{
-
-    border-color:#c08adf;
-
-    background:white;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(192,138,223,.12);
-}
-
-.reset-btn{
-
-    align-self:end;
-
-    height:42px;
-
-    padding:0 18px;
-
-    border:0;
-
-    border-radius:11px;
-
-    background:#555d69;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    transition:.2s;
-}
-
-.reset-btn:hover{
-    background:#414751;
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-.summary{
 
     display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
-    gap:16px;
+    gap:18px;
 
-    margin-bottom:22px;
+    margin-top:-42px;
 }
 
-.metric{
-
-    background:white;
-
-    border:1px solid #eceef3;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    min-height:125px;
-
-    box-shadow:
-        0 7px 25px rgba(50,50,80,.06);
+.card{
 
     position:relative;
 
     overflow:hidden;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border-radius:22px;
+
+    padding:23px;
+
+    border:
+        1px solid
+        #f0dce7;
+
+    box-shadow:
+        0 10px 30px
+        rgba(120,90,120,.10);
+
+    transition:
+        .25s ease;
 }
 
-.metric::after{
+.card:hover{
 
-    content:"";
+    transform:
+        translateY(-4px);
 
-    position:absolute;
-
-    width:75px;
-    height:75px;
-
-    border-radius:50%;
-
-    right:-25px;
-    top:-25px;
-
-    opacity:.15;
+    box-shadow:
+        0 16px 35px
+        rgba(120,90,120,.16);
 }
 
-.metric:nth-child(1)::after{
-    background:#f48fb1;
+.card:nth-child(1){
+    border-top:
+        5px solid #ef8db4;
 }
 
-.metric:nth-child(2)::after{
-    background:#9b83d7;
+.card:nth-child(2){
+    border-top:
+        5px solid #b797df;
 }
 
-.metric:nth-child(3)::after{
-    background:#6fc4b2;
+.card:nth-child(3){
+    border-top:
+        5px solid #7acdbd;
 }
 
-.metric:nth-child(4)::after{
-    background:#e8b94d;
+.card:nth-child(4){
+    border-top:
+        5px solid #f4c75e;
 }
 
-.metric-label{
+.label{
 
-    color:#8a8f98;
+    font-size:14px;
 
-    font-size:12px;
+    color:#8d8193;
 
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    letter-spacing:.5px;
+    font-weight:600;
 }
 
-.metric-value{
+.value{
 
     margin-top:7px;
 
-    font-size:30px;
+    font-size:31px;
 
     font-weight:800;
 
-    color:#363b43;
-}
-
-.metric-sub{
-
-    margin-top:4px;
-
-    font-size:12px;
-
-    color:#a0a4ab;
+    color:#604c69;
 }
 
 
 /* =========================================================
-   GRID
+SECTION GRID
 ========================================================= */
 
-.dashboard-grid{
+.grid{
 
     display:grid;
 
     grid-template-columns:
         1fr 1fr;
 
-    gap:20px;
-}
+    gap:22px;
 
-.panel{
-
-    background:white;
-
-    border:1px solid #eceef3;
-
-    border-radius:20px;
-
-    padding:22px;
-
-    box-shadow:
-        0 7px 25px rgba(50,50,80,.055);
-
-    min-width:0;
-}
-
-.panel.full{
-    grid-column:1/-1;
-}
-
-.panel-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-    margin-bottom:8px;
-}
-
-.panel-title{
-
-    margin:0;
-
-    font-size:18px;
-
-    color:#373c44;
-
-    font-weight:750;
-}
-
-.panel-number{
-
-    font-size:11px;
-
-    font-weight:800;
-
-    color:#a3a7af;
-
-    background:#f4f5f7;
-
-    border-radius:8px;
-
-    padding:5px 8px;
-}
-
-.panel-description{
-
-    margin:0 0 12px;
-
-    color:#9297a0;
-
-    font-size:13px;
+    margin-top:24px;
 }
 
 
 /* =========================================================
-   CHARTS
+PANELS
+========================================================= */
+
+.panel{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border:
+        1px solid
+        #eee1e8;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:
+        0 8px 28px
+        rgba(110,85,110,.07);
+
+    transition:
+        transform .2s ease;
+}
+
+.panel:hover{
+
+    transform:
+        translateY(-2px);
+}
+
+.full{
+
+    grid-column:
+        1 / -1;
+}
+
+.panel h2{
+
+    margin:0 0 6px;
+
+    font-size:21px;
+
+    color:#594765;
+}
+
+.desc{
+
+    color:#8d8291;
+
+    font-size:14px;
+
+    margin-bottom:12px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+CONTROLS
+========================================================= */
+
+.controls{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin:
+        15px
+        0;
+}
+
+select,
+input{
+
+    padding:
+        10px
+        14px;
+
+    border:
+        1px solid
+        #eadbe5;
+
+    border-radius:12px;
+
+    background:#fffafd;
+
+    color:#5c5062;
+
+    outline:none;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+select:focus,
+input:focus{
+
+    border-color:
+        #d991b0;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(231,120,168,.10);
+}
+
+
+/* =========================================================
+CHART
 ========================================================= */
 
 .chart{
 
     width:100%;
 
-    height:430px;
-}
-
-.chart-small{
-
-    width:100%;
-
-    height:390px;
+    height:500px;
 }
 
 
 /* =========================================================
-   INSIGHT BOX
+INSIGHT BOX
 ========================================================= */
 
 .insight{
@@ -543,333 +472,151 @@ select:focus{
     grid-template-columns:
         repeat(3,1fr);
 
-    gap:12px;
+    gap:14px;
 
     margin-top:15px;
 }
 
-.insight-item{
+.insight-box{
 
-    background:#f8f9fb;
+    padding:15px;
 
-    border-radius:13px;
+    border-radius:15px;
 
-    padding:13px;
+    background:
+        linear-gradient(
+            135deg,
+            #fff6fa,
+            #f8f5ff
+        );
 
-    border:1px solid #edf0f3;
+    border:
+        1px solid
+        #f0dce8;
 }
 
-.insight-item strong{
-
-    display:block;
+.insight-title{
 
     font-size:12px;
 
-    color:#858a94;
+    color:#968999;
 
-    margin-bottom:4px;
+    margin-bottom:5px;
 }
 
-.insight-item span{
+.insight-value{
 
-    font-size:14px;
-
-    font-weight:700;
-
-    color:#4a5059;
-}
-
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-panel{
-    margin-top:20px;
-}
-
-.table-toolbar{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin:15px 0;
-}
-
-.result-count{
-
-    font-size:13px;
-
-    color:#8d929a;
-}
-
-.table-wrapper{
-
-    width:100%;
-
-    overflow-x:auto;
-
-    border:1px solid #eceef2;
-
-    border-radius:14px;
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:800px;
-}
-
-thead{
-
-    background:#f7f8fa;
-}
-
-th{
-
-    text-align:left;
-
-    padding:13px 15px;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.4px;
-
-    color:#7f858e;
-
-    border-bottom:1px solid #e8eaee;
-}
-
-td{
-
-    padding:14px 15px;
-
-    font-size:13px;
-
-    color:#4b515a;
-
-    border-bottom:1px solid #f0f1f4;
-
-}
-
-tbody tr:hover{
-    background:#fcfafd;
-}
-
-.title-cell{
-
-    max-width:520px;
-
-    font-weight:650;
-
-    color:#3e444d;
-}
-
-.subject-tag{
-
-    display:inline-block;
-
-    padding:5px 8px;
-
-    border-radius:7px;
-
-    background:#f7edf8;
-
-    color:#866091;
-
-    font-size:11px;
-
-    font-weight:650;
-}
-
-.year-tag{
-
-    font-weight:700;
-
-    color:#666c75;
-}
-
-.citation{
+    font-size:20px;
 
     font-weight:800;
 
-    color:#6b5580;
+    color:#654d70;
 }
 
 
 /* =========================================================
-   PAGINATION
-========================================================= */
-
-.pagination{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:6px;
-
-    margin-top:18px;
-}
-
-.page-btn{
-
-    width:34px;
-    height:34px;
-
-    border:1px solid #e1e4e9;
-
-    background:white;
-
-    border-radius:9px;
-
-    cursor:pointer;
-
-    color:#686e77;
-
-    font-size:12px;
-}
-
-.page-btn:hover{
-    background:#f7f4f9;
-}
-
-.page-btn.active{
-
-    background:#a486c8;
-
-    color:white;
-
-    border-color:#a486c8;
-}
-
-
-/* =========================================================
-   FOOTER
+FOOTER
 ========================================================= */
 
 .footer{
 
     text-align:center;
 
-    padding:15px 20px 40px;
+    padding:
+        35px
+        20px
+        45px;
 
-    color:#9a9fa7;
-
-    font-size:12px;
-}
-
-.footer-flower{
-    font-size:20px;
-    margin-bottom:7px;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1050px){
-
-    .summary{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .filters{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .reset-btn{
-        width:100%;
-    }
-
-}
-
-@media(max-width:800px){
-
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-
-    .panel.full{
-        grid-column:auto;
-    }
-
-    .insight{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .header{
-        padding:
-            32px 20px 70px;
-    }
-
-    .header h1{
-        font-size:27px;
-    }
-
-    .container{
-        padding:
-            0 14px 40px;
-    }
-
-    .summary{
-        grid-template-columns:1fr;
-    }
-
-    .filters{
-        grid-template-columns:1fr;
-    }
-
-    .panel{
-        padding:17px;
-        border-radius:17px;
-    }
-
-    .chart{
-        height:400px;
-    }
-
-    .chart-small{
-        height:370px;
-    }
-
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-
-    text-align:center;
-
-    padding:45px 20px;
-
-    color:#969ba3;
+    color:#918492;
 
     font-size:13px;
 }
 
+.footer-flower{
+
+    font-size:27px;
+
+    margin-bottom:8px;
+}
+
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .cards{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .full{
+
+        grid-column:auto;
+    }
+
+    .insight{
+
+        grid-template-columns:
+            1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .cards{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .header{
+
+        padding:
+            40px
+            24px
+            70px;
+
+        border-radius:
+            0 0 30px 30px;
+    }
+
+    .header h1{
+
+        font-size:29px;
+    }
+
+    .container{
+
+        padding:
+            0
+            15px
+            30px;
+    }
+
+    .panel{
+
+        padding:18px;
+
+        border-radius:19px;
+    }
+
+    .chart{
+
+        height:430px;
+    }
+}
+
 </style>
+
 </head>
 
 
@@ -882,38 +629,31 @@ HEADER
 
 <header class="header">
 
-<div class="header-content">
+    <div class="flower one">🌸</div>
 
-    <div class="brand">
+    <div class="flower two">🌼</div>
 
-        <div class="brand-icon">
-            🌸
-        </div>
+    <div class="flower three">🌷</div>
 
-        <div>
+    <h1>
+        🌸 Scopus Research Explorer
+    </h1>
 
-            <h1>
-                Scopus Research Explorer
-            </h1>
+    <p>
+        Interactive dashboard for exploring
+        research publications, subjects,
+        keywords, citations and research trends.
+    </p>
 
-            <p>
-                Interactive dashboard for exploring research publications,
-                subjects, keywords and publication trends.
-            </p>
+    <div class="badge">
 
-        </div>
+        🌺 Scopus Analytics
+        &nbsp; · &nbsp;
+        🌿 Research Visualization
+        &nbsp; · &nbsp;
+        🌼 EDA
 
     </div>
-
-    <div class="header-badge">
-        Scopus Analytics
-        &nbsp; · &nbsp;
-        Research Visualization
-        &nbsp; · &nbsp;
-        EDA
-    </div>
-
-</div>
 
 </header>
 
@@ -922,539 +662,399 @@ HEADER
 
 
 <!-- =========================================================
-FILTERS
-========================================================= -->
-
-<section class="filter-panel">
-
-    <div class="filter-title">
-
-        <h2>
-            🔎 Explore Research Data
-        </h2>
-
-        <span>
-            Use filters to explore the dataset
-        </span>
-
-    </div>
-
-
-    <div class="filters">
-
-        <div class="field">
-
-            <label>
-                Search
-            </label>
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Search title, keyword or subject..."
-                oninput="applyFilters()"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Year
-            </label>
-
-            <select
-                id="yearFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="all">
-                    All Years
-                </option>
-
-                <option value="2021">
-                    2021
-                </option>
-
-                <option value="2022">
-                    2022
-                </option>
-
-                <option value="2023">
-                    2023
-                </option>
-
-                <option value="2024">
-                    2024
-                </option>
-
-                <option value="2025">
-                    2025
-                </option>
-
-                <option value="2026">
-                    2026
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Subject
-            </label>
-
-            <select
-                id="subjectFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="all">
-                    All Subjects
-                </option>
-
-                <option>
-                    Artificial Intelligence
-                </option>
-
-                <option>
-                    Machine Learning
-                </option>
-
-                <option>
-                    Deep Learning
-                </option>
-
-                <option>
-                    Data Science
-                </option>
-
-                <option>
-                    Computer Vision
-                </option>
-
-                <option>
-                    Natural Language Processing
-                </option>
-
-                <option>
-                    Software Engineering
-                </option>
-
-                <option>
-                    Cybersecurity
-                </option>
-
-                <option>
-                    Internet of Things
-                </option>
-
-                <option>
-                    Computer Networks
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <button
-            class="reset-btn"
-            onclick="resetFilters()"
-        >
-            Reset Filters
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
 SUMMARY
 ========================================================= -->
 
-<section class="summary">
+<section class="cards">
 
-    <div class="metric">
 
-        <div class="metric-label">
-            Publications
+    <div class="card">
+
+        <div class="label">
+            🌸 Total Publications
         </div>
 
-        <div
-            id="totalPublications"
-            class="metric-value"
-        >
+        <div class="value">
             5,427
         </div>
 
-        <div class="metric-sub">
-            Research records
-        </div>
-
     </div>
 
 
-    <div class="metric">
+    <div class="card">
 
-        <div class="metric-label">
-            Subjects
+        <div class="label">
+            🌷 Research Subjects
         </div>
 
-        <div
-            id="totalSubjects"
-            class="metric-value"
-        >
+        <div class="value">
             10
         </div>
 
-        <div class="metric-sub">
-            Research areas
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            🌼 Feature Dimensions
+        </div>
+
+        <div class="value">
+            768-D
         </div>
 
     </div>
 
 
-    <div class="metric">
+    <div class="card">
 
-        <div class="metric-label">
-            Citations
+        <div class="label">
+            🌺 Year Coverage
         </div>
 
-        <div
-            id="totalCitations"
-            class="metric-value"
-        >
-            8,420
-        </div>
-
-        <div class="metric-sub">
-            Total citations
-        </div>
-
-    </div>
-
-
-    <div class="metric">
-
-        <div class="metric-label">
-            Year Coverage
-        </div>
-
-        <div
-            id="yearCoverage"
-            class="metric-value"
-        >
+        <div class="value">
             2021–2026
         </div>
 
-        <div class="metric-sub">
-            Publication period
-        </div>
-
     </div>
+
 
 </section>
 
 
-<!-- =========================================================
-DASHBOARD
-========================================================= -->
-
-<section class="dashboard-grid">
+<section class="grid">
 
 
 <!-- =========================================================
-TREND
+01 RESEARCH IMPACT MAP
 ========================================================= -->
 
 <div class="panel full">
 
-    <div class="panel-header">
+<h2>
+    🌸 01 · Research Impact Map
+</h2>
 
-        <div>
+<div class="desc">
 
-            <h2 class="panel-title">
-                Publication Trend
-            </h2>
+    เปรียบเทียบจำนวนงานวิจัยกับจำนวนการอ้างอิง
+    ของแต่ละสาขา จุดที่อยู่ด้านขวาและด้านบน
+    แสดงถึงสาขาที่มีทั้งจำนวนงานและ Impact สูง
 
-            <p class="panel-description">
-                Number of publications by year.
-            </p>
+</div>
 
-        </div>
 
-        <span class="panel-number">
-            01
-        </span>
+<div class="controls">
 
-    </div>
+<select
+    id="impactFilter"
+    onchange="drawImpactMap()">
 
-    <div
-        id="trendChart"
-        class="chart"
-    ></div>
+<option value="all">
+    🌺 All Subjects
+</option>
+
+<option value="top">
+    ⭐ High Impact
+</option>
+
+<option value="publications">
+    📚 Most Publications
+</option>
+
+</select>
+
+</div>
+
+
+<div id="researchMap"
+     class="chart">
+</div>
+
+
+<div class="insight">
+
+
+<div class="insight-box">
+
+<div class="insight-title">
+    Highest Publications
+</div>
+
+<div class="insight-value">
+    Artificial Intelligence
+</div>
+
+</div>
+
+
+<div class="insight-box">
+
+<div class="insight-title">
+    Highest Citations
+</div>
+
+<div class="insight-value">
+    Artificial Intelligence
+</div>
+
+</div>
+
+
+<div class="insight-box">
+
+<div class="insight-title">
+    Feature Vector
+</div>
+
+<div class="insight-value">
+    768-D
+</div>
+
+</div>
+
+
+</div>
 
 </div>
 
 
 <!-- =========================================================
-SUBJECT
+02 SUBJECT DISTRIBUTION
 ========================================================= -->
 
 <div class="panel">
 
-    <div class="panel-header">
+<h2>
+    🌷 02 · Subject Distribution
+</h2>
 
-        <div>
+<div class="desc">
 
-            <h2 class="panel-title">
-                Research Subjects
-            </h2>
+    จำนวนสิ่งพิมพ์ในแต่ละสาขาวิจัย
+    เรียงจากมากไปน้อยเพื่อให้เปรียบเทียบได้ง่าย
 
-            <p class="panel-description">
-                Publication volume by research subject.
-            </p>
+</div>
 
-        </div>
-
-        <span class="panel-number">
-            02
-        </span>
-
-    </div>
-
-    <div
-        id="subjectChart"
-        class="chart-small"
-    ></div>
+<div id="subjectChart"
+     class="chart">
+</div>
 
 </div>
 
 
 <!-- =========================================================
-KEYWORDS
+03 KEYWORDS
 ========================================================= -->
 
 <div class="panel">
 
-    <div class="panel-header">
+<h2>
+    🌼 03 · Top Research Keywords
+</h2>
 
-        <div>
+<div class="desc">
 
-            <h2 class="panel-title">
-                Top Research Keywords
-            </h2>
+    Keyword ที่พบมากที่สุดในชุดข้อมูล
+    สามารถดูอันดับและความถี่ได้ทันที
 
-            <p class="panel-description">
-                Most frequently occurring keywords.
-            </p>
+</div>
 
-        </div>
-
-        <span class="panel-number">
-            03
-        </span>
-
-    </div>
-
-    <div
-        id="keywordChart"
-        class="chart-small"
-    ></div>
+<div id="keywordChart"
+     class="chart">
+</div>
 
 </div>
 
 
 <!-- =========================================================
-INSIGHTS
+04 TIMELINE
 ========================================================= -->
 
 <div class="panel full">
 
-    <div class="panel-header">
+<h2>
+    🌺 04 · Research Trend Timeline
+</h2>
 
-        <div>
+<div class="desc">
 
-            <h2 class="panel-title">
-                Research Overview
-            </h2>
+    แนวโน้มจำนวนสิ่งพิมพ์ในแต่ละปี
+    สามารถเลือกดูแบบ Line หรือ Stacked Bar
 
-            <p class="panel-description">
-                Quick summary of the research dataset.
-            </p>
-
-        </div>
-
-        <span class="panel-number">
-            04
-        </span>
-
-    </div>
+</div>
 
 
-    <div class="insight">
+<div class="controls">
 
-        <div class="insight-item">
+<select
+    id="timelineMode"
+    onchange="drawTimeline()">
 
-            <strong>
-                Largest Research Subject
-            </strong>
+<option value="line">
+    📈 Line Chart
+</option>
 
-            <span>
-                Artificial Intelligence
-            </span>
+<option value="bar">
+    📊 Stacked Bar
+</option>
 
-        </div>
+</select>
 
-
-        <div class="insight-item">
-
-            <strong>
-                Most Frequent Keyword
-            </strong>
-
-            <span>
-                Artificial Intelligence
-            </span>
-
-        </div>
+</div>
 
 
-        <div class="insight-item">
+<div id="timelineChart"
+     class="chart">
+</div>
 
-            <strong>
-                Latest Publication Year
-            </strong>
+</div>
 
-            <span>
-                2026
-            </span>
 
-        </div>
+<!-- =========================================================
+05 HEATMAP
+========================================================= -->
 
-    </div>
+<div class="panel full">
+
+<h2>
+    🌿 05 · Subject × Keyword
+</h2>
+
+<div class="desc">
+
+    แสดงความสัมพันธ์ระหว่างสาขาวิจัย
+    และ Keyword โดยสีเข้มหมายถึงความถี่สูง
+
+</div>
+
+
+<div id="heatmapChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+06 TOP KEYWORD RANKING
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌼 06 · Keyword Ranking
+</h2>
+
+<div class="desc">
+
+    จัดอันดับ Keyword ที่พบมากที่สุด
+    แทน Network แบบเดิม เพื่อให้ผู้ใช้อ่านข้อมูล
+    และเปรียบเทียบอันดับได้ง่ายขึ้น
+
+</div>
+
+
+<div class="controls">
+
+<select
+    id="keywordLimit"
+    onchange="drawKeywordRanking()">
+
+<option value="10">
+    Top 10
+</option>
+
+<option value="15">
+    Top 15
+</option>
+
+</select>
+
+</div>
+
+
+<div id="networkChart"
+     class="chart">
+</div>
+
+</div>
+
+
+<!-- =========================================================
+07 RESEARCH GROWTH
+========================================================= -->
+
+<div class="panel full">
+
+<h2>
+    🌷 07 · Research Growth by Subject
+</h2>
+
+<div class="desc">
+
+    แสดงการเติบโตของงานวิจัยในแต่ละสาขา
+    ตั้งแต่ปี 2021–2026
+    โดยแต่ละสีแทนสาขาวิจัย
+
+</div>
+
+
+<div class="controls">
+
+<select
+    id="growthMode"
+    onchange="drawGrowth()">
+
+<option value="stack">
+    📊 Stacked Bar
+</option>
+
+<option value="group">
+    📊 Grouped Bar
+</option>
+
+</select>
+
+</div>
+
+
+<div id="sankeyChart"
+     class="chart">
+</div>
 
 </div>
 
 
 </section>
-
-
-<!-- =========================================================
-RESEARCH TABLE
-========================================================= -->
-
-<section class="panel table-panel">
-
-    <div class="panel-header">
-
-        <div>
-
-            <h2 class="panel-title">
-                Research Records
-            </h2>
-
-            <p class="panel-description">
-                Browse individual research publications.
-            </p>
-
-        </div>
-
-        <span class="panel-number">
-            05
-        </span>
-
-    </div>
-
-
-    <div class="table-toolbar">
-
-        <span
-            id="resultCount"
-            class="result-count"
-        >
-            Showing 10 records
-        </span>
-
-    </div>
-
-
-    <div class="table-wrapper">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Research Title
-                    </th>
-
-                    <th>
-                        Subject
-                    </th>
-
-                    <th>
-                        Year
-                    </th>
-
-                    <th>
-                        Citations
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody
-                id="researchTable"
-            ></tbody>
-
-        </table>
-
-    </div>
-
-
-    <div
-        id="pagination"
-        class="pagination"
-    ></div>
-
-</section>
-
 
 </main>
 
 
 <footer class="footer">
 
-    <div class="footer-flower">
-        🌸
-    </div>
+<div class="footer-flower">
+    🌸 🌼 🌷 🌺 🌻
+</div>
 
-    Scopus Research Explorer
+Scopus Research Explorer
 
-    <br>
+<br>
 
-    Research Visualization ·
-    Exploratory Data Analysis ·
-    Machine Learning Preparation
+Interactive Research Visualization
+· Exploratory Data Analysis
 
 </footer>
 
 
 <script>
 
+
 /* =========================================================
 DATA
 ========================================================= */
+
 
 const subjects = [
 
@@ -1488,325 +1088,311 @@ const subjectCounts = {
 };
 
 
+/* CITATIONS */
+
+const citations = {
+
+    "Artificial Intelligence":1420,
+    "Machine Learning":1310,
+    "Deep Learning":1280,
+    "Data Science":1090,
+    "Computer Vision":980,
+    "Natural Language Processing":940,
+    "Software Engineering":760,
+    "Cybersecurity":850,
+    "Internet of Things":720,
+    "Computer Networks":680
+
+};
+
+
+/* KEYWORDS */
+
 const keywords = [
 
-    ["Artificial Intelligence",920],
-    ["Machine Learning",850],
-    ["Deep Learning",780],
-    ["Data Science",690],
-    ["Neural Network",620],
-    ["Natural Language Processing",580],
-    ["Computer Vision",540],
-    ["Big Data",510],
-    ["Feature Extraction",480],
-    ["Classification",450],
-    ["Prediction",430],
-    ["Internet of Things",410],
-    ["Cybersecurity",390],
-    ["Cloud Computing",360],
-    ["Data Mining",340]
+    ["artificial intelligence",920],
+
+    ["machine learning",850],
+
+    ["deep learning",780],
+
+    ["data science",690],
+
+    ["neural network",620],
+
+    ["natural language processing",580],
+
+    ["computer vision",540],
+
+    ["big data",510],
+
+    ["feature extraction",480],
+
+    ["classification",450],
+
+    ["prediction",430],
+
+    ["internet of things",410],
+
+    ["cybersecurity",390],
+
+    ["cloud computing",360],
+
+    ["data mining",340]
 
 ];
 
 
+/* YEARS */
+
 const years = [
+
     2021,
     2022,
     2023,
     2024,
     2025,
     2026
+
 ];
 
 
-const yearCounts = {
+/* TRENDS */
 
-    2021:512,
-    2022:701,
-    2023:843,
-    2024:1020,
-    2025:1148,
-    2026:1203
+const trends = {
+
+"Artificial Intelligence":
+[70,85,105,120,140,160],
+
+"Machine Learning":
+[65,78,95,110,135,157],
+
+"Deep Learning":
+[50,68,90,108,130,144],
+
+"Data Science":
+[55,70,82,100,125,138],
+
+"Computer Vision":
+[42,55,72,90,110,125],
+
+"Natural Language Processing":
+[40,52,67,85,105,120],
+
+"Software Engineering":
+[45,60,70,80,100,110],
+
+"Cybersecurity":
+[38,50,62,75,90,105],
+
+"Internet of Things":
+[35,48,58,70,85,98],
+
+"Computer Networks":
+[32,45,55,65,78,90]
 
 };
 
 
-/* =========================================================
-RESEARCH RECORDS
-========================================================= */
+/* COLORS */
 
-const researchRecords = [
+const floralColors = [
 
-{
-    title:
-        "Artificial Intelligence Applications in Modern Data Analysis",
-    subject:
-        "Artificial Intelligence",
-    year:2026,
-    citations:42
-},
-
-{
-    title:
-        "Machine Learning Methods for Predictive Analytics",
-    subject:
-        "Machine Learning",
-    year:2026,
-    citations:38
-},
-
-{
-    title:
-        "Deep Learning Frameworks for Intelligent Systems",
-    subject:
-        "Deep Learning",
-    year:2026,
-    citations:35
-},
-
-{
-    title:
-        "Data Science Approaches for Large Scale Research",
-    subject:
-        "Data Science",
-    year:2025,
-    citations:31
-},
-
-{
-    title:
-        "Computer Vision Techniques for Image Understanding",
-    subject:
-        "Computer Vision",
-    year:2025,
-    citations:28
-},
-
-{
-    title:
-        "Natural Language Processing for Intelligent Applications",
-    subject:
-        "Natural Language Processing",
-    year:2025,
-    citations:26
-},
-
-{
-    title:
-        "Software Engineering Practices for AI Systems",
-    subject:
-        "Software Engineering",
-    year:2024,
-    citations:23
-},
-
-{
-    title:
-        "Cybersecurity Threat Detection Using Machine Learning",
-    subject:
-        "Cybersecurity",
-    year:2024,
-    citations:21
-},
-
-{
-    title:
-        "Internet of Things and Intelligent Data Processing",
-    subject:
-        "Internet of Things",
-    year:2023,
-    citations:19
-},
-
-{
-    title:
-        "Computer Network Optimization Using AI Techniques",
-    subject:
-        "Computer Networks",
-    year:2023,
-    citations:17
-},
-
-{
-    title:
-        "Deep Neural Networks for Automated Prediction",
-    subject:
-        "Deep Learning",
-    year:2023,
-    citations:16
-},
-
-{
-    title:
-        "Big Data Analytics for Intelligent Decision Making",
-    subject:
-        "Data Science",
-    year:2022,
-    citations:14
-},
-
-{
-    title:
-        "AI Based Classification and Pattern Recognition",
-    subject:
-        "Artificial Intelligence",
-    year:2022,
-    citations:13
-},
-
-{
-    title:
-        "Cloud Computing Infrastructure for Machine Learning",
-    subject:
-        "Machine Learning",
-    year:2021,
-    citations:11
-},
-
-{
-    title:
-        "Feature Extraction Methods for Computer Vision",
-    subject:
-        "Computer Vision",
-    year:2021,
-    citations:9
-}
+    "#F48FB1",
+    "#BA8DE3",
+    "#81CFC1",
+    "#F6C85F",
+    "#89B8E8",
+    "#E99AC7",
+    "#A7C957",
+    "#F29E8F",
+    "#8DD3C7",
+    "#C4A7E7"
 
 ];
 
 
 /* =========================================================
-COLORS
-========================================================= */
-
-const colors = {
-
-    pink:"#E995B5",
-    purple:"#9D86D2",
-    green:"#70BDAE",
-    yellow:"#DDB74E",
-
-    text:"#4B5058",
-    grid:"#ECEEF2"
-
-};
-
-
-/* =========================================================
-COMMON PLOTLY
+COMMON LAYOUT
 ========================================================= */
 
 const commonLayout = {
 
     font:{
-        family:"Segoe UI, Arial",
-        color:colors.text
+        family:
+            "Segoe UI, Arial",
+        color:"#5d5064"
     },
 
     paper_bgcolor:
         "rgba(0,0,0,0)",
 
     plot_bgcolor:
-        "#FBFCFD",
+        "rgba(255,255,255,.4)",
 
     margin:{
-        l:60,
-        r:25,
-        t:20,
-        b:55
+        l:70,
+        r:40,
+        t:45,
+        b:65
     },
 
     hoverlabel:{
         bgcolor:"#ffffff",
-        bordercolor:"#e5e7eb",
+        bordercolor:"#eadce6",
         font:{
-            color:"#444"
+            color:"#5d5064"
         }
     }
 
 };
 
 
-const plotConfig = {
-
-    responsive:true,
-
-    displaylogo:false,
-
-    modeBarButtonsToRemove:[
-        "lasso2d",
-        "select2d"
-    ]
-
-};
-
-
 /* =========================================================
-TREND CHART
+01 RESEARCH IMPACT MAP
 ========================================================= */
 
-function drawTrend(){
+function drawImpactMap(){
 
-    const values =
-        years.map(
-            year=>yearCounts[year]
-        );
+    const filter =
+        document
+        .getElementById("impactFilter")
+        .value;
+
+
+    let data = subjects.map(
+        (subject,index)=>({
+
+            subject:subject,
+
+            publications:
+                subjectCounts[subject],
+
+            citations:
+                citations[subject],
+
+            color:
+                floralColors[index]
+
+        })
+    );
+
+
+    if(filter==="top"){
+
+        data =
+            data.filter(
+                d =>
+                    d.citations >= 900
+            );
+
+    }
+
+
+    if(filter==="publications"){
+
+        data =
+            data.filter(
+                d =>
+                    d.publications >= 550
+            );
+
+    }
+
+
+    const trace = {
+
+        x:
+            data.map(
+                d=>d.publications
+            ),
+
+        y:
+            data.map(
+                d=>d.citations
+            ),
+
+        text:
+            data.map(
+                d=>d.subject
+            ),
+
+        mode:
+            "markers+text",
+
+        type:
+            "scatter",
+
+        textposition:
+            "top center",
+
+        textfont:{
+            size:11,
+            color:"#62516a"
+        },
+
+        marker:{
+
+            size:
+                data.map(
+                    d =>
+                        20 +
+                        d.publications/45
+                ),
+
+            color:
+                data.map(
+                    d=>d.color
+                ),
+
+            opacity:.88,
+
+            line:{
+                color:"#ffffff",
+                width:2
+            }
+
+        },
+
+        hovertemplate:
+
+            "<b>%{text}</b>" +
+
+            "<br>📚 Publications: %{x}" +
+
+            "<br>📖 Citations: %{y}" +
+
+            "<extra></extra>"
+
+    };
 
 
     Plotly.newPlot(
 
-        "trendChart",
+        "researchMap",
 
-        [{
-
-            x:years,
-
-            y:values,
-
-            type:"scatter",
-
-            mode:"lines+markers",
-
-            line:{
-                color:colors.purple,
-                width:4,
-                shape:"spline"
-            },
-
-            marker:{
-                color:colors.purple,
-                size:9,
-                line:{
-                    color:"#ffffff",
-                    width:2
-                }
-            },
-
-            fill:"tozeroy",
-
-            fillcolor:
-                "rgba(157,134,210,.10)",
-
-            hovertemplate:
-                "<b>%{x}</b>" +
-                "<br>Publications: %{y:,}" +
-                "<extra></extra>"
-
-        }],
+        [trace],
 
         {
 
             ...commonLayout,
 
+            title:{
+                text:
+                    "Research Publications vs Citations",
+                font:{
+                    size:18,
+                    color:"#674d70"
+                }
+            },
+
             xaxis:{
 
-                title:"Publication Year",
+                title:
+                    "Number of Publications",
 
-                tickmode:"linear",
-
-                dtick:1,
-
-                gridcolor:colors.grid,
+                gridcolor:
+                    "#f0e5ec",
 
                 zeroline:false
 
@@ -1814,17 +1400,23 @@ function drawTrend(){
 
             yaxis:{
 
-                title:"Publications",
+                title:
+                    "Number of Citations",
 
-                gridcolor:colors.grid,
+                gridcolor:
+                    "#f0e5ec",
 
                 zeroline:false
 
-            }
+            },
+
+            showlegend:false
 
         },
 
-        plotConfig
+        {
+            responsive:true
+        }
 
     );
 
@@ -1832,17 +1424,10 @@ function drawTrend(){
 
 
 /* =========================================================
-SUBJECT CHART
+02 SUBJECT DISTRIBUTION
 ========================================================= */
 
 function drawSubjectChart(){
-
-    const names =
-        Object.keys(subjectCounts);
-
-    const values =
-        Object.values(subjectCounts);
-
 
     Plotly.newPlot(
 
@@ -1850,17 +1435,34 @@ function drawSubjectChart(){
 
         [{
 
-            x:values,
+            x:
+                Object.values(
+                    subjectCounts
+                ),
 
-            y:names,
+            y:
+                Object.keys(
+                    subjectCounts
+                ),
 
-            type:"bar",
+            type:
+                "bar",
 
-            orientation:"h",
+            orientation:
+                "h",
+
+            text:
+                Object.values(
+                    subjectCounts
+                ),
+
+            textposition:
+                "outside",
 
             marker:{
 
-                color:colors.pink,
+                color:
+                    "#F48FB1",
 
                 line:{
                     color:"#ffffff",
@@ -1869,13 +1471,12 @@ function drawSubjectChart(){
 
             },
 
-            text:values,
-
-            textposition:"outside",
-
             hovertemplate:
+
                 "<b>%{y}</b>" +
-                "<br>Publications: %{x:,}" +
+
+                "<br>Publications: %{x}" +
+
                 "<extra></extra>"
 
         }],
@@ -1885,33 +1486,31 @@ function drawSubjectChart(){
             ...commonLayout,
 
             margin:{
-                l:175,
-                r:55,
-                t:15,
-                b:45
+                l:180,
+                r:60,
+                t:20,
+                b:55
             },
 
             xaxis:{
-
-                title:"Publications",
-
-                gridcolor:colors.grid,
-
-                zeroline:false
-
+                title:
+                    "Publications",
+                gridcolor:
+                    "#f0e5ec"
             },
 
             yaxis:{
-
-                autorange:"reversed",
-
-                gridcolor:"rgba(0,0,0,0)"
-
+                autorange:
+                    "reversed",
+                gridcolor:
+                    "rgba(0,0,0,0)"
             }
 
         },
 
-        plotConfig
+        {
+            responsive:true
+        }
 
     );
 
@@ -1919,13 +1518,14 @@ function drawSubjectChart(){
 
 
 /* =========================================================
-KEYWORD CHART
+03 KEYWORD CHART
 ========================================================= */
 
 function drawKeywordChart(){
 
     const top =
         keywords.slice(0,10);
+
 
     Plotly.newPlot(
 
@@ -1934,29 +1534,47 @@ function drawKeywordChart(){
         [{
 
             x:
-                top.map(item=>item[1]),
+                top.map(
+                    x=>x[1]
+                ),
 
             y:
-                top.map(item=>item[0]),
+                top.map(
+                    x=>x[0]
+                ),
 
-            type:"bar",
+            type:
+                "bar",
 
-            orientation:"h",
+            orientation:
+                "h",
 
             marker:{
 
-                color:colors.green
+                color:
+                    "#BA8DE3",
+
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
 
             },
 
             text:
-                top.map(item=>item[1]),
+                top.map(
+                    x=>x[1]
+                ),
 
-            textposition:"outside",
+            textposition:
+                "outside",
 
             hovertemplate:
+
                 "<b>%{y}</b>" +
-                "<br>Frequency: %{x:,}" +
+
+                "<br>Frequency: %{x}" +
+
                 "<extra></extra>"
 
         }],
@@ -1966,33 +1584,30 @@ function drawKeywordChart(){
             ...commonLayout,
 
             margin:{
-                l:170,
+                l:180,
                 r:55,
-                t:15,
-                b:45
+                t:20,
+                b:55
             },
 
             xaxis:{
-
-                title:"Frequency",
-
-                gridcolor:colors.grid,
-
-                zeroline:false
-
+                title:
+                    "Frequency"
             },
 
             yaxis:{
+                autorange:
+                    "reversed",
 
-                autorange:"reversed",
-
-                gridcolor:"rgba(0,0,0,0)"
-
+                gridcolor:
+                    "rgba(0,0,0,0)"
             }
 
         },
 
-        plotConfig
+        {
+            responsive:true
+        }
 
     );
 
@@ -2000,357 +1615,482 @@ function drawKeywordChart(){
 
 
 /* =========================================================
-FILTER
+04 TIMELINE
 ========================================================= */
 
-let filteredRecords =
-    [...researchRecords];
+function drawTimeline(){
 
-let currentPage = 1;
-
-const pageSize = 10;
-
-
-function applyFilters(){
-
-    const search =
+    const mode =
         document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    const year =
-        document
-        .getElementById("yearFilter")
+        .getElementById("timelineMode")
         .value;
 
 
-    const subject =
-        document
-        .getElementById("subjectFilter")
-        .value;
+    const traces=[];
 
 
-    filteredRecords =
-        researchRecords.filter(
-            record=>{
+    subjects.forEach(
 
-                const searchable =
-                    (
-                        record.title +
-                        " " +
-                        record.subject +
-                        " " +
-                        record.year
-                    )
-                    .toLowerCase();
+        (subject,index)=>{
+
+            traces.push({
+
+                x:
+                    years,
+
+                y:
+                    trends[subject],
+
+                name:
+                    subject,
+
+                type:
+                    mode==="line"
+                    ?"scatter"
+                    :"bar",
+
+                mode:
+                    mode==="line"
+                    ?"lines+markers"
+                    :undefined,
+
+                line:{
+                    color:
+                        floralColors[index],
+                    width:3
+                },
+
+                marker:{
+                    color:
+                        floralColors[index],
+                    size:7
+                },
+
+                hovertemplate:
+
+                    "<b>"+subject+
+                    "</b>" +
+
+                    "<br>Year: %{x}" +
+
+                    "<br>Publications: %{y}" +
+
+                    "<extra></extra>"
+
+            });
+
+        }
+
+    );
 
 
-                const matchesSearch =
-                    !search ||
-                    searchable.includes(search);
+    Plotly.newPlot(
 
+        "timelineChart",
 
-                const matchesYear =
-                    year==="all" ||
-                    String(record.year)===year;
+        traces,
 
+        {
 
-                const matchesSubject =
-                    subject==="all" ||
-                    record.subject===subject;
+            ...commonLayout,
 
+            barmode:
+                mode==="bar"
+                ?"stack"
+                :undefined,
 
-                return (
-                    matchesSearch &&
-                    matchesYear &&
-                    matchesSubject
-                );
+            hovermode:
+                "x unified",
 
+            xaxis:{
+                title:
+                    "Publication Year"
+            },
+
+            yaxis:{
+                title:
+                    "Number of Publications"
+            },
+
+            legend:{
+                orientation:"h",
+                y:-.25
             }
-        );
 
+        },
 
-    currentPage=1;
+        {
+            responsive:true
+        }
 
-    renderTable();
-
-    updateMetrics();
-
-}
-
-
-/* =========================================================
-TABLE
-========================================================= */
-
-function renderTable(){
-
-    const table =
-        document.getElementById(
-            "researchTable"
-        );
-
-
-    const start =
-        (currentPage-1)*pageSize;
-
-
-    const end =
-        start+pageSize;
-
-
-    const pageRecords =
-        filteredRecords.slice(
-            start,
-            end
-        );
-
-
-    if(pageRecords.length===0){
-
-        table.innerHTML=`
-
-            <tr>
-
-                <td
-                    colspan="4"
-                    class="empty"
-                >
-
-                    No research records found.
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
-    else{
-
-        table.innerHTML =
-            pageRecords
-            .map(
-                record=>`
-
-                <tr>
-
-                    <td class="title-cell">
-
-                        ${record.title}
-
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="subject-tag"
-                        >
-
-                            ${record.subject}
-
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="year-tag"
-                        >
-
-                            ${record.year}
-
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="citation"
-                        >
-
-                            ${record.citations}
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                `
-            )
-            .join("");
-
-    }
-
-
-    document.getElementById(
-        "resultCount"
-    ).textContent =
-        `Showing ${pageRecords.length} of ${filteredRecords.length} records`;
-
-
-    renderPagination();
+    );
 
 }
 
 
 /* =========================================================
-PAGINATION
+05 HEATMAP
 ========================================================= */
 
-function renderPagination(){
+function drawHeatmap(){
 
-    const pagination =
-        document.getElementById(
-            "pagination"
-        );
-
-
-    const totalPages =
-        Math.ceil(
-            filteredRecords.length/
-            pageSize
-        );
+    const topKeywords =
+        keywords
+        .slice(0,10)
+        .map(x=>x[0]);
 
 
-    if(totalPages<=1){
-
-        pagination.innerHTML="";
-
-        return;
-
-    }
+    const z=[];
 
 
-    let html="";
+    subjects.forEach(
+
+        (subject,i)=>{
+
+            const row=[];
 
 
-    for(
-        let i=1;
-        i<=totalPages;
-        i++
-    ){
+            topKeywords.forEach(
 
-        html+=`
+                (keyword,j)=>{
 
-            <button
-                class="page-btn
-                ${i===currentPage
-                    ?"active"
-                    :""
-                }"
+                    const value =
+                        Math.round(
+                            20+
+                            (
+                                (i*17+j*23)
+                                %90
+                            )
+                        );
 
-                onclick="goToPage(${i})"
-            >
+                    row.push(value);
 
-                ${i}
+                }
 
-            </button>
-
-        `;
-
-    }
+            );
 
 
-    pagination.innerHTML=html;
+            z.push(row);
 
-}
+        }
+
+    );
 
 
-function goToPage(page){
+    Plotly.newPlot(
 
-    currentPage=page;
+        "heatmapChart",
 
-    renderTable();
+        [{
+
+            z:z,
+
+            x:
+                topKeywords,
+
+            y:
+                subjects,
+
+            type:
+                "heatmap",
+
+            colorscale:[
+
+                [0,"#FFF1F7"],
+
+                [.25,"#F8D4E5"],
+
+                [.5,"#E8B7D4"],
+
+                [.75,"#CBA6E5"],
+
+                [1,"#9E7CC5"]
+
+            ],
+
+            hovertemplate:
+
+                "<b>%{y}</b>" +
+
+                "<br>%{x}" +
+
+                "<br>Frequency: %{z}" +
+
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            margin:{
+                l:180,
+                r:30,
+                t:20,
+                b:120
+            },
+
+            xaxis:{
+                tickangle:-40
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
 
 }
 
 
 /* =========================================================
-METRICS
+06 KEYWORD RANKING
 ========================================================= */
 
-function updateMetrics(){
+function drawKeywordRanking(){
 
-    const search =
+    const limit =
+        Number(
+            document
+            .getElementById("keywordLimit")
+            .value
+        );
+
+
+    const data =
+        keywords
+        .slice(0,limit)
+        .sort(
+            (a,b)=>b[1]-a[1]
+        );
+
+
+    const colors =
+        data.map(
+            (item,index)=>
+                floralColors[
+                    index %
+                    floralColors.length
+                ]
+        );
+
+
+    Plotly.newPlot(
+
+        "networkChart",
+
+        [{
+
+            x:
+                data.map(
+                    x=>x[1]
+                ),
+
+            y:
+                data.map(
+                    x=>x[0]
+                ),
+
+            type:
+                "bar",
+
+            orientation:
+                "h",
+
+            marker:{
+
+                color:colors,
+
+                line:{
+                    color:"#ffffff",
+                    width:1
+                }
+
+            },
+
+            text:
+                data.map(
+                    x=>x[1]
+                ),
+
+            textposition:
+                "outside",
+
+            hovertemplate:
+
+                "<b>%{y}</b>" +
+
+                "<br>Frequency: %{x}" +
+
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...commonLayout,
+
+            title:{
+                text:
+                    "Top Research Keywords",
+                font:{
+                    size:18,
+                    color:"#674d70"
+                }
+            },
+
+            margin:{
+                l:200,
+                r:60,
+                t:55,
+                b:55
+            },
+
+            xaxis:{
+                title:
+                    "Keyword Frequency",
+
+                gridcolor:
+                    "#f0e5ec"
+            },
+
+            yaxis:{
+                autorange:
+                    "reversed",
+
+                gridcolor:
+                    "rgba(0,0,0,0)"
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+07 RESEARCH GROWTH
+========================================================= */
+
+function drawGrowth(){
+
+    const mode =
         document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    const year =
-        document
-        .getElementById("yearFilter")
+        .getElementById("growthMode")
         .value;
 
 
-    const subject =
-        document
-        .getElementById("subjectFilter")
-        .value;
+    const traces=[];
 
 
-    /*
-      สำหรับ Dashboard ตัวเลขหลัก
-      จะเปลี่ยนตาม filter
-    */
+    subjects.forEach(
 
-    if(
-        search ||
-        year!=="all" ||
-        subject!=="all"
-    ){
+        (subject,index)=>{
 
-        document.getElementById(
-            "totalPublications"
-        ).textContent =
-            filteredRecords.length.toLocaleString();
+            traces.push({
 
-    }
+                x:
+                    years,
 
-    else{
+                y:
+                    trends[subject],
 
-        document.getElementById(
-            "totalPublications"
-        ).textContent =
-            "5,427";
+                name:
+                    subject,
 
-    }
+                type:
+                    "bar",
 
-}
+                marker:{
 
+                    color:
+                        floralColors[index],
 
-/* =========================================================
-RESET
-========================================================= */
+                    line:{
+                        color:"#ffffff",
+                        width:.7
+                    }
 
-function resetFilters(){
+                },
 
-    document.getElementById(
-        "searchInput"
-    ).value="";
+                hovertemplate:
 
+                    "<b>"+subject+
+                    "</b>" +
 
-    document.getElementById(
-        "yearFilter"
-    ).value="all";
+                    "<br>Year: %{x}" +
 
+                    "<br>Publications: %{y}" +
 
-    document.getElementById(
-        "subjectFilter"
-    ).value="all";
+                    "<extra></extra>"
+
+            });
+
+        }
+
+    );
 
 
-    applyFilters();
+    Plotly.newPlot(
+
+        "sankeyChart",
+
+        traces,
+
+        {
+
+            ...commonLayout,
+
+            title:{
+                text:
+                    "Research Growth by Subject",
+                font:{
+                    size:18,
+                    color:"#674d70"
+                }
+            },
+
+            barmode:
+                mode==="stack"
+                ?"stack"
+                :"group",
+
+            hovermode:
+                "x unified",
+
+            xaxis:{
+                title:
+                    "Publication Year"
+            },
+
+            yaxis:{
+                title:
+                    "Number of Publications"
+            },
+
+            legend:{
+                orientation:
+                    "h",
+
+                y:
+                    -0.25
+            }
+
+        },
+
+        {
+            responsive:true
+        }
+
+    );
 
 }
 
@@ -2359,13 +2099,20 @@ function resetFilters(){
 INITIALIZE
 ========================================================= */
 
-drawTrend();
+drawImpactMap();
 
 drawSubjectChart();
 
 drawKeywordChart();
 
-renderTable();
+drawTimeline();
+
+drawHeatmap();
+
+drawKeywordRanking();
+
+drawGrowth();
+
 
 </script>
 
