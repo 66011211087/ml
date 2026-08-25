@@ -10,21 +10,13 @@
 
 <style>
 
-/* =========================================================
-   GLOBAL
-========================================================= */
-
 *{
     box-sizing:border-box;
 }
 
 body{
     margin:0;
-    font-family:
-        "Segoe UI",
-        Inter,
-        Arial,
-        sans-serif;
+    font-family:"Segoe UI",Inter,Arial,sans-serif;
 
     background:
         linear-gradient(
@@ -39,7 +31,7 @@ body{
 
 
 /* =========================================================
-   DECORATIVE FLOWERS
+   FLOWERS DECORATION
 ========================================================= */
 
 .flower{
@@ -78,6 +70,7 @@ body{
     50%{
         transform:translateY(-8px) rotate(5deg);
     }
+
 }
 
 
@@ -122,7 +115,6 @@ body{
         0 15px 45px rgba(202,105,160,.18);
 }
 
-
 .header:after{
 
     content:"";
@@ -140,7 +132,6 @@ body{
     border-radius:50%;
 }
 
-
 .header h1{
 
     position:relative;
@@ -153,7 +144,6 @@ body{
 
     letter-spacing:-1px;
 }
-
 
 .header p{
 
@@ -168,7 +158,6 @@ body{
 
     color:#fff8fd;
 }
-
 
 .badge{
 
@@ -226,7 +215,6 @@ body{
     margin-top:-45px;
 }
 
-
 .card{
 
     position:relative;
@@ -249,7 +237,6 @@ body{
         box-shadow .25s ease;
 }
 
-
 .card:hover{
 
     transform:translateY(-5px);
@@ -257,7 +244,6 @@ body{
     box-shadow:
         0 18px 40px rgba(145,105,130,.18);
 }
-
 
 .card:after{
 
@@ -275,7 +261,6 @@ body{
     color:#e878aa;
 }
 
-
 .card:nth-child(1){
     border-top:5px solid #f48fb1;
 }
@@ -292,7 +277,6 @@ body{
     border-top:5px solid #f6c85f;
 }
 
-
 .card .label{
 
     color:#8b7c91;
@@ -301,7 +285,6 @@ body{
 
     font-weight:600;
 }
-
 
 .card .value{
 
@@ -316,7 +299,7 @@ body{
 
 
 /* =========================================================
-   MAIN GRID
+   GRID
 ========================================================= */
 
 .grid{
@@ -330,7 +313,6 @@ body{
 
     margin-top:25px;
 }
-
 
 .panel{
 
@@ -349,17 +331,11 @@ body{
 
     box-shadow:
         0 8px 30px rgba(120,90,120,.08);
-
-    transition:
-        transform .2s ease;
 }
-
 
 .panel:hover{
-
     transform:translateY(-2px);
 }
-
 
 .panel:before{
 
@@ -383,11 +359,9 @@ body{
     border-radius:50%;
 }
 
-
 .full{
     grid-column:1/-1;
 }
-
 
 .panel h2{
 
@@ -400,11 +374,9 @@ body{
     color:#5d4668;
 }
 
-
 .panel h2:first-letter{
     color:#e778a8;
 }
-
 
 .desc{
 
@@ -433,14 +405,12 @@ body{
     margin:15px 0;
 }
 
-
 select,
 input{
 
     padding:11px 15px;
 
-    border:
-        1px solid #ead9e5;
+    border:1px solid #ead9e5;
 
     border-radius:13px;
 
@@ -451,19 +421,13 @@ input{
     outline:none;
 
     font-size:14px;
-
-    transition:
-        border .2s,
-        box-shadow .2s;
 }
-
 
 select:hover,
 input:hover{
 
     border-color:#e59aba;
 }
-
 
 select:focus,
 input:focus{
@@ -493,8 +457,6 @@ input:focus{
 
 .footer{
 
-    position:relative;
-
     text-align:center;
 
     padding:40px 20px 45px;
@@ -503,7 +465,6 @@ input:focus{
 
     font-size:13px;
 }
-
 
 .footer .flower-footer{
 
@@ -522,60 +483,47 @@ input:focus{
 @media(max-width:1000px){
 
     .cards{
-
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .grid{
-
         grid-template-columns:1fr;
     }
 
     .full{
-
         grid-column:auto;
     }
 
 }
 
-
 @media(max-width:600px){
 
     .cards{
-
         grid-template-columns:1fr;
     }
 
     .header{
 
-        padding:
-            45px 25px 75px;
+        padding:45px 25px 75px;
 
         border-bottom-left-radius:30px;
         border-bottom-right-radius:30px;
     }
 
     .header h1{
-
         font-size:29px;
     }
 
     .container{
-
-        padding:
-            0 15px 30px;
+        padding:0 15px 30px;
     }
 
     .panel{
-
         padding:18px;
-
         border-radius:20px;
     }
 
     .chart{
-
         height:430px;
     }
 
@@ -589,7 +537,7 @@ input:focus{
 
 
 <!-- =========================================================
-   HEADER
+HEADER
 ========================================================= -->
 
 <header class="header">
@@ -626,7 +574,7 @@ input:focus{
 
 
 <!-- =========================================================
-   SUMMARY CARDS
+SUMMARY CARDS
 ========================================================= -->
 
 <section class="cards">
@@ -637,11 +585,8 @@ input:focus{
             🌸 Total Publications
         </div>
 
-        <div class="value"
-             id="totalRecords">
-
+        <div class="value">
             5,427
-
         </div>
 
     </div>
@@ -653,11 +598,8 @@ input:focus{
             🌷 Research Subjects
         </div>
 
-        <div class="value"
-             id="totalSubjects">
-
+        <div class="value">
             10
-
         </div>
 
     </div>
@@ -670,9 +612,7 @@ input:focus{
         </div>
 
         <div class="value">
-
             768-D
-
         </div>
 
     </div>
@@ -685,9 +625,7 @@ input:focus{
         </div>
 
         <div class="value">
-
             2021–2026
-
         </div>
 
     </div>
@@ -699,7 +637,7 @@ input:focus{
 
 
 <!-- =========================================================
-   01 RESEARCH MAP
+01 RESEARCH LANDSCAPE MAP
 ========================================================= -->
 
 <div class="panel full">
@@ -711,9 +649,10 @@ input:focus{
 <div class="desc">
 
     Interactive 2D projection of research feature vectors.
-    Each point represents a research publication.
+    Each flower represents a research publication.
 
 </div>
+
 
 <div class="controls">
 
@@ -768,6 +707,7 @@ input:focus{
 
 </div>
 
+
 <div id="researchMap"
      class="chart">
 </div>
@@ -776,7 +716,7 @@ input:focus{
 
 
 <!-- =========================================================
-   02 SUBJECT
+02 SUBJECT DISTRIBUTION
 ========================================================= -->
 
 <div class="panel">
@@ -786,10 +726,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
-    Distribution of publications across
-    the ten research subjects.
-
+    Distribution of publications across the ten research subjects.
 </div>
 
 <div id="subjectChart"
@@ -800,7 +737,7 @@ input:focus{
 
 
 <!-- =========================================================
-   03 KEYWORDS
+03 KEYWORDS
 ========================================================= -->
 
 <div class="panel">
@@ -810,9 +747,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
     Most frequently occurring research keywords.
-
 </div>
 
 <div id="keywordChart"
@@ -823,7 +758,7 @@ input:focus{
 
 
 <!-- =========================================================
-   04 TIMELINE
+04 TIMELINE
 ========================================================= -->
 
 <div class="panel full">
@@ -833,10 +768,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
-    Publication trends across different
-    research subjects and years.
-
+    Publication trends across different research subjects and years.
 </div>
 
 <div class="controls">
@@ -864,7 +796,7 @@ input:focus{
 
 
 <!-- =========================================================
-   05 HEATMAP
+05 HEATMAP
 ========================================================= -->
 
 <div class="panel full">
@@ -874,10 +806,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
-    Relationship between research subjects
-    and the most important keywords.
-
+    Relationship between research subjects and the most important keywords.
 </div>
 
 <div id="heatmapChart"
@@ -888,7 +817,7 @@ input:focus{
 
 
 <!-- =========================================================
-   06 NETWORK
+06 NETWORK
 ========================================================= -->
 
 <div class="panel full">
@@ -898,10 +827,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
-    Research keywords that frequently appear
-    together in publications.
-
+    Research keywords that frequently appear together in publications.
 </div>
 
 <div class="controls">
@@ -965,7 +891,7 @@ input:focus{
 
 
 <!-- =========================================================
-   07 SANKEY
+07 SANKEY
 ========================================================= -->
 
 <div class="panel full">
@@ -975,10 +901,7 @@ input:focus{
 </h2>
 
 <div class="desc">
-
-    Flow of research topics from
-    Subject → Keyword → Year.
-
+    Flow of research topics from Subject → Keyword → Year.
 </div>
 
 <div id="sankeyChart"
@@ -1011,7 +934,7 @@ input:focus{
 <script>
 
 /* =========================================================
-   DATA
+DATA
 ========================================================= */
 
 const subjects = [
@@ -1068,14 +991,12 @@ const keywords = [
 
 
 const years = [
-
     2021,
     2022,
     2023,
     2024,
     2025,
     2026
-
 ];
 
 
@@ -1115,7 +1036,7 @@ const trends = {
 
 
 /* =========================================================
-   FLORAL COLOR PALETTE
+FLORAL COLORS
 ========================================================= */
 
 const floralColors = [
@@ -1166,7 +1087,7 @@ const commonLayout = {
 
 
 /* =========================================================
-   01 SUBJECT CHART
+01 SUBJECT CHART
 ========================================================= */
 
 function drawSubjectChart(){
@@ -1237,7 +1158,7 @@ function drawSubjectChart(){
 
 
 /* =========================================================
-   02 KEYWORD CHART
+02 KEYWORD CHART
 ========================================================= */
 
 function drawKeywordChart(){
@@ -1303,7 +1224,7 @@ function drawKeywordChart(){
 
 
 /* =========================================================
-   03 TIMELINE
+03 TIMELINE
 ========================================================= */
 
 function drawTimeline(){
@@ -1313,9 +1234,7 @@ function drawTimeline(){
             "timelineMode"
         ).value;
 
-
     const traces=[];
-
 
     subjects.forEach(
         (subject,index)=>{
@@ -1339,16 +1258,12 @@ function drawTimeline(){
                     :undefined,
 
                 line:{
-                    color:
-                        floralColors[index],
-
+                    color:floralColors[index],
                     width:3
                 },
 
                 marker:{
-                    color:
-                        floralColors[index],
-
+                    color:floralColors[index],
                     size:8
                 }
 
@@ -1400,7 +1315,7 @@ function drawTimeline(){
 
 
 /* =========================================================
-   04 HEATMAP
+04 HEATMAP
 ========================================================= */
 
 function drawHeatmap(){
@@ -1410,15 +1325,12 @@ function drawHeatmap(){
         .slice(0,10)
         .map(x=>x[0]);
 
-
     const z=[];
-
 
     subjects.forEach(
         (subject,i)=>{
 
             const row=[];
-
 
             topKeywords.forEach(
                 (keyword,j)=>{
@@ -1429,12 +1341,10 @@ function drawHeatmap(){
                             ((i*17+j*23)%90)
                         );
 
-
                     row.push(value);
 
                 }
             );
-
 
             z.push(row);
 
@@ -1459,13 +1369,9 @@ function drawHeatmap(){
             colorscale:[
 
                 [0,"#FFF1F7"],
-
                 [.25,"#F8D4E5"],
-
                 [.5,"#E8B7D4"],
-
                 [.75,"#CBA6E5"],
-
                 [1,"#9E7CC5"]
 
             ],
@@ -1473,11 +1379,8 @@ function drawHeatmap(){
             hovertemplate:
 
                 "<b>%{y}</b>" +
-
                 "<br>%{x}" +
-
                 "<br>🌸 Frequency: %{z}" +
-
                 "<extra></extra>"
 
         }],
@@ -1507,8 +1410,156 @@ function drawHeatmap(){
 
 
 /* =========================================================
-   05 RESEARCH LANDSCAPE
+05 RESEARCH LANDSCAPE MAP
+=========================================================
+
+    จุดสำคัญของการแก้ไขอยู่ตรงนี้
+
+    เดิม:
+        scattergl
+        marker: circle
+
+    ใหม่:
+        scatter
+        marker: diamond
+
+    แล้วใช้ SVG ดอกไม้เป็น background
+    เพื่อให้ทุก Feature Vector แสดงเป็นดอกไม้
 ========================================================= */
+
+
+/* SVG FLOWER */
+
+function createFlowerSVG(color){
+
+    const svg = `
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="80"
+         height="80"
+         viewBox="0 0 80 80">
+
+        <defs>
+
+            <radialGradient id="petal"
+                            cx="50%"
+                            cy="35%"
+                            r="70%">
+
+                <stop offset="0%"
+                      stop-color="#ffffff"
+                      stop-opacity=".75"/>
+
+                <stop offset="55%"
+                      stop-color="${color}"/>
+
+                <stop offset="100%"
+                      stop-color="${color}"
+                      stop-opacity=".8"/>
+
+            </radialGradient>
+
+        </defs>
+
+
+        <!-- Petals -->
+
+        <ellipse
+            cx="40"
+            cy="18"
+            rx="13"
+            ry="21"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="62"
+            cy="30"
+            rx="13"
+            ry="21"
+            transform="rotate(72 62 30)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="56"
+            cy="55"
+            rx="13"
+            ry="21"
+            transform="rotate(144 56 55)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="24"
+            cy="55"
+            rx="13"
+            ry="21"
+            transform="rotate(216 24 55)"
+            fill="url(#petal)"
+        />
+
+        <ellipse
+            cx="18"
+            cy="30"
+            rx="13"
+            ry="21"
+            transform="rotate(288 18 30)"
+            fill="url(#petal)"
+        />
+
+
+        <!-- Center -->
+
+        <circle
+            cx="40"
+            cy="40"
+            r="10"
+            fill="#FFD966"
+            stroke="#FFFFFF"
+            stroke-width="2"
+        />
+
+
+        <circle
+            cx="37"
+            cy="37"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+        <circle
+            cx="44"
+            cy="37"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+        <circle
+            cx="40"
+            cy="44"
+            r="2"
+            fill="#FFF4B0"
+        />
+
+    </svg>
+
+    `;
+
+    return "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(svg);
+}
+
+
+/* CREATE FLOWER IMAGES */
+
+const flowerImages =
+    floralColors.map(
+        color => createFlowerSVG(color)
+    );
+
+
+/* RESEARCH MAP */
 
 function updateResearchMap(){
 
@@ -1525,8 +1576,8 @@ function updateResearchMap(){
         (subject,index)=>{
 
             if(
-                selected!=="all" &&
-                selected!==subject
+                selected !== "all" &&
+                selected !== subject
             ){
                 return;
             }
@@ -1587,17 +1638,29 @@ function updateResearchMap(){
 
                     "<b>🌸 Research Publication</b>" +
 
-                    "<br>Subject: "+
+                    "<br>Subject: " +
                     subject +
 
                     "<br>Feature Vector: 768-D" +
 
-                    "<br>PCA Dimension: 2D"
+                    "<br>PCA Dimension: 2D" +
+
+                    "<br>Publication ID: " +
+                    (index*90+i+1)
 
                 );
 
             }
 
+
+            /*
+             ====================================================
+             IMPORTANT
+
+             ใช้ marker เป็น "star" เพื่อสร้างตำแหน่ง hover
+             และวาง SVG Flower ทับแต่ละตำแหน่งด้วย layout.images
+             ====================================================
+            */
 
             traces.push({
 
@@ -1609,27 +1672,20 @@ function updateResearchMap(){
 
                 mode:"markers",
 
-                type:"scattergl",
+                type:"scatter",
 
                 name:subject,
 
                 marker:{
 
-                    size:8,
+                    size:1,
 
-                    opacity:.72,
-
-                    color:
-                        floralColors[index],
-
-                    line:{
-                        width:1,
-                        color:"#ffffff"
-                    }
+                    opacity:0
 
                 },
 
                 hovertemplate:
+
                     "%{text}<extra></extra>"
 
             });
@@ -1637,6 +1693,103 @@ function updateResearchMap(){
         }
     );
 
+
+    /* =========================================================
+       CREATE FLOWER IMAGES
+    ========================================================= */
+
+    const images=[];
+
+
+    subjects.forEach(
+        (subject,index)=>{
+
+            if(
+                selected !== "all" &&
+                selected !== subject
+            ){
+                return;
+            }
+
+
+            for(
+                let i=0;
+                i<90;
+                i++
+            ){
+
+                const angle =
+                    (i/90)*Math.PI*2;
+
+
+                const radius =
+                    0.5+
+                    ((i*13+
+                      index*7)%100)/100;
+
+
+                const centerX =
+                    Math.cos(
+                        index*.63
+                    )*4;
+
+
+                const centerY =
+                    Math.sin(
+                        index*.63
+                    )*4;
+
+
+                const px =
+                    centerX+
+                    Math.cos(angle)*radius+
+                    ((i*17)%100)/100;
+
+
+                const py =
+                    centerY+
+                    Math.sin(angle)*radius+
+                    ((i*23)%100)/100;
+
+
+                images.push({
+
+                    source:
+                        flowerImages[index],
+
+                    x:px,
+
+                    y:py,
+
+                    xref:"x",
+
+                    yref:"y",
+
+                    sizex:.28,
+
+                    sizey:.28,
+
+                    xanchor:"center",
+
+                    yanchor:"middle",
+
+                    sizing:"contain",
+
+                    opacity:.95,
+
+                    layer:"above"
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PLOT
+    ========================================================= */
 
     Plotly.newPlot(
 
@@ -1649,35 +1802,65 @@ function updateResearchMap(){
             ...commonLayout,
 
             title:{
+
                 text:
-                    "🌺 768-D Feature Vector → PCA 2D",
+                    "🌸 768-D Feature Vectors → PCA 2D",
+
                 font:{
-                    size:18,
+                    size:19,
                     color:"#674d70"
                 }
+
             },
+
+
+            images:images,
+
 
             xaxis:{
+
                 title:"Principal Component 1",
-                zeroline:false
+
+                zeroline:false,
+
+                gridcolor:"#f2e5ed",
+
+                showgrid:true
+
             },
 
+
             yaxis:{
+
                 title:"Principal Component 2",
-                zeroline:false
+
+                zeroline:false,
+
+                gridcolor:"#f2e5ed",
+
+                showgrid:true
+
             },
+
 
             hovermode:"closest",
 
+
             legend:{
+
                 orientation:"h",
-                y:-.15
+
+                y:-0.15
+
             }
 
         },
 
+
         {
+
             responsive:true
+
         }
 
     );
@@ -1686,7 +1869,7 @@ function updateResearchMap(){
 
 
 /* =========================================================
-   06 KEYWORD NETWORK
+06 KEYWORD NETWORK
 ========================================================= */
 
 function drawNetwork(){
@@ -1753,7 +1936,6 @@ function drawNetwork(){
                     nodeX[j],
                     null
                 );
-
 
                 edgeY.push(
                     nodeY[i],
@@ -1890,7 +2072,7 @@ function drawNetwork(){
 
 
 /* =========================================================
-   07 SANKEY
+07 SANKEY
 ========================================================= */
 
 function drawSankey(){
@@ -2047,7 +2229,7 @@ function drawSankey(){
 
 
 /* =========================================================
-   INITIALIZE
+INITIALIZE
 ========================================================= */
 
 drawSubjectChart();
